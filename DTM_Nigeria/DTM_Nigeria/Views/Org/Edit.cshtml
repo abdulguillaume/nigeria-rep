@@ -1,0 +1,105 @@
+﻿@model DTM_Nigeria.Models.OrgB1F
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit organization/B1F</h2>
+<h3>@ViewBag.LgaInfo</h3>
+
+@if (ViewBag.Exception != null)
+{
+    <p style="color: Red">@ViewBag.Exception</p>
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+<link href="../../Content/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script src="../../Scripts/jquery-ui.js" type="text/javascript"></script>
+
+<script src="~/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#org_name").autocomplete({
+            source: '@Url.Action("GetOrgsNames","Org")',
+            focus: function (event, ui) {
+                $("#org_name").val(ui.item.label);
+                return false;
+            },
+            select: function (event, ui) {
+
+                $.ajax({
+                    url: "/Org/GetOrgType",
+                    type: 'POST',
+                    data: { o_name: ui.item.label },
+                    success: function (org) {
+                        var $telTxtBox = $('#org_type');
+                        $telTxtBox.val(org.toString());
+                    },
+                    error: function (xhr) { alert("error!!"); }
+                });
+
+            }
+        }
+        );
+
+    });
+</script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>organization information</legend>
+
+        
+      <div class="editor-label">
+            Organization name
+        </div>
+        <div class="editor-field">
+         @using (Html.BeginForm())
+        { 
+            @Html.EditorFor(model => model.org.name)
+            @Html.ValidationMessageFor(model => model.org.name)
+        }
+        </div>
+
+
+        <div class="editor-label">
+            Organization type
+        </div>
+
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.org.type, (SelectList)ViewBag.OrgType, "[Select organization type]")
+            @Html.ValidationMessageFor(model => model.org.type)
+        </div>
+
+        <div class="editor-label">
+            Assistance type
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.porg.assistance_type, (SelectList)ViewBag.AssType, "[Select assistance type]")
+            @Html.ValidationMessageFor(model => model.porg.assistance_type)
+        </div>
+
+        <div class="editor-label">
+            Contact person
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.porg.contact_person)
+            @Html.ValidationMessageFor(model => model.porg.contact_person)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to organizations List/B1F", "Index")
+</div>

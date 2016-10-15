@@ -1,0 +1,76 @@
+﻿@model DTM_Nigeria.Models.iom_presence_wards
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ward presence details/B1F</h2>
+
+<fieldset>
+    <legend>ward presence information</legend>
+
+    <div class="display-label">ward_code</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lkp_Ward.ward_name)
+    </div>
+
+    <div class="display-label">location_type</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lkp_TypeOfResidence.residence)
+    </div>
+
+    <div class="display-label">idp_category</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lkp_IDP_Category.category)
+    </div>
+
+    <div class="display-label">location_name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.location_name)
+    </div>
+
+    <div class="display-label">estimate_hh</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.estimate_hh)
+    </div>
+
+    <div class="display-label">estimate_ind</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.estimate_ind)
+    </div>
+
+    <div class="display-label">majority_stateoforigin</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lkp_State.state_name)
+    </div>
+
+    <div class="display-label">majority_lgaoforigin</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lkp_Lga.lga_name)
+    </div>
+
+    <div class="display-label">created_by</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.created_by)
+    </div>
+
+    <div class="display-label">create_time</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.create_time)
+    </div>
+
+    <div class="display-label">updated_by</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.updated_by)
+    </div>
+
+    <div class="display-label">update_time</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.update_time)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
+    @Html.ActionLink("Back to wards List/B1F", "Index")
+</p>

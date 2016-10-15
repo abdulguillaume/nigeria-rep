@@ -1,0 +1,150 @@
+﻿@model DTM_Nigeria.Models.iom_ward_profile
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>B2F</h2>
+<h3>@ViewBag.LgaInfo</h3>
+
+@if (Model != null)
+{
+<table class="table">
+    
+    @{
+            string style1= null, style2=null;
+    
+    if (Model.number_hh != Model.iom_presence_wards.estimate_hh)
+    { style1 = "background-color:pink"; }
+
+        
+    if (Model.number_ind != Model.iom_presence_wards.estimate_ind)
+    { style2 = "background-color:pink"; }
+    
+        }
+
+
+    <tr>
+        <th>
+            date
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.date)
+        </td>
+    </tr><tr>
+        <th>
+            researcher
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.iom_researchers.researcher_name)
+        </td>
+    </tr><tr>
+        <th>
+            ward
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.iom_presence_wards.lkp_Ward.ward_name)
+        </td>
+    </tr><tr>
+        <th>
+            settlement
+        </th> 
+        <td>
+            @Html.DisplayFor(model => model.settlement)
+        </td>
+   </tr><tr>
+        <th>
+            type
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.lkp_Settlement.settlement)
+        </td>
+    </tr><tr>
+        <th>Displaced people?</th>
+        <td>
+            @if (@Model.displaced_hh_ind_YesNo == 1)
+            {
+                @:Ans: Yes
+             }
+            else
+            {
+                @:Ans: No
+             }
+        </td>
+    </tr><tr>
+        <th>
+            # hh    
+        </th>
+        <td style="@style1">
+            @Html.DisplayFor(model => model.number_hh)
+        </td>
+    </tr><tr>
+        <th>
+            # ind
+        </th>
+        <td style="@style2">
+            @Html.DisplayFor(model => model.number_ind)
+        </td>
+    </tr><tr>
+        <th>locations in the ward</th>
+        <td>
+        @Html.ActionLink("locations", "Index", "WLocation", new RouteValueDictionary(new { id = @Model.id }), null)
+        ( @Model.iom_ward_presence_per_location.Count() )
+        </td>
+    </tr><tr>
+        <th>key informants list</th>
+        <td>
+         @Html.ActionLink("informants", "Index", "WInformant", new RouteValueDictionary(new { id = @Model.id }), null)
+        ( @Model.iom_b2f_informants.Count() )
+        </td>
+    </tr><tr>
+        <th>organizations list</th>
+        <td>
+        @Html.ActionLink("organizations", "Index", "Worg", new RouteValueDictionary(new { id = @Model.id }), null)
+        ( @Model.iom_b2f_organizations_assisting.Count() )
+        </td>
+    </tr><tr>
+        <th>demographic calc</th>
+        <td>
+         @Html.ActionLink("hh breakdown", "Index", "Breakdown", new RouteValueDictionary(new { id = @Model.id }), null)
+        
+        
+        @if(@Model.iom_ward_households_breakdown!=null)
+        {
+            @: (*)
+        }
+        
+        
+        </td>
+    </tr><tr>
+        <th>DTM - Group assessment</th>
+        <td>
+        @Html.ActionLink("group assessment", "Index", "B3F", new RouteValueDictionary(new { id = @Model.id }), null)
+        ( @Model.iom_group_assessment_1.Count() )
+        </td>
+    </tr><tr>
+        <th></th>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = @Model.id }) |
+            @Html.ActionLink("Details", "Details", new { id = @Model.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = @Model.id })
+        </td>
+    </tr>
+
+
+</table>
+}
+else
+{ 
+    
+<p>
+    @Html.ActionLink("Create B2F", "Create")
+</p>
+        
+<b>No data</b>
+}
+
+<p>
+    @Html.ActionLink("Back to wards List", "Index", "Wards")
+</p>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<DTM_Nigeria.Models.iom_dtm_phase>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of DTM/Phases</h2>
+
+<p>
+    @Html.ActionLink("Create New DTM/Phase", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            Phase
+        </th>
+        <th>
+            description
+        </th>
+        <th>
+            start date
+        </th>
+        <th>
+            end date
+        </th>
+        <th>
+            Phase is closed
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.phase)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.field_start_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.field_end_date)
+        </td>
+        <td>
+         @if (@item.closed_YesNo == 1)
+            {
+                @:Ans: Yes
+             }
+            else
+            {
+                @:Ans: No
+             }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.phase}) |
+            @Html.ActionLink("Details", "Details", new { id = item.phase }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.phase })
+        </td>
+    </tr>
+}
+
+</table>

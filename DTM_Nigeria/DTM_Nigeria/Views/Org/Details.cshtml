@@ -1,0 +1,57 @@
+﻿@model DTM_Nigeria.Models.iom_b1f_organizations_assisting
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Organization Details/B1F</h2>
+
+<fieldset>
+    <legend>organization information</legend>
+
+
+    <div class="display-label">name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.iom_organizations.name)
+    </div>
+
+    <div class="display-label">type</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.iom_organizations.lkp_Organization.organization)
+    </div>
+
+    <div class="display-label">assistance_type</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lkp_assistance_type.assistance_type)
+    </div>
+
+    <div class="display-label">contact_person</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.contact_person)
+    </div>
+
+    <div class="display-label">created_by</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.created_by)
+    </div>
+
+    <div class="display-label">create_time</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.create_time)
+    </div>
+
+    <div class="display-label">updated_by</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.updated_by)
+    </div>
+
+    <div class="display-label">update_time</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.update_time)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to organizations List/B1F", "Index")
+</p>

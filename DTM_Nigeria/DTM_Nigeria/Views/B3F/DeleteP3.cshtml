@@ -1,0 +1,42 @@
+﻿@model IEnumerable<DTM_Nigeria.Models.iom_ga_site_information>
+@{
+    ViewBag.Title = "DeleteP3";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DeleteP3</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>DTM - Group Assessment (Page 3/4)</legend>
+
+    <br />
+    7. Site information
+    <table width=50% class='table'>
+    <tr><th>#</th><th>Name of site</th><th>Longitude</th><th>Latitude</th></tr>
+    
+    @{int i = 1;}
+
+    @foreach (var a in Model)
+    {
+        if (!string.IsNullOrEmpty(a.name_site))
+        {
+        <tr><td>@i</td><td>@a.name_site</td><td>@a.coord_lon</td><td>@a.coord_lat</td></tr>
+        
+                                                                i++;
+        }
+    }
+
+    </table>
+
+</fieldset>
+@using (Html.BeginForm()) {
+    
+    
+    
+    <p>
+        <input type="submit" value="Delete" /> |
+        @*@Html.ActionLink("Back", "IndexP3", new { id = (int)ViewBag.Page1 })*@
+        @Html.ActionLink("Cancel", "Index")
+    </p>
+}

@@ -1,0 +1,506 @@
+﻿@model DTM_Nigeria.Models.iom_group_assessment_2
+
+@{
+    ViewBag.Title = "Edit GA 2/4";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Group Assessment</h2>
+<h3>@ViewBag.WardInfo</h3>
+@if (ViewBag.Exception != null)
+{
+    <p style="color: Red">@ViewBag.Exception</p>
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    
+List<SelectListItem> freq = new List<SelectListItem>();
+
+freq.Add(new SelectListItem { Text = "2", Value = "2" });
+freq.Add(new SelectListItem { Text = "3", Value = "3" });
+freq.Add(new SelectListItem { Text = "4+", Value = "4" });
+
+List<SelectListItem> yesNo = new List<SelectListItem>();
+
+yesNo.Add(new SelectListItem { Value = "1", Text = "1. Yes" });
+yesNo.Add(new SelectListItem { Value = "2", Text = "2. No" });
+
+    <fieldset>
+        <legend>DTM - Group Assessment (Page 2/4)</legend>
+    <br />
+    2. Multi-displacement and intentions
+    <table width=100%>
+    <tr>
+    <th colspan=3>2.1 Have members of the group been displaced more than once since 2014?? (Y/N)</th>
+    <td> 
+        <div class="editor-field">
+                @Html.DropDownListFor(model => model.member_disp_p1_YesNo, yesNo, "[1. Yes or  2. No]")
+                @Html.ValidationMessageFor(model => model.member_disp_p1_YesNo)
+            </div> 
+     </td>
+    </tr>
+    <tr>
+    <th colspan=3>2.2 How many times have most families in the group been displaced since Jan 2014? (2,3 or 4+)</th> 
+    <td> 
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.how_many_time_disp, freq, "[Select freq.]")
+                @Html.ValidationMessageFor(model => model.how_many_time_disp)
+            </div> 
+     </td>
+    </tr>
+    <tr>
+    <th rowspan=2>2.3 If yes where is last place of displacement of the Majority?</th>
+    <th>State</th><th>Lga</th><th>Ward</th>
+    </tr>
+
+    <tr>
+    <td>
+
+           <div class="editor-field">
+                @Html.DropDownListFor(model => model.state, (SelectList)ViewBag.StatesList, "[Select state]")
+                @Html.ValidationMessageFor(model => model.state)
+           </div>
+    
+    </td>
+    
+    <td> 
+        <div class="editor-field">
+                @Html.DropDownListFor(model => model.if_yes_lga_maj, (SelectList)ViewBag.LgaList, "[Select lga]")
+                @Html.ValidationMessageFor(model => model.if_yes_lga_maj)
+            </div> 
+    </td> <td> 
+        <div class="editor-field">
+                @Html.DropDownListFor(model => model.if_yes_ward_maj, (SelectList)ViewBag.WardList, "[Select ward]")
+                @Html.ValidationMessageFor(model => model.if_yes_ward_maj)
+            </div> 
+     </td></tr>
+    
+    <tr>
+    <th colspan=3>2.4 What are the intentions of the majority of the group?</th>
+    <td> 
+        <div class="editor-field">
+                @Html.DropDownListFor(model => model.intention_of_majority, (SelectList)ViewBag.Intention, "[Select intention]")
+                @Html.ValidationMessageFor(model => model.intention_of_majority)
+            </div>
+     </td>
+    </tr>
+    </table>
+    <br />
+
+    3. Vulnerability
+    <table width=100%>
+    <tr><td colspan=2>3.1 Which of following vulnerabilities does the group members have?</td></tr>
+    <tr><th colspan=2>Vulnerabilities</th></tr>
+
+    <tr><td> 
+            3.1. Pregnant women
+            <div class="bd_editor display-field">
+                @Html.EditorFor(model => (model.v_pregnant_women))
+                @Html.ValidationMessageFor(model => model.v_pregnant_women)
+            </div> 
+             </td>
+    <td> 3.7 Unaccompanied children (not with parents and relatives)
+            <div class="bd_editor display-field">
+                @Html.EditorFor(model => (model.v_unaccompanied_children))
+                @Html.ValidationMessageFor(model => model.v_unaccompanied_children)
+            </div>  
+            
+    </td> </tr>
+
+    <tr><td> 
+            3.2 Breastfeeding mothers
+            <div class="bd_editor display-field">
+                @Html.EditorFor(model => model.v_breastfeeding_mother)
+                @Html.ValidationMessageFor(model => model.v_breastfeeding_mother)
+            </div> 
+     </td> <td> 
+            3.8 Separated minors
+            <div class="bd_editor display-field">
+                @Html.EditorFor(model => model.v_separated_children)
+                @Html.ValidationMessageFor(model => model.v_separated_children)
+            </div> 
+      </td></tr>
+
+    <tr><td> 
+            3.3 Persons with physical disabilities
+            <div class="bd_editor display-field">
+                @Html.EditorFor(model => model.v_physical_disability)
+                @Html.ValidationMessageFor(model => model.v_physical_disability)
+            </div> 
+     </td> <td> 
+            3.9 Single female head of household
+            <div class="bd_editor display-field">
+                @Html.EditorFor(model => model.v_female_hh)
+                @Html.ValidationMessageFor(model => model.v_female_hh)
+            </div> 
+      </td></tr>
+
+
+    <tr><td> 
+            3.4 Persons with mental disabilities
+            <div class="bd_editor display-field">
+                @Html.EditorFor(model => model.v_mental_disability)
+                @Html.ValidationMessageFor(model => model.v_mental_disability)
+            </div> 
+     </td> <td> 
+            3.10 Single child head of household
+            <div class="bd_editor display-field">
+                @Html.EditorFor(model => model.v_minor_hh)
+                @Html.ValidationMessageFor(model => model.v_minor_hh)
+            </div> 
+      </td></tr>
+
+    <tr><td> 
+            3.5 Elderly (not accompanied by relatives)
+            <div class="bd_editor display-field">
+                @Html.EditorFor(model => model.v_older_at_risk)
+                @Html.ValidationMessageFor(model => model.v_older_at_risk)
+            </div> 
+     </td> <td> 
+            3.11 Single male head of household
+            <div class="bd_editor display-field">
+                @Html.EditorFor(model => model.v_male_hh)
+                @Html.ValidationMessageFor(model => model.v_male_hh)
+            </div> 
+      </td></tr>
+
+
+    <tr><td> 
+            3.6 Person with chronic diseases/serious medical conditions 
+            <div class="bd_editor display-field">
+                @Html.EditorFor(model => model.v_serious_med_condition)
+                @Html.ValidationMessageFor(model => model.v_serious_med_condition)
+            </div> 
+     </td> <td> 
+            3.12 Others
+            <div class="display-field">
+                @Html.EditorFor(model => model.v_specify)
+                @Html.ValidationMessageFor(model => model.v_specify)
+            </div> 
+            <div class="bd_editor display-field">
+                @Html.EditorFor(model => model.v_other)
+                @Html.ValidationMessageFor(model => model.v_other)
+            </div> 
+      </td></tr>
+    </table>
+    <br />
+
+    4. Protection
+    <table width=100%>
+        <tr>
+            <th colspan=3>Do people in the group feel safe in their current location</th>
+            <td>
+                <div class="display-field">
+                    @Html.DropDownListFor(model => model.protect_people_feel_safe_YesNo, (SelectList)ViewBag.YesNo, "[Select]")
+                    @Html.ValidationMessageFor(model => model.protect_people_feel_safe_YesNo)
+                </div> 
+            </td>
+            <th>No Answer, Why?</th>
+            <td>
+                <div class="display-field">
+                    @Html.EditorFor(model => model.protect_people_feel_safe_ifNoAns)
+                    @Html.ValidationMessageFor(model => model.protect_people_feel_safe_ifNoAns)
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <th>Most common type of incidents</th>
+            <td>
+                <div class="display-field">
+                    @Html.DropDownListFor(model => model.protect_common_incident, (SelectList)ViewBag.Incidents, "[Select]")
+                    @Html.ValidationMessageFor(model => model.protect_common_incident)
+                </div> 
+            </td>
+            <th>Other, specify</th>
+            <td>
+                <div class="display-field">
+                    @Html.EditorFor(model => model.protect_common_in_ifOther)
+                    @Html.ValidationMessageFor(model => model.protect_common_in_ifOther)
+                </div>
+            </td>
+            <th>No Answer, why?</th>
+            <td>
+                <div class="display-field">
+                    @Html.EditorFor(model => model.protect_common_in_ifNoAns)
+                    @Html.ValidationMessageFor(model => model.protect_common_in_ifNoAns)
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <th>Most common type of GBV</th>
+            <td>
+                <div class="display-field">
+                    @Html.DropDownListFor(model => model.protect_common_GBV, (SelectList)ViewBag.GBVs, "[Select]")
+                    @Html.ValidationMessageFor(model => model.protect_common_GBV)
+                </div> 
+            </td>
+            <th>Other, specify</th>
+            <td>
+                <div class="display-field">
+                    @Html.EditorFor(model => model.protect_common_GBV_ifOther)
+                    @Html.ValidationMessageFor(model => model.protect_common_GBV_ifOther)
+                </div>
+            </td>
+            <th>No Answer, why?</th>
+            <td>
+                <div class="display-field">
+                    @Html.EditorFor(model => model.protect_common_GBV_ifNoAns)
+                    @Html.ValidationMessageFor(model => model.protect_common_GBV_ifNoAns)
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <th colspan=2>Most common type of child protection incident</th>
+            <td>
+                <div class="display-field">
+                    @Html.DropDownListFor(model => model.protect_common_child_p_incident, (SelectList)ViewBag.CPIncidents, "[Select]")
+                    @Html.ValidationMessageFor(model => model.protect_common_child_p_incident)
+                </div> 
+            </td>
+            <th>Other, specify</th>
+            <td colspan=2>
+                <div class="display-field">
+                    @Html.EditorFor(model => model.protect_common_child_p_incident_ifOther)
+                    @Html.ValidationMessageFor(model => model.protect_common_child_p_incident_ifOther)
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <th>Are travel opportunities being offered within the camp/community</th>
+            <td>
+                <div class="display-field">
+                    @Html.DropDownListFor(model => model.protect_travel_oic_YesNo, (SelectList)ViewBag.YesNo2, "[Select]")
+                    @Html.ValidationMessageFor(model => model.protect_travel_oic_YesNo)
+                </div> 
+            </td>
+            <th>If yes, where to?</th>
+            <td>
+                <div class="display-field">
+                    @Html.DropDownListFor(model => model.protect_travel_oic_ifYes_where, (SelectList)ViewBag.TravelLocations, "[Select]")
+                    @Html.ValidationMessageFor(model => model.protect_travel_oic_ifYes_where)
+                </div>
+            </td>
+            <th>If yes, what is promised?</th>
+            <td>
+                <div class="display-field">
+                    @Html.DropDownListFor(model => model.protect_travel_oic_ifYes_what, (SelectList)ViewBag.Opportunities, "[Select]")
+                    @Html.ValidationMessageFor(model => model.protect_travel_oic_ifYes_what)
+                </div>
+            </td>
+        </tr>
+
+    </table>
+
+    <br />
+
+    5. Needs
+    <table width=100%>
+        <tr>
+            <td colspan=6>5.1 Priority needs: what are the current priority needs of the Group? Choose from the list below, ranking with 1,2,3,4,5 in order of prominence.</td>
+        </tr>
+        <tr>
+            <th>Item</th><th>Ranking</th><th>Item</th><th>Ranking</th><th>Item</th><th>Ranking</th>
+        </tr>
+        <tr>
+            <td>Water</td> <td> <div class="editor-field">
+                @Html.EditorFor(model => model.need_water)
+                @Html.ValidationMessageFor(model => model.need_water)
+            </div> </td> <td> Sanitation/Hygiene</td> <td> <div class="editor-field">
+                @Html.EditorFor(model => model.need_sanitation)
+                @Html.ValidationMessageFor(model => model.need_sanitation)
+            </div> </td> <td> Access to income </td> <td> <div class="editor-field">
+                @Html.EditorFor(model => model.need_access_icome)
+                @Html.ValidationMessageFor(model => model.need_access_icome)
+            </div> </td>
+        </tr>
+        <tr>
+            <td>Food</td> <td> <div class="editor-field">
+                @Html.EditorFor(model => model.need_food)
+                @Html.ValidationMessageFor(model => model.need_food)
+            </div> </td> <td>Shelter</td> <td> <div class="editor-field">
+                @Html.EditorFor(model => model.need_shelter)
+                @Html.ValidationMessageFor(model => model.need_shelter)
+            </div> </td> <td> Legal help</td> <td> <div class="editor-field">
+                @Html.EditorFor(model => model.need_lhelp)
+                @Html.ValidationMessageFor(model => model.need_lhelp)
+            </div> </td>
+        </tr>
+
+        <tr>
+            <td>Health</td><td> <div class="editor-field">
+                @Html.EditorFor(model => model.need_health)
+                @Html.ValidationMessageFor(model => model.need_health)
+            </div> </td> <td> Education </td> <td> <div class="editor-field">
+                @Html.EditorFor(model => model.need_education)
+                @Html.ValidationMessageFor(model => model.need_education)
+            </div> </td> <td> NFI </td> <td> <div class="editor-field">
+                @Html.EditorFor(model => model.need_nfi)
+                @Html.ValidationMessageFor(model => model.need_nfi)
+            </div> </td>
+        </tr>
+
+        <tr>
+            <td>Other</td> <td> Specify:</td> <td> <div class="editor-field">
+                @Html.EditorFor(model => model.need_specify)
+                @Html.ValidationMessageFor(model => model.need_specify)
+            </div> </td> <td> <div class="editor-field">
+                @Html.EditorFor(model => model.need_other)
+                @Html.ValidationMessageFor(model => model.need_other)
+            </div> </td> <td colspan=2></td>
+        </tr>
+    </table>
+    <br />
+
+
+
+    6. Shelter
+    <table width=100%>
+    <tr>
+      <th rowspan=2>Number of people in:</th> <th>1)host community</th><th>2)rented house</th>
+      <th>3)makeshift shelter</th><th>4)emergency shelter</th>
+    </tr>
+
+    <tr>
+        <td>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.shelter_num_hc)
+                @Html.ValidationMessageFor(model => model.shelter_num_hc)
+            </div>
+        </td>
+        <td>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.shelter_num_rh)
+                @Html.ValidationMessageFor(model => model.shelter_num_rh)
+            </div>
+        </td>
+        <td>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.shelter_num_ms)
+                @Html.ValidationMessageFor(model => model.shelter_num_ms)
+            </div>
+        </td>
+        <td>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.shelter_num_es)
+                @Html.ValidationMessageFor(model => model.shelter_num_es)
+            </div>
+        </td>
+    </tr>
+
+    <tr>
+        <th colspan=2>Most needed NFI</th>
+        <td>
+            <div class="display-field">
+                    @Html.DropDownListFor(model => model.shelter_mn_nfi, (SelectList)ViewBag.NFIs, "[Select]")
+                    @Html.ValidationMessageFor(model => model.shelter_mn_nfi)
+                </div>
+        </td>
+        <th>
+            If other, specify
+        </th>
+        <td>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.shelter_mn_other)
+                @Html.ValidationMessageFor(model => model.shelter_mn_other)
+            </div>
+        </td>
+    </tr>
+
+    </table>
+
+    <br />
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#state").change(function () {
+
+            if ($(this).val() != "NULL") {
+
+                $.ajax({
+                    url: "/B3F/getLgaList",
+                    type: 'POST',
+                    data: { id: $(this).val() },
+                    success: function (lgas) {
+
+                        var $select = $('#if_yes_lga_maj');
+                        $select.empty();
+                        $select.append("<option value=''>[Select Lga]</option>");
+                        $.each(lgas, function (i, lga) {
+                            $select.append("<option value='" + lga.Value + "'>" + lga.Text + "</option>");
+                        });
+                    },
+                    error: function (xhr) { alert("error!!"); }
+                });
+            }
+        });
+
+
+        $("#if_yes_lga_maj").change(function () {
+
+            if ($(this).val() != "NULL") {
+
+                $.ajax({
+                    url: "/B3F/getWardList",
+                    type: 'POST',
+                    data: { id: $(this).val() },
+                    success: function (wards) {
+
+                        var $select = $('#if_yes_ward_maj');
+                        $select.empty();
+                        $select.append("<option value=''>[Select ward]</option>");
+                        $.each(wards, function (i, ward) {
+                            $select.append("<option value='" + ward.Value + "'>" + ward.Text + "</option>");
+                        });
+                    },
+                    error: function (xhr) { alert("error!!"); }
+                });
+            }
+        });
+    });
+</script>
+
+@*<script type="text/javascript">
+    $(function () {
+        $("#if_yes_lga_maj").change(function () {
+
+            if ($(this).val() != "NULL") {
+
+                $.ajax({
+                    url: "/B3F/getWardList",
+                    type: 'POST',
+                    data: { id: $(this).val() },
+                    success: function (wards) {
+
+                        var $select = $('#if_yes_ward_maj');
+                        $select.empty();
+                        $select.append("<option value=''>[Select ward]</option>");
+                        $.each(wards, function (i, ward) {
+                            $select.append("<option value='" + ward.Value + "'>" + ward.Text + "</option>");
+                        });
+                    },
+                    error: function (xhr) { alert("error!!"); }
+                });
+            }
+        });
+    });
+</script>*@

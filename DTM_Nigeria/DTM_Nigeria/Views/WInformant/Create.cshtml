@@ -1,0 +1,94 @@
+﻿@model DTM_Nigeria.Models.InfB2F
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create informant/B2F</h2>
+<h3>@ViewBag.WardInfo</h3>
+
+@if (ViewBag.Exception != null)
+{
+    <p style="color: Red">@ViewBag.Exception</p>
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+<link href="../../Content/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script src="../../Scripts/jquery-ui.js" type="text/javascript"></script>
+
+<script src="~/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#inf_name").autocomplete({
+            source: '@Url.Action("GetInfsNames","WInformant")'
+
+        });
+
+    });
+</script>
+
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+List<SelectListItem> sex = new List<SelectListItem>();
+
+sex.Add(new SelectListItem { Text = "Male", Value = "M" });
+sex.Add(new SelectListItem { Text = "Female", Value = "F" });
+sex.Add(new SelectListItem { Text = "N/A", Value = "x" });
+    
+    
+    <fieldset>
+        <legend>informant information</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.inf.name)
+        </div>
+        <div class="editor-field">
+        @using (Html.BeginForm())
+        { 
+            @Html.EditorFor(model => model.inf.name)
+            @Html.ValidationMessageFor(model => model.inf.name)
+        }
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.inf.type)
+        </div>
+
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.inf.type, (SelectList)ViewBag.InformantType, "[Select type]")
+            @Html.ValidationMessageFor(model => model.inf.type)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.inf.sex)
+        </div>
+
+         <div class="editor-field">
+            @Html.DropDownListFor(model => model.inf.sex, sex, "[Select sex]")
+            @Html.ValidationMessageFor(model => model.inf.sex)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.pinf.contact_details)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.pinf.contact_details)
+            @Html.ValidationMessageFor(model => model.pinf.contact_details)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back", "Index")
+</div>

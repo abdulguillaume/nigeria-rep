@@ -1,0 +1,181 @@
+﻿@{
+    ViewBag.Title = "About Us";
+}
+
+@*<h2>About</h2>
+<p>
+     Put content here.
+</p>*@
+
+
+@{
+    HtmlHelper.UnobtrusiveJavaScriptEnabled = false;
+}
+
+<script src="../../Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+<script src="../../Scripts/jquery.validate.min.js" type="text/javascript"></script>
+<script src="../../Scripts/MicrosoftAjax.js" type="text/javascript"></script>
+<script src="../../Scripts/MicrosoftMvcAjax.js" type="text/javascript"></script>
+<script type="text/javascript" src="@Url.Content("../../Scripts/jquery.cookie.js")"></script>
+
+
+<h2>About</h2>
+
+To know more about IOM Nigeria, please visit: <a href="http://nigeria.iom.int/dtm" title="IOM Nigeria/DTM">http://nigeria.iom.int/dtm</a> :-)
+
+<br /><br />
+
+ <fieldset>
+        <legend>Generate report</legend>
+
+
+@*@Html.ActionLink("Generate report", "ExportExcel", "Home",
+    new { parameter = Guid.NewGuid(), tokenId = "__token__"}, new { @class = "download" })
+*@
+
+@using (Html.BeginForm("ExportExcel", "Home", FormMethod.Get, new { id = "forma" }))
+{ 
+    @*<input type="hidden" id="__token__" />*@    
+    
+@*    <div>Only the closed DTM/phases will be shown in the list</div> <br />*@
+
+    <div>@Html.DropDownList("phaseId", (List<SelectListItem>)ViewBag.Phase)</div>
+
+    <div><input type="image" src="../../Content/Images/excel_1.jpg" class="download" /></div>
+    
+        
+    @Html.Hidden("tokenId");
+}
+
+<div id="errorMsg" style="display: none; color: Red">
+	Need to select a DTM phase first!
+</div>
+
+<div id="pleaseWait" style="display: none">
+    <img src="../../Content/Images/PleaseWait.gif" />
+	Please Wait...
+</div>
+
+</fieldset>
+
+<script type="text/javascript">
+    $(function () {
+        $('#forma').submit(function (e) {
+
+            if ($('#phaseId').val() == "") {
+                $('#errorMsg').show();
+                e.preventDefault();
+            } else {
+                blockUIForDownload();
+            }
+        });
+    });
+
+    var fileDownloadCheckTimer;
+
+    function blockUIForDownload() {
+        var token = new Date().getTime(); //use the current timestamp as the token value
+        $('#tokenId').val(token);
+        $('#errorMsg').hide();
+        $("#pleaseWait").show();
+        $(".download").attr("disabled", "disabled");
+        //$.blockUI();
+        fileDownloadCheckTimer = window.setInterval(function () {
+            var cookieValue = $.cookie('fileDownloadToken');
+            if (cookieValue == token)
+                finishDownload();
+        }, 1000);
+    }
+
+    function finishDownload() {
+        window.clearInterval(fileDownloadCheckTimer);
+        $.removeCookie('fileDownloadToken'); //clears this cookie value
+        $("#pleaseWait").hide();
+        $(".download").removeAttr("disabled");
+        //$.unblockUI();
+    }
+</script>
+
+@*<script type="text/javascript">
+    $(function () {
+
+
+        //        if ($("#alink").val() == "2") {
+        //            e1.preventDefault();
+        //        }
+
+        var fileDownloadCheckTimer;
+
+        $('.download').click(function () {
+
+
+            var token = new Date().getTime();
+
+            $(this).attr('href', function () {
+                alert(token);
+                return this.href.replace('__token__', token);
+            });
+
+            //$.blockUI();
+
+            // Show the download spinner
+            $("#pleaseWait").show();
+            //$('body').append('<span id="progress">Downloading ...</span>');
+
+            // Start polling for the cookie
+            fileDownloadCheckTimer = window.setInterval(function () {
+
+                var cookieValue = $.cookie('fileDownloadToken');
+
+                //alert(token + ' ' + cookieValue + ' ' + fileDownloadCheckTimer);
+
+                if (cookieValue == token) {
+                    window.clearInterval(fileDownloadCheckTimer);
+                    $.cookie('fileDownloadToken', null);
+
+                    // Hide the download spinner
+                    // $('#progress').remove();
+
+                    $("#pleaseWait").hide();
+
+                    // tem = undefined
+                    //                    $("#alink").val("1");
+
+
+                }
+            }, 1000);
+        }
+
+		);
+
+
+    });
+
+</script>*@
+
+
+@*<script type="text/javascript">
+    $(function () {
+
+        //$("#format").ready(function () { alert("It's loaded  1!") });
+
+        $("#forma").on("click", function (e) {
+            $("#pleaseWait").show();
+
+            // $("#format").ready(function () { alert("It's loaded  2!") });
+
+            $("#submitBtn").attr("disabled", "disabled");
+
+            $("#forma").submit();
+
+        });
+
+        //        $("#pleaseWait").show();
+
+        //        // Attach click handler to the submit button:
+        //        $('#process').click(function () {
+        //            $('#myform').submit();
+        //        });
+
+    });
+</script>*@
