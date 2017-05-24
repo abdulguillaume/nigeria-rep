@@ -1,0 +1,249 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IPagedList<DTM_Nigeria.Models.iom_profile>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of B1F(@Model.LastItemOnPage/@Model.TotalItemCount)</h2>
+
+<p>
+    @Html.ActionLink("Create New B1F", "Create")
+</p>
+
+<div>
+@using (Html.BeginForm())
+    { 
+        
+        <table>
+        <tr><th>Phase</th><th>State</th><th></th></tr>
+        <tr><td>
+         <select name="phase" id="phase">
+
+           <option value="">[Select phase]</option>
+
+           @foreach (var item in (SelectList)ViewBag.Phase)
+           {
+
+
+               if (ViewBag.SelectedPhase == null)
+               {
+                   <option value="@item.Value">@item.Text</option> 
+               }
+               else if (@item.Value.Equals(((int)ViewBag.SelectedPhase).ToString()))
+               { 
+                   <option value="@item.Value" selected="selected">@item.Text</option>
+               }
+               else
+               {        
+                   <option value="@item.Value">@item.Text</option> 
+               }
+
+           }
+           </select>
+        </td><td>
+        <select name="state" id="state">
+
+           <option value="">[Select state]</option>
+
+           @foreach (var item in (SelectList)ViewBag.StatesList)
+           {
+
+
+               if (string.IsNullOrEmpty(ViewBag.SelectedState))
+               {
+                   <option value="@item.Value">@item.Text</option> 
+               }
+               else if (@item.Value.Equals((string)ViewBag.SelectedState))
+               { 
+                   <option value="@item.Value" selected="selected">@item.Text</option>
+               }
+               else
+               {        
+                   <option value="@item.Value">@item.Text</option> 
+               }
+
+           }
+           </select>
+        </td><td>
+            <input type=submit value="Search" />
+        </td></tr>
+        </table>   
+    
+    }
+
+@if (Model.Count() > 0)
+{
+   
+    
+
+    <div>   
+
+    Page 
+
+    @*Html.PagedListPager(Model, page => Url.Action("Index", new {page}))*@
+
+
+    @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)   
+      / @Model.PageCount 
+    
+    @if (Model.HasPreviousPage)
+    {
+          @Html.ActionLink("<<", "Index", new { page = 1 })
+          @Html.Raw(" ")
+          @Html.ActionLink("< Prev", "Index", new { page = Model.PageNumber - 1 })
+    }
+    else
+    {
+           @:<<
+           @Html.Raw(" ")
+           @:< Ant
+     }
+
+
+
+    @if (Model.HasNextPage)
+    {
+         @Html.ActionLink("Next >", "Index", new { page = Model.PageNumber + 1 })
+         @Html.Raw(" ")
+         @Html.ActionLink(">>", "Index", new { page = Model.PageCount })
+    }
+    else
+    { 
+
+      @:Prox >
+      @Html.Raw(" ")
+      @:>>
+      // table-striped
+        
+     }
+     
+</div>
+    
+    
+<table class="table table-hover">
+
+    <tr>
+        <th>
+            phase
+        </th>
+        <th>
+            date
+        </th>
+        <th>
+            researcher
+        </th>
+        <th>
+            state
+        </th>
+        <th>
+            lga
+        </th>
+        <th>
+            settlement
+        </th>
+        <th>
+            type
+        </th>
+        <th>Displaced people?</th>
+        <th>
+            # hh    
+        </th>
+        <th>
+            # ind
+        </th>
+        <th>wards list</th><th>key informants list</th><th>organizations list</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    
+    string style = null;
+    
+    if (@item.iom_presence_wards!=null)
+    {
+            int hhs = @item.iom_presence_wards.Sum(x=>x.estimate_hh);
+            int inds = @item.iom_presence_wards.Sum(x=>x.estimate_ind);
+            
+            if(@item.number_hh != hhs || @item.number_ind != inds)
+            {style = "background-color:pink";}
+            
+    }
+        
+    
+    <tr style="@style">
+        <td>
+            @Html.DisplayFor(modelItem => item.phase)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iom_researchers.researcher_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lkp_Lga.lkp_State.state_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lkp_Lga.lga_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.settlement)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lkp_Settlement.settlement)
+        </td>  
+        <td>
+            @if (@item.displaced_hh_ind_YesNo == 1)
+            {
+                @:Ans: Yes
+             }
+            else
+            {
+                @:Ans: No
+             }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.number_hh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.number_ind)
+        </td>
+
+        <td>
+            @Html.ActionLink("wards", "Index", "Wards", new RouteValueDictionary(new { id = item.id, lga = item.lga, phase=item.phase }), null)
+            ( @item.iom_presence_wards.Count() )
+        </td>
+        <td>
+            @Html.ActionLink("informants", "Index", "Informant", new RouteValueDictionary(new { id = item.id, lga = item.lga }), null)
+            
+            ( @item.iom_b1f_informants.Count() )
+            
+        </td>
+        <td>
+            @Html.ActionLink("organizations", "Index", "Org", new RouteValueDictionary(new { id = item.id, lga = item.lga }), null)
+        
+            ( @item.iom_b1f_organizations_assisting.Count() )
+        </td>
+        
+           
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.id })
+        </td>
+    </tr>
+}
+
+</table>
+    
+}
+else
+{ 
+<b>No data</b>
+}
+</div>

@@ -1,0 +1,1089 @@
+﻿@model DTM_Nigeria.Models.B2F
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit B2F</h2>
+
+@if (ViewBag.Exception != null)
+{
+    <p style="color: Red">@ViewBag.Exception</p>
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="../../Scripts/MyCustomValidation.js" type="text/javascript"></script>
+<link href="../../Content/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script src="../../Scripts/jquery-ui.js" type="text/javascript"></script>
+
+<script src="~/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('.edit-date').datepicker({
+            constrainInput: true,   // prevent letters in the input field
+            //minDate: new Date(),    // prevent selection of date older than today
+            maxDate: new Date(),    // prevent selection of date greater than today
+            //showOn: 'button',       // Show a button next to the text-field
+            autoSize: true,         // automatically resize the input field
+            dateFormat: 'dd/mm/yy',  // Date Format used
+            //beforeShowDay: $.datepicker.noWeekends,     // Disable selection of weekends
+            firstDay: 1 // Start with Monday
+        })
+
+        $("#researcher_researcher_name").autocomplete({
+            source: '@Url.Action("GetResearchersNames")',
+            focus: function (event, ui) {
+                $("#researcher_researcher_name").val(ui.item.label);
+                return false;
+            },
+            select: function (event, ui) {
+                //$("#researcher_researcher_tel").val("test");
+
+                $.ajax({
+                    url: "/B2F/GetResearcherTels",
+                    type: 'POST',
+                    data: { r_name: ui.item.label },
+                    success: function (reseacher) {
+                        var $telTxtBox = $('#researcher_researcher_tel');
+                        $telTxtBox.empty();
+                        $telTxtBox.val(reseacher.toString());
+                    },
+                    error: function (xhr) { alert("error!!"); }
+                });
+
+            }
+        }
+        );
+
+        //$("#forma").on("load", function () {
+        //alert("tst");
+        //this.value = this.value.replace(/ /g, '');
+    });
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+   
+    List<SelectListItem> yesNo = new List<SelectListItem>();
+
+    yesNo.Add(new SelectListItem { Text = "Yes", Value = "1" });
+    yesNo.Add(new SelectListItem { Text = "No", Value = "2" });
+    
+    
+    <fieldset>
+        <legend>Details about one B2F form</legend>
+
+       <br />
+        
+        <table width=100%>
+        <tr><th colspan=4>A. LOCATION AND TEAM MEMBERS</th></tr>
+           <tr><td colspan=2>Date of assessment
+           
+           <div class="editor-field">
+            @Html.TextBoxFor(model => model.profile.date, new { @class = "edit-date" })
+            @Html.ValidationMessageFor(model => model.profile.date)
+        </div>
+
+           </td><td >Researcher name
+           
+        <div class="editor-field">
+           @using (Html.BeginForm("Edit", "B2F", FormMethod.Post, new { id = "search" }))
+           {
+            @Html.EditorFor(model => model.researcher.researcher_name)
+            @Html.ValidationMessageFor(model => model.researcher.researcher_name)
+           }
+        </div>
+               
+
+           </td><td >Researcher tel
+           
+        <div class="editor-field">
+            @Html.EditorFor(model => model.researcher.researcher_tel)
+            @Html.ValidationMessageFor(model => model.researcher.researcher_tel)
+        </div>
+               
+
+           </td></tr>
+           <tr><td>State / Lga
+           
+           <div class="editor-field">
+           @ViewBag.StateName / @ViewBag.LGA
+           </div>
+           
+
+           </td><td>Ward / W_pcode
+           
+           <div class="editor-field">
+            @ViewBag.Ward / @ViewBag.Wpcode
+        </div>
+
+           </td><td>Settlement
+           
+           <div class="editor-field">
+            @Html.EditorFor(model => model.profile.settlement)
+            @Html.ValidationMessageFor(model => model.profile.settlement)
+        </div>
+
+           </td><td>Type
+           
+
+           <div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.settlement_type, (SelectList)ViewBag.Settlement, "[Select type]")
+            @Html.ValidationMessageFor(model => model.profile.settlement_type)
+        </div>
+
+
+           </td></tr>
+        </table>
+
+        <br />
+        
+        <table width=100%>
+        <tr><th colspan=5>B. DEMOGRAPHICS</th></tr>
+           <tr><td colspan=2>Are there displaced IDP hh/individuals in the LGA?</td><td colspan=2>
+           
+           <div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.displaced_hh_ind_YesNo, yesNo, "[Yes or No]")
+            @Html.ValidationMessageFor(model => model.profile.displaced_hh_ind_YesNo)
+        </div>
+
+           </td></tr>
+           
+           <tr><td colspan=4>If yes, what is the estimated number of current IDP population?</td></tr>
+           <tr><td>Number of households</td><td>
+           
+             <div class="editor-field">
+            @Html.TextBoxFor(model => model.profile.number_hh)
+            @Html.ValidationMessageFor(model => model.profile.number_hh)
+        </div>
+
+
+           </td><td>Number of individuals</td><td>
+           
+                 <div class="editor-field">
+            @Html.TextBoxFor(model => model.profile.number_ind)
+            @Html.ValidationMessageFor(model => model.profile.number_ind)
+        </div>
+
+           </td></tr>
+           <tr><td colspan=4>Arrival of IDPs in the LGA</td></tr>
+            @*<tr><td>Before 2012
+            
+            
+            </td><td>2012
+            
+            
+            </td><td>2013
+            
+            
+            </td><td>2014
+            
+            
+            </td></tr>  *@
+
+            <tr>
+            @{int i = 0;}
+
+            @foreach (var arrivals in Model.arrivals)
+            {
+            <td>
+            
+            @*@foreach(var p in (SelectList)ViewBag.Periods)
+            {
+                if (p.Value.Equals(arrivals.year))
+                {
+                    @: @p.Text
+                    break;
+                }
+            }*@
+
+            <div class="display-field">
+            @Html.DisplayFor(model => model.arrivals[i].lkp_Period2.label)</div>
+
+<div class="editor-label">
+            #HH
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.arrivals[i].year, new { @type = "hidden" })
+            @Html.EditorFor(model => model.arrivals[i].hh)
+            @Html.ValidationMessageFor(model => model.arrivals[i].hh)
+        </div>
+
+        <div class="editor-label">
+            #IND
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.arrivals[i].ind)
+            @Html.ValidationMessageFor(model => model.arrivals[i].ind)
+        </div>
+
+
+<div class="editor-label">
+            From
+        </div>
+
+        <div class="editor-field">
+           <select name="arrivals[@i].state_type" id="arrivals[@i].state_type">
+
+           <option value="">[1. Same state,  2. Other state]</option>
+
+           @foreach (var item in (SelectList)ViewBag.LocationsList)
+           {
+               if (@item.Value.Equals(arrivals.state_type))
+               {
+               <option value="@item.Value" selected="selected">@item.Text</option>
+               }
+               else
+               { 
+               <option value="@item.Value">@item.Text</option>
+               }
+
+           }
+           </select></div>
+
+
+<div class="editor-label">
+            Specify
+        </div>
+
+
+
+         <div class="editor-field">
+           <select name="arrivals[@i].location" id="arrivals[@i].location">
+
+           <option value="">[Select state]</option>
+
+           @foreach (var item in (SelectList)ViewBag.StatesList)
+           {
+               if (@item.Value.Equals(arrivals.location))
+               {
+               <option value="@item.Value" selected="selected">@item.Text</option>
+               }
+               else
+               { 
+               <option value="@item.Value">@item.Text</option>
+               }
+
+           }
+           </select></div>
+            
+            
+            </td>
+                
+           i++;
+            }
+  </tr>
+
+
+            <tr></tr>
+
+        </table>
+
+        
+        <br />
+        
+        <table width=100%>
+        <tr><th colspan=4>C. DISPLACEMENT THAT ORIGINANTES FROM THIS LGA</th></tr>
+           <tr><td colspan=3>Are there households/individuals from this LGA that left as IDPs and have not returned?</td><td>
+           
+           <div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.nr_YesNo, yesNo, "[Yes or No]")
+            @Html.ValidationMessageFor(model => model.profile.nr_YesNo)
+        </div>
+           
+           </td></tr>
+           <tr><td colspan=2>If yes, where did majority of them go?</td><td colspan=2>
+           
+
+           <div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.nr_location, (SelectList)ViewBag.LocationsList, "[1. Same state other LGA,  2. Other state]")
+            @Html.ValidationMessageFor(model => model.profile.nr_location)
+        </div>
+
+           </td></tr>
+
+           <tr><td colspan=2>List maximum 2 states -> </td><td>
+           
+
+           <div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.nr_state1, (SelectList)ViewBag.StatesList, "[Select state S1]")
+            @Html.ValidationMessageFor(model => model.profile.nr_state1)
+        </div>
+        
+
+           </td><td>
+           
+           <div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.nr_state2, (SelectList)ViewBag.StatesList, "[Select state S2]")
+            @Html.ValidationMessageFor(model => model.profile.nr_state2)
+        </div>
+
+           </td></tr>
+
+           <tr><td colspan=2>Select below for period when majority left:</td><td colspan=2>
+           
+           <div class="editor-field"> 
+            @Html.DropDownListFor(model => model.profile.nr_period, (SelectList)ViewBag.Periods, "[Select period]")
+            @Html.ValidationMessageFor(model => model.profile.nr_period)
+        </div>
+          
+
+           </td></tr>
+        </table>
+
+        <br />
+        
+        <table width=100%>
+        <tr><th colspan=4>D. IDP CATEGORY / REASON FOR DISPLACEMENT</th></tr>
+           <tr><th>1. Insurgency-Conflict in North East</th><th>2. Community Clashes</th><th>3. Natural Disasters</th><th>
+           Other, Specify
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.profile.reason_others_name)
+            @Html.ValidationMessageFor(model => model.profile.reason_others_name)
+        </div>
+
+
+           </th></tr>
+           <tr><td>
+           
+            <div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.reason_insurgency_YesNo, yesNo, "[Yes or No]")
+            @Html.ValidationMessageFor(model => model.profile.reason_insurgency_YesNo)
+        </div>
+
+         <div class="editor-field"> 
+            @Html.DropDownListFor(model => model.profile.reason_insurg_year, (SelectList)ViewBag.Period2, "[Select period]")
+            @Html.ValidationMessageFor(model => model.profile.reason_insurg_year)
+        </div>
+
+        <div class="editor-label">
+            #HH
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.profile.reason_insurg_hh)
+            @Html.ValidationMessageFor(model => model.profile.reason_insurg_hh)
+        </div>
+
+        <div class="editor-label">
+            #IND
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.profile.reason_insurg_ind)
+            @Html.ValidationMessageFor(model => model.profile.reason_insurg_ind)
+        </div>
+
+
+           </td><td>
+           
+
+           <div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.reason_clash_YesNo, yesNo, "[Yes or No]")
+            @Html.ValidationMessageFor(model => model.profile.reason_clash_YesNo)
+        </div>
+
+         <div class="editor-field"> 
+            @Html.DropDownListFor(model => model.profile.reason_clash_year, (SelectList)ViewBag.Period2, "[Select period]")
+            @Html.ValidationMessageFor(model => model.profile.reason_clash_year)
+        </div>
+
+
+        <div class="editor-label">
+            #HH
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.profile.reason_clash_hh)
+            @Html.ValidationMessageFor(model => model.profile.reason_clash_hh)
+        </div>
+
+        <div class="editor-label">
+            #IND
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.profile.reason_clash_ind)
+            @Html.ValidationMessageFor(model => model.profile.reason_clash_ind)
+        </div>
+
+
+           </td><td>
+           
+
+           <div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.reason_disaster_YesNo, yesNo, "[Yes or No]")
+            @Html.ValidationMessageFor(model => model.profile.reason_disaster_YesNo)
+        </div>
+
+         <div class="editor-field"> 
+            @Html.DropDownListFor(model => model.profile.reason_disaster_year, (SelectList)ViewBag.Period2, "[Select period]")
+            @Html.ValidationMessageFor(model => model.profile.reason_disaster_year)
+        </div>
+
+
+        <div class="editor-label">
+            #HH
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.profile.reason_disaster_hh)
+            @Html.ValidationMessageFor(model => model.profile.reason_disaster_hh)
+        </div>
+
+        <div class="editor-label">
+            #IND
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.profile.reason_disaster_ind)
+            @Html.ValidationMessageFor(model => model.profile.reason_disaster_ind)
+        </div>
+
+
+           </td><td>
+           
+            
+            <div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.reason_others_YesNo, yesNo, "[Yes or No]")
+            @Html.ValidationMessageFor(model => model.profile.reason_others_YesNo)
+        </div>
+
+         <div class="editor-field"> 
+            @Html.DropDownListFor(model => model.profile.reason_others_year, (SelectList)ViewBag.Period2, "[Select period]")
+            @Html.ValidationMessageFor(model => model.profile.reason_others_year)
+        </div>
+
+        <div class="editor-label">
+            #HH
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.profile.reason_others_hh)
+            @Html.ValidationMessageFor(model => model.profile.reason_others_hh)
+        </div>
+
+        <div class="editor-label">
+            #IND
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.profile.reason_others_ind)
+            @Html.ValidationMessageFor(model => model.profile.reason_others_ind)
+        </div>
+
+           </td></tr>
+        </table>
+
+
+        <br />
+
+        <table width=100%>
+        <tr><th colspan=4>E. TYPE OF LOCATION/RESIDENCE FOR IDP POPULATION IN THE LGA</th></tr>
+           <tr><th>Type of IDP's Temporary Settlements</th><th>IDPs</th><th>#HHs</th><th>
+           #IND</th></tr>
+           <tr><td>1. Camp like sites/centers</td><td>
+           
+            <div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.temporary_settlement_type_camp_YesNo, yesNo, "[Yes or No]")
+            @Html.ValidationMessageFor(model => model.profile.temporary_settlement_type_camp_YesNo)
+        </div>
+
+           </td><td>
+           
+             <div class="editor-field">
+            @Html.EditorFor(model => model.profile.temporary_settlement_hh_camp)
+            @Html.ValidationMessageFor(model => model.profile.temporary_settlement_hh_camp)
+        </div>
+
+           </td><td>
+           
+            <div class="editor-field">
+            @Html.EditorFor(model => model.profile.temporary_settlement_ind_camp)
+            @Html.ValidationMessageFor(model => model.profile.temporary_settlement_ind_camp)
+        </div>
+           
+           </td></tr>
+
+           <tr><td>2. Host family/Community accomodation</td><td>
+           
+
+             <div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.temporary_settlement_type_hc_YesNo, yesNo, "[Yes or No]")
+            @Html.ValidationMessageFor(model => model.profile.temporary_settlement_type_hc_YesNo)
+        </div>
+
+           </td><td>
+           
+                   <div class="editor-field">
+            @Html.EditorFor(model => model.profile.temporary_settlement_hh_hc)
+            @Html.ValidationMessageFor(model => model.profile.temporary_settlement_hh_hc)
+        </div>
+
+           </td><td>
+           
+            <div class="editor-field">
+            @Html.EditorFor(model => model.profile.temporary_settlement_ind_hc)
+            @Html.ValidationMessageFor(model => model.profile.temporary_settlement_ind_hc)
+        </div>
+
+           </td></tr>
+
+        </table>
+
+        <br />
+        @Html.HiddenFor(model => model.profile.created_by)
+        @Html.HiddenFor(model => model.profile.create_time)
+        @Html.HiddenFor(model => model.profile.housing_shelter)
+        @Html.HiddenFor(model => model.profile.drinking_water)
+        @Html.HiddenFor(model => model.profile.food)
+
+        @Html.HiddenFor(model => model.profile.medical_care)
+        @Html.HiddenFor(model => model.profile.access_edu)
+        @Html.HiddenFor(model => model.profile.hygiene_kits)
+        @Html.HiddenFor(model => model.profile.sewage_disp)
+
+        @Html.HiddenFor(model => model.profile.hospitality_extent)
+        @Html.HiddenFor(model => model.profile.diff_cause_issues)
+        @Html.HiddenFor(model => model.profile.tensions_idp_hc)
+        @Html.HiddenFor(model => model.profile.collabo_idp_hc)
+        @Html.HiddenFor(model => model.profile.res_shr_idp_hc)
+
+        @Html.HiddenFor(model => model.profile.stigma_toward1)
+        @Html.HiddenFor(model => model.profile.stigma_toward2)
+        @Html.HiddenFor(model => model.profile.stigma_toward3)
+
+        @Html.HiddenFor(model => model.profile.trust_ppl1)
+        @Html.HiddenFor(model => model.profile.trust_ppl2)
+        @Html.HiddenFor(model => model.profile.trust_ppl3)
+        
+        <table class="table">
+
+        <tr><th colspan="4">F. SECONDARY DISPLACEMENT</th></tr>
+        <tr><th colspan="4">Number of times IDPs were displaced (Estimate the % of total IDP population by number of displacements 
+        and indicate for each category,<br /> Previous State & LGA of displacement and date of last displacement of the majority).</th></tr>
+           <tr><th>Displaced 1 time</th><th>Displaced 2 times</th><th>Displaced 3 times</th><th>Displaced more than 3 times</th></tr>
+             
+            <tr><td> <div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_1T_yn, (SelectList)ViewBag.YesNo_, "[Yes or No]")
+            @Html.ValidationMessageFor(model => model.profile.disp_1T_yn)
+            </div>
+           
+
+            </td><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_2T_yn, (SelectList)ViewBag.YesNo_, "[Yes or No]")
+            @Html.ValidationMessageFor(model => model.profile.disp_2T_yn)
+            </div>
+            
+
+            </td><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_3T_yn, (SelectList)ViewBag.YesNo_, "[Yes or No]")
+            @Html.ValidationMessageFor(model => model.profile.disp_3T_yn)
+            </div>
+            
+
+            </td><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_3Tp_yn, (SelectList)ViewBag.YesNo_, "[Yes or No]")
+            @Html.ValidationMessageFor(model => model.profile.disp_3Tp_yn)
+            </div>
+
+           </td></tr>
+
+           <tr><td>           
+            %<div class="bd_editor display-field">
+            @Html.EditorFor(model => model.profile.disp_1T_perc)
+            @Html.ValidationMessageFor(model => model.profile.disp_1T_perc)
+            </div>
+
+            </td><td>%<div class="bd_editor display-field">
+            @Html.EditorFor(model => model.profile.disp_2T_perc)
+            @Html.ValidationMessageFor(model => model.profile.disp_2T_perc)
+            </div>
+
+            </td><td>%<div class="bd_editor display-field">
+            @Html.EditorFor(model => model.profile.disp_3T_perc)
+            @Html.ValidationMessageFor(model => model.profile.disp_3T_perc)
+            </div>
+
+            </td><td>%<div class="bd_editor display-field">
+            @Html.EditorFor(model => model.profile.disp_3Tp_perc)
+            @Html.ValidationMessageFor(model => model.profile.disp_3Tp_perc)
+            </div>
+
+           </td></tr>
+
+           <tr><th>           
+            </th><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_2T_state, (SelectList)ViewBag.StatesList, "[Select STATE]", new { @id = "st_2T" })
+            @Html.ValidationMessageFor(model => model.profile.disp_2T_state)
+            </div>
+
+            </td><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_3T_state, (SelectList)ViewBag.StatesList, "[Select STATE]", new { @id = "st_3T" })
+            @Html.ValidationMessageFor(model => model.profile.disp_3T_state)
+            </div>
+
+            </td><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_3Tp_state, (SelectList)ViewBag.StatesList, "[Select STATE]", new { @id = "st_3Tp" })
+            @Html.ValidationMessageFor(model => model.profile.disp_3Tp_state)
+            </div>
+
+           </td></tr>
+
+           <tr><th>           
+            </th><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_2T_lga, (SelectList)ViewBag.LgasList, "[Select LGA]", new { @id = "lg_2T" })
+            @Html.ValidationMessageFor(model => model.profile.disp_2T_lga)
+            </div>
+
+            </td><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_3T_lga, (SelectList)ViewBag.LgasList, "[Select LGA]", new { @id = "lg_3T" })
+            @Html.ValidationMessageFor(model => model.profile.disp_3T_lga)
+            </div>
+
+            </td><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_3Tp_lga, (SelectList)ViewBag.LgasList, "[Select LGA]", new { @id = "lg_3Tp" })
+            @Html.ValidationMessageFor(model => model.profile.disp_3Tp_lga)
+            </div>
+
+           </td></tr>
+
+           <tr><th>           
+            </th><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_2T_ward, (SelectList)ViewBag.WardsList, "[Select WARD]", new { @id = "wd_2T" })
+            @Html.ValidationMessageFor(model => model.profile.disp_2T_ward)
+            </div>
+
+            </td><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_3T_ward, (SelectList)ViewBag.WardsList, "[Select WARD]", new { @id = "wd_3T" })
+            @Html.ValidationMessageFor(model => model.profile.disp_3T_ward)
+            </div>
+
+            </td><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_3Tp_ward, (SelectList)ViewBag.WardsList, "[Select WARD]", new { @id = "wd_3Tp" })
+            @Html.ValidationMessageFor(model => model.profile.disp_3Tp_ward)
+            </div>
+
+           </td></tr>
+
+           <tr><th>           
+            </th><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_2T_dispDate, (SelectList)ViewBag.Periods, "[Select date]")
+            @Html.ValidationMessageFor(model => model.profile.disp_2T_dispDate)
+            </div>
+
+            </td><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_3T_dispDate, (SelectList)ViewBag.Periods, "[Select date]")
+            @Html.ValidationMessageFor(model => model.profile.disp_3T_dispDate)
+            </div>
+
+            </td><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_3Tp_dispDate, (SelectList)ViewBag.Periods, "[Select date]")
+            @Html.ValidationMessageFor(model => model.profile.disp_3Tp_dispDate)
+            </div>
+
+           </td></tr>
+
+        </table>
+
+        <br />
+
+        <table width=100%>
+        <tr><th colspan="5">G. IDPs WHO WERE ORIGINALLY DISPLACED FROM THIS LGA</th></tr>
+
+        <tr><td colspan="3">Are there IDPs who originate from this LGA and are currently displaced in the Ward?
+            </td><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.idps_fromLGA_dispInWard, (SelectList)ViewBag.YesNo_, "[Yes or No]")
+            @Html.ValidationMessageFor(model => model.profile.idps_fromLGA_dispInWard)
+            </div>
+        </td></tr>
+
+        <tr><td>Number of Households</td><td>        
+        <div class="bd_editor display-field">
+        @Html.EditorFor(model => model.profile.NbHH_dispInWard)
+        @Html.ValidationMessageFor(model => model.profile.NbHH_dispInWard)
+        </div>
+
+        </td><td>Number of Individuals</td><td>        
+        <div class="bd_editor display-field">
+        @Html.EditorFor(model => model.profile.NbIND_dispInWard)
+        @Html.ValidationMessageFor(model => model.profile.NbIND_dispInWard)
+        </div>
+        
+        </td></tr>
+
+        <tr><th colspan="5">State/LGA of previous displacement of largest group</th></tr>
+            <tr><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.state_prev_disp_LargestGrp1, (SelectList)ViewBag.StatesList, "[Select STATE]", new { @id = "st_prv1" })
+            @Html.ValidationMessageFor(model => model.profile.state_prev_disp_LargestGrp1)
+            </div>
+
+            </td><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.lga_prev_disp_LargestGrp1, (SelectList)ViewBag.LgasList, "[Select LGA]", new { @id = "lg_prv1" })
+            @Html.ValidationMessageFor(model => model.profile.lga_prev_disp_LargestGrp1)
+            </div>
+
+            </td><td>        
+            <div class="editor-field">
+            @Html.TextBoxFor(model => model.profile.NbHH_LargestGrp1, new { placeholder = "Number of Households" })
+            @Html.ValidationMessageFor(model => model.profile.NbHH_LargestGrp1)
+            </div>
+
+            </td><td>        
+            <div class="editor-field">
+            @Html.TextBoxFor(model => model.profile.NbIND_LargestGrp1, new { placeholder = "Number of Individuals" })
+            @Html.ValidationMessageFor(model => model.profile.NbIND_LargestGrp1)
+            </div>
+
+           </td><td> 
+           <div class="editor-field">
+            @Html.TextBoxFor(model => model.profile.date_arriv_LGA_LargestGrp1, new { @class = "edit-date", placeholder = "Date arrived in LGA" })
+            @Html.ValidationMessageFor(model => model.profile.date_arriv_LGA_LargestGrp1)
+            </div>
+
+        </td></tr>
+
+        <tr><th colspan="5">State/LGA of previous displacement of 2nd largest group</th></tr>
+            <tr><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.state_prev_disp_LargestGrp2, (SelectList)ViewBag.StatesList, "[Select STATE]", new { @id = "st_prv2" })
+            @Html.ValidationMessageFor(model => model.profile.state_prev_disp_LargestGrp2)
+            </div>
+
+            </td><td><div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.lga_prev_disp_LargestGrp2, (SelectList)ViewBag.LgasList, "[Select LGA]", new { @id = "lg_prv2" })
+            @Html.ValidationMessageFor(model => model.profile.lga_prev_disp_LargestGrp2)
+            </div>
+
+            </td><td>        
+            <div class="editor-field">
+            @Html.TextBoxFor(model => model.profile.NbHH_LargestGrp2, new { placeholder = "Number of Households" })
+            @Html.ValidationMessageFor(model => model.profile.NbHH_LargestGrp2)
+            </div>
+
+            </td><td>        
+            <div class="editor-field">
+            @Html.TextBoxFor(model => model.profile.NbIND_LargestGrp2, new { placeholder = "Number of Individuals" })
+            @Html.ValidationMessageFor(model => model.profile.NbIND_LargestGrp2)
+            </div>
+
+           </td><td> 
+           <div class="editor-field">
+            @Html.TextBoxFor(model => model.profile.date_arriv_LGA_LargestGrp2, new { @class = "edit-date", placeholder = "Date arrived in LGA" })
+            @Html.ValidationMessageFor(model => model.profile.date_arriv_LGA_LargestGrp2)
+            </div>
+
+        </td></tr>
+
+        </table>
+
+        <br />
+
+        <table width=100%>
+        <tr><th colspan=2>K. SHELTER/NFI NEEDS</th></tr>
+
+        <tr><td>I.1.a. Number of households in makeshift shelter?</td><td>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.profile.NbHH_makeshift)
+                @Html.ValidationMessageFor(model => model.profile.NbHH_makeshift)
+            </div>
+        </td></tr>
+    
+        <tr><td>I.1.b. Number of households in overcrowded houses (living with host community and above 5 households per host)</td><td>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.profile.NbHH_overcrowded_houses)
+                @Html.ValidationMessageFor(model => model.profile.NbHH_overcrowded_houses)
+            </div>
+        </td></tr>
+
+        <tr><td>I.1.c. Number of households in damaged houses (needing some repairs)</td><td>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.profile.NbHH_damaged_houses)
+                @Html.ValidationMessageFor(model => model.profile.NbHH_damaged_houses)
+            </div>
+        </td></tr>
+
+        <tr><td>I.1.d. Number of households living outdoors</td><td>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.profile.NbHH_living_outdoors)
+                @Html.ValidationMessageFor(model => model.profile.NbHH_living_outdoors)
+            </div>
+        </td></tr>
+
+        <tr><td>I.2.a. Number of households in need of basic NFI kits</td><td>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.profile.NbHH_need_NFI)
+                @Html.ValidationMessageFor(model => model.profile.NbHH_need_NFI)
+            </div>
+        </td></tr>
+
+        <tr><td>I.2.b. Number of households in need of kitchen sets</td><td>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.profile.NbHH_need_KitchenSet)
+                @Html.ValidationMessageFor(model => model.profile.NbHH_need_KitchenSet)
+            </div>
+        </td></tr>
+
+        <tr><td>I.2.c. Number of households in need of full kits (Please do not double count)</td><td>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.profile.NbHH_need_Full_kits)
+                @Html.ValidationMessageFor(model => model.profile.NbHH_need_Full_kits)
+            </div>
+        </td></tr>
+
+        </table>
+        <br />
+
+        
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+    
+}
+
+<div>
+    @Html.ActionLink("Back", "Index")
+</div>
+
+<script type="text/javascript">
+    $(function () {
+
+    //2T displaced
+        $("#st_2T").change(function () {
+
+            if ($(this).val() != "NULL") {
+
+                $.ajax({
+                    url: "/B2F/getLgaList",
+                    type: 'POST',
+                    data: { id: $(this).val() },
+                    success: function (lgas) {
+
+                        var $select = $('#lg_2T');
+                        $select.empty();
+                        $select.append("<option value=''>[Select Lga]</option>");
+                        $.each(lgas, function (i, lga) {
+                            $select.append("<option value='" + lga.Value + "'>" + lga.Text + "</option>");
+                        });
+                    },
+                    error: function (xhr) { alert("error!!"); }
+                });
+                //***--set ward to null--***
+                $.ajax({
+                    url: "/B2F/getWardList",
+                    type: 'POST',
+                    data: { id: $(this).val() },
+                    success: function (wards) {
+
+                        var $select = $('#wd_2T');
+                        $select.empty();
+                        //
+                        $select.append("<option value=''>[Select Ward]</option>");
+                        // $.each(wards, function (i, ward) {
+                        //     $select.append("<option value='" + ward.Value + "'>" + ward.Text + "</option>");
+                        // });
+                    },
+                    error: function (xhr) { alert("error!!"); }
+                });
+                //***--set ward to null--***
+            }
+        });
+
+
+        $("#lg_2T").change(function () {
+
+            if ($(this).val() != "NULL") {
+
+                $.ajax({
+                    url: "/B2F/getWardList",
+                    type: 'POST',
+                    data: { id: $(this).val() },
+                    success: function (wards) {
+
+                        var $select = $('#wd_2T');
+                        $select.empty();
+                        $select.append("<option value=''>[Select ward]</option>");
+                        $.each(wards, function (i, ward) {
+                            $select.append("<option value='" + ward.Value + "'>" + ward.Text + "</option>");
+                        });
+                    },
+                    error: function (xhr) { alert("error!!"); }
+                });
+            }
+        });
+
+        //3T displaced
+        $("#st_3T").change(function () {
+
+            if ($(this).val() != "NULL") {
+
+                $.ajax({
+                    url: "/B2F/getLgaList",
+                    type: 'POST',
+                    data: { id: $(this).val() },
+                    success: function (lgas) {
+
+                        var $select = $('#lg_3T');
+                        $select.empty();
+                        $select.append("<option value=''>[Select Lga]</option>");
+                        $.each(lgas, function (i, lga) {
+                            $select.append("<option value='" + lga.Value + "'>" + lga.Text + "</option>");
+                        });
+                    },
+                    error: function (xhr) { alert("error!!"); }
+                });
+                //***--set ward to null--***
+                $.ajax({
+                    url: "/B2F/getWardList",
+                    type: 'POST',
+                    data: { id: $(this).val() },
+                    success: function (wards) {
+
+                        var $select = $('#wd_3T');
+                        $select.empty();
+                        //
+                        $select.append("<option value=''>[Select Ward]</option>");
+                        // $.each(wards, function (i, ward) {
+                        //     $select.append("<option value='" + ward.Value + "'>" + ward.Text + "</option>");
+                        // });
+                    },
+                    error: function (xhr) { alert("error!!"); }
+                });
+                //***--set ward to null--***
+            }
+        });
+
+
+        $("#lg_3T").change(function () {
+
+            if ($(this).val() != "NULL") {
+
+                $.ajax({
+                    url: "/B2F/getWardList",
+                    type: 'POST',
+                    data: { id: $(this).val() },
+                    success: function (wards) {
+
+                        var $select = $('#wd_3T');
+                        $select.empty();
+                        $select.append("<option value=''>[Select ward]</option>");
+                        $.each(wards, function (i, ward) {
+                            $select.append("<option value='" + ward.Value + "'>" + ward.Text + "</option>");
+                        });
+                    },
+                    error: function (xhr) { alert("error!!"); }
+                });
+            }
+        });
+
+        //3Tp displaced
+        $("#st_3Tp").change(function () {
+
+            if ($(this).val() != "NULL") {
+
+                $.ajax({
+                    url: "/B2F/getLgaList",
+                    type: 'POST',
+                    data: { id: $(this).val() },
+                    success: function (lgas) {
+
+                        var $select = $('#lg_3Tp');
+                        $select.empty();
+                        $select.append("<option value=''>[Select Lga]</option>");
+                        $.each(lgas, function (i, lga) {
+                            $select.append("<option value='" + lga.Value + "'>" + lga.Text + "</option>");
+                        });
+                    },
+                    error: function (xhr) { alert("error!!"); }
+                });
+                //***--set ward to null--***
+                $.ajax({
+                    url: "/B2F/getWardList",
+                    type: 'POST',
+                    data: { id: $(this).val() },
+                    success: function (wards) {
+
+                        var $select = $('#wd_3Tp');
+                        $select.empty();
+                        //
+                        $select.append("<option value=''>[Select Ward]</option>");
+                        // $.each(wards, function (i, ward) {
+                        //     $select.append("<option value='" + ward.Value + "'>" + ward.Text + "</option>");
+                        // });
+                    },
+                    error: function (xhr) { alert("error!!"); }
+                });
+                //***--set ward to null--***
+            }
+        });
+
+
+        $("#lg_3Tp").change(function () {
+
+            if ($(this).val() != "NULL") {
+
+                $.ajax({
+                    url: "/B2F/getWardList",
+                    type: 'POST',
+                    data: { id: $(this).val() },
+                    success: function (wards) {
+
+                        var $select = $('#wd_3Tp');
+                        $select.empty();
+                        $select.append("<option value=''>[Select ward]</option>");
+                        $.each(wards, function (i, ward) {
+                            $select.append("<option value='" + ward.Value + "'>" + ward.Text + "</option>");
+                        });
+                    },
+                    error: function (xhr) { alert("error!!"); }
+                });
+            }
+        });
+
+        //State/LGA prev disp (1)
+        $("#st_prv1").change(function () {
+
+            if ($(this).val() != "NULL") {
+
+                $.ajax({
+                    url: "/B2F/getLgaList",
+                    type: 'POST',
+                    data: { id: $(this).val() },
+                    success: function (lgas) {
+
+                        var $select = $('#lg_prv1');
+                        $select.empty();
+                        $select.append("<option value=''>[Select Lga]</option>");
+                        $.each(lgas, function (i, lga) {
+                            $select.append("<option value='" + lga.Value + "'>" + lga.Text + "</option>");
+                        });
+                    },
+                    error: function (xhr) { alert("error!!"); }
+                });
+            }
+        });
+
+
+        //State/LGA prev disp (2)
+        $("#st_prv2").change(function () {
+
+            if ($(this).val() != "NULL") {
+
+                $.ajax({
+                    url: "/B2F/getLgaList",
+                    type: 'POST',
+                    data: { id: $(this).val() },
+                    success: function (lgas) {
+
+                        var $select = $('#lg_prv2');
+                        $select.empty();
+                        $select.append("<option value=''>[Select Lga]</option>");
+                        $.each(lgas, function (i, lga) {
+                            $select.append("<option value='" + lga.Value + "'>" + lga.Text + "</option>");
+                        });
+                    },
+                    error: function (xhr) { alert("error!!"); }
+                });
+            }
+        });
+
+    });
+</script>

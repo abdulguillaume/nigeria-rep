@@ -1,0 +1,88 @@
+﻿@model DTM_Nigeria.Models.iom_dtm_phase
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete DTM/Phase</h2>
+@if (ViewBag.Exception != null)
+{
+    <p style="color: Red">@ViewBag.Exception</p>
+}
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>DTM phase information</legend>
+
+   <div class="display-label">phase</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.phase)
+    </div>
+
+    <div class="display-label">description</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.description)
+    </div>
+
+    <div class="display-label">start date</div>
+    <div class="display-field">
+        @if (@Model.field_start_date == null)
+        { 
+            @: No date
+        }
+        else
+        {
+        @Html.DisplayFor(model => model.field_start_date)
+        }
+    </div>
+
+    <div class="display-label">end date</div>
+    <div class="display-field">
+        @if(@Model.field_end_date==null)
+        {
+            @: No date
+        }
+        else
+        {
+        @Html.DisplayFor(model => model.field_end_date)
+        }
+    </div>
+
+    <div class="display-label">Phase is closed</div>
+    <div class="display-field">
+         @if (@Model.closed_YesNo == 1)
+         {
+                @:Ans: Yes
+             }
+         else
+         {
+                @:Ans: No
+             }
+    </div>
+
+    <div class="display-label">create_date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.create_date)
+    </div>
+
+    <div class="display-label">created_by</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.created_by)
+    </div>
+
+    <div class="display-label">update_date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.update_date)
+    </div>
+
+    <div class="display-label">updated_by</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.updated_by)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to DTM/Phases List", "Index")
+    </p>
+}

@@ -1,0 +1,152 @@
+﻿@model IEnumerable<DTM_Nigeria.Models.iom_presence_wards>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Wards with IDP presence/B1F</h2>
+<h3>@ViewBag.LgaInfo</h3>
+
+<p>
+    @Html.ActionLink("Add new ward presence", "Create")
+</p>
+
+@if (Model.Count() > 0)
+{
+    int tot_hh = 0, tot_ind = 0;
+    
+<table class="table table-hover">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            ward
+        </th>
+        <th>
+            location type
+        </th>
+        <th>
+            idp category
+        </th>
+        <th>
+            location name
+        </th>
+        <th>
+            estimate hh
+        </th>
+        <th>
+            estimate ind
+        </th>
+        <th>
+            majority stateoforigin
+        </th>
+        <th>
+             majority lgaoforigin 
+        </th>
+        <th>
+             lon 
+        </th>
+        <th>
+             lat 
+        </th>
+        <th> attached B2F</th>
+        <th></th>
+    </tr>
+@{
+    int i = 1;
+    
+             }
+
+@foreach (var item in Model)
+{
+    tot_hh = tot_hh + @item.estimate_hh;
+    tot_ind = tot_ind + @item.estimate_ind;
+    
+    
+    string style = null;
+    
+    if (@item.iom_ward_profile!=null && @item.iom_ward_profile.iom_ward_presence_per_location!=null)
+    {
+            int inds = @item.iom_ward_profile.iom_ward_presence_per_location.Sum(x=>x.estimate_ind);
+            
+            if(@item.estimate_ind != inds)
+            {style = "background-color:pink";}
+            
+    }
+        
+    
+    <tr style="@style">
+        <td>
+            @i
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lkp_Ward.ward_name)
+        </td>
+        <td>
+            @item.lkp_TypeOfResidence.residence
+        </td>
+        <td>
+            @item.lkp_IDP_Category.category
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.location_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estimate_hh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estimate_ind)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lkp_State.state_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lkp_Lga.lga_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.coord_lon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.coord_lat)
+        </td>
+        <td>   
+        @if (@item.location_type.Equals("HC"))
+        {
+            ///@item.location_type.Equals("HC")
+         @Html.ActionLink("B2F", "Index", "B2F", new RouteValueDictionary(new { id = item.id, ward = item.ward_code }), null)
+         
+            if (@item.iom_ward_profile != null)
+            {
+                    @:*
+                 }
+        }
+        else
+        { 
+            @:-
+        }
+
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.id })
+        </td>
+    </tr>
+    
+       i++;
+}
+
+</table>
+    
+  <i>** total hhs/inds: @tot_hh / @tot_ind</i>  <br />
+}
+else
+{ 
+<b>No data</b>
+}
+
+<p>
+    @Html.ActionLink("Back to B1F List", "Index", "B1F")
+</p>

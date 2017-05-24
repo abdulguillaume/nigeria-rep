@@ -1,0 +1,159 @@
+﻿@model DTM_Nigeria.Models.Breakdown
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit age breakdown table</h2>
+<h3>@ViewBag.WardInfo</h3>
+
+@if (ViewBag.Exception != null)
+{
+    <p style="color: Red">@ViewBag.Exception</p>
+}
+
+@using (
+    Html.BeginForm()
+    //Html.BeginForm("Create", "B1F", FormMethod.Post, new { id = "forma" })
+    )
+{
+    
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Demographic calculator, sample household composition for 20 households</legend>
+
+    
+<table>
+    <tr>
+        <th rowspan=2>
+            hhs
+        </th>
+
+        <th colspan=2>< 1</th>
+        <th colspan=2>1-5</th>
+        <th colspan=2>6-17</th>
+        <th colspan=2>18-59</th>
+        <th colspan=2>60+</th>
+        </tr><tr>
+        <th>
+            m
+        </th>
+        <th>
+            f
+        </th>
+        <th>
+            m
+        </th>
+        <th>
+            f
+        </th>
+        <th>
+            m
+        </th>
+        <th>
+            f
+        </th>
+        <th>
+            m
+        </th>
+        <th>
+            f
+        </th>
+        <th>
+            m
+        </th>
+        <th>
+            f
+        </th>
+
+    </tr>
+
+
+
+@for (int i = 0; i < 20; i++)
+{
+    int j = i;
+    j = j + 1;
+    
+    <tr>
+        <td>
+            @j
+        </td>
+        <td>
+            <div class="bd_editor editor-field">
+                @Html.EditorFor(model => model.hh_ages[i].m_lt1)
+                @Html.ValidationMessageFor(model => model.hh_ages[i].m_lt1)
+            </div>
+        </td>
+        <td>
+            <div class="bd_editor editor-field">
+                @Html.EditorFor(model => model.hh_ages[i].f_lt1)
+                @Html.ValidationMessageFor(model => model.hh_ages[i].f_lt1)
+            </div>
+        </td>
+        <td>
+            <div class="bd_editor editor-field">
+                @Html.EditorFor(model => model.hh_ages[i].m_1_5)
+                @Html.ValidationMessageFor(model => model.hh_ages[i].m_1_5)
+            </div>
+        </td>
+        <td>
+            <div class="bd_editor editor-field">
+                @Html.EditorFor(model => model.hh_ages[i].f_1_5)
+                @Html.ValidationMessageFor(model => model.hh_ages[i].f_1_5)
+            </div>
+        </td>
+        <td>
+            <div class="bd_editor editor-field">
+                @Html.EditorFor(model => model.hh_ages[i].m_6_17)
+                @Html.ValidationMessageFor(model => model.hh_ages[i].m_6_17)
+            </div>
+        </td>
+        <td>
+            <div class="bd_editor editor-field">
+                @Html.EditorFor(model => model.hh_ages[i].f_6_17)
+                @Html.ValidationMessageFor(model => model.hh_ages[i].f_6_17)
+            </div>
+        </td>
+        <td>
+            <div class="bd_editor editor-field">
+                @Html.EditorFor(model => model.hh_ages[i].m_18_59)
+                @Html.ValidationMessageFor(model => model.hh_ages[i].m_18_59)
+            </div>
+        </td>
+        <td>
+            <div class="bd_editor editor-field">
+                @Html.EditorFor(model => model.hh_ages[i].f_18_59)
+                @Html.ValidationMessageFor(model => model.hh_ages[i].f_18_59)
+            </div>
+        </td>
+        <td>
+            <div class="bd_editor editor-field">
+                @Html.EditorFor(model => model.hh_ages[i].m_60p)
+                @Html.ValidationMessageFor(model => model.hh_ages[i].m_60p)
+            </div>
+        </td>
+        <td>
+            <div class="bd_editor editor-field">
+                @Html.EditorFor(model => model.hh_ages[i].f_60p)
+                @Html.ValidationMessageFor(model => model.hh_ages[i].f_60p)
+            </div>
+        </td>
+
+    </tr>
+}
+
+</table>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back", "Index")
+</div>

@@ -1,0 +1,81 @@
+﻿@model DTM_Nigeria.Models.iom_dtm_phase
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details about DTM/Phase</h2>
+
+<fieldset>
+    <legend>DTM phase information</legend>
+
+    <div class="display-label">phase</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.phase)
+    </div>
+
+    <div class="display-label">description</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.description)
+    </div>
+
+    <div class="display-label">start date</div>
+    <div class="display-field">
+        @if (@Model.field_start_date == null)
+        { 
+            @: No date
+        }
+        else
+        {
+        @Html.DisplayFor(model => model.field_start_date)
+        }
+    </div>
+
+    <div class="display-label">end date</div>
+    <div class="display-field">
+        @if(@Model.field_end_date==null)
+        {
+            @: No date
+        }
+        else
+        {
+        @Html.DisplayFor(model => model.field_end_date)
+        }
+    </div>
+
+    <div class="display-label">Phase is closed</div>
+    <div class="display-field">
+         @if (@Model.closed_YesNo == 1)
+         {
+                @:Ans: Yes
+             }
+         else
+         {
+                @:Ans: No
+             }
+    </div>
+
+    <div class="display-label">create_date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.create_date)
+    </div>
+
+    <div class="display-label">created_by</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.created_by)
+    </div>
+
+    <div class="display-label">update_date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.update_date)
+    </div>
+
+    <div class="display-label">updated_by</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.updated_by)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id=Model.phase }) |
+    @Html.ActionLink("Back to DTM/Phases List", "Index")
+</p>

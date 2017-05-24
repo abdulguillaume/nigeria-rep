@@ -1,0 +1,721 @@
+﻿@model DTM_Nigeria.Models.iom_ward_profile
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete B2F</h2>
+
+@if (ViewBag.Exception != null)
+{
+    <p style="color: Red">@ViewBag.Exception</p>
+}
+
+<h3>Are you sure you want to delete this?</h3>
+
+
+<fieldset>
+    <legend>Details about one B2F form</legend>
+
+    <table width=100%>
+        <tr><th colspan=4>A. LOCATION AND TEAM MEMBERS</th></tr>
+           <tr><td colspan=2>Date of assessment
+           
+           <div class="display-field">
+            @Html.DisplayFor(model => model.date)
+        </div>
+
+           </td><td>Researcher name
+           
+           <div class="display-field">
+            @Html.DisplayFor(model => model.iom_researchers.researcher_name)
+        </div>
+
+           </td><td>Researcher tel.
+           
+           <div class="display-field">
+            @Html.DisplayFor(model => model.iom_researchers.researcher_tel)
+        </div>
+
+           </td></tr>
+           <tr><td>State / Lga
+           
+           <div class="display-field">
+           @Html.DisplayFor(model => model.iom_presence_wards.lkp_Ward.lkp_Lga.lkp_State.state_name) / 
+           @Html.DisplayFor(model => model.iom_presence_wards.lkp_Ward.lkp_Lga.lga_name)
+		   </div>
+           
+
+           </td><td>Ward / Wp_code
+           
+           <div class="display-field">
+            @Html.DisplayFor(model => model.iom_presence_wards.lkp_Ward.ward_name) / 
+            @Html.DisplayFor(model => model.iom_presence_wards.lkp_Ward.ward_code)
+        </div>
+
+           </td><td>Settlement
+           
+           <div class="display-field">
+            @Html.DisplayFor(model => model.settlement)
+        </div>
+
+           </td><td>Type
+           
+
+           <div class="display-field">
+            @Html.DisplayFor(model => model.lkp_Settlement.settlement)
+        </div>
+
+
+           </td></tr>
+        </table>
+
+        <br />
+        
+        
+        <table width=100%>
+        <tr><th colspan=5>B. DEMOGRAPHICS</th></tr>
+           <tr><td colspan=2>Are there displaced IDP hh/individuals in the LGA?</td><td colspan=2>
+           
+           <div class="display-field">
+            @if (@Model.displaced_hh_ind_YesNo == 1)
+            {
+                @:Ans: Yes
+             }
+            else
+            {
+                @:Ans: No
+             }
+           </div>
+
+           </td></tr>
+           
+           <tr><td colspan=4>If yes, what is the estimated number of current IDP population?</td></tr>
+           <tr><td>Number of households</td><td>
+           
+             <div class="display-field">
+            @Html.DisplayFor(model => model.number_hh)
+        </div>
+
+
+           </td><td>Number of individuals</td><td>
+           
+                 <div class="display-field">
+            @Html.DisplayFor(model => model.number_ind)
+        </div>
+
+           </td></tr>
+           <tr><td colspan=4>Arrival of IDPs in the LGA</td></tr>
+
+            <tr>
+            
+         @foreach (var item in Model.iom_ward_idp_arrival)
+         {    
+            
+                        <td valign=top>
+                
+           <div class="display-field">
+             @item.lkp_Period2.label</div>
+
+
+            <div class="editor-label">
+                        #HH
+                    </div>
+                    <div class="display-field">
+                        @item.hh
+                    </div>
+
+                    <div class="editor-label">
+                        #IND
+                    </div>
+                    <div class="display-field">
+                        @item.ind
+                    </div>
+
+
+            <div class="editor-label">
+                        From
+                    </div>
+
+            <div class="display-field">
+                       @if (@item.lkp_Location != null)
+                       {@item.lkp_Location.location}
+                         </div>
+
+            <div class="editor-label">
+                        Specify
+                    </div>
+
+            <div class="display-field"> 
+                        @if (@item.lkp_State != null)
+                        { @item.lkp_State.state_name}
+                    </div>
+
+                        </td>
+             
+         }
+            
+            </tr>
+
+
+            <tr></tr>
+
+        </table>
+
+        
+        <br />
+        
+        <table width=100%>
+        <tr><th colspan=4>C. DISPLACEMENT THAT ORIGINANTES FROM THIS LGA</th></tr>
+           <tr><td colspan=3>Are there households/individuals from this LGA that left as IDPs and have not returned?</td><td>
+           
+           <div class="display-field">
+            @if (@Model.nr_YesNo == 1)
+            {
+                @:Ans: Yes
+             }
+            else
+            {
+                @:Ans: No
+             }
+           </div>
+
+           
+           </td></tr>
+           <tr><td colspan=2>If yes, where did majority of them go?</td><td colspan=2>
+           
+
+           <div class="display-field">
+            @Html.DisplayFor(model => model.lkp_NotReturnLocation.location)
+        </div>
+
+           </td></tr>
+
+           <tr><td colspan=2>List maximum 2 states -> </td><td>
+           
+
+           <div class="display-field">
+            @Html.DisplayFor(model => model.nr_state1)
+        </div>
+        
+
+           </td><td>
+           
+           <div class="display-field">
+            @Html.DisplayFor(model => model.nr_state2)
+        </div>
+
+           </td></tr>
+
+           <tr><td colspan=2>Select below for period when majority left:</td><td colspan=2>
+           
+           <div class="display-field"> 
+            @Html.DisplayFor(model => model.lkp_Period2.label)
+        </div>
+          
+
+           </td></tr>
+        </table>
+
+        <br />
+        
+        <table width=100%>
+        <tr><th colspan=4>D. IDP CATEGORY / REASON FOR DISPLACEMENT</th></tr>
+           <tr><th>1. Insurgency-Conflict in North East</th><th>2. Community Clashes</th><th>3. Natural Disasters</th><th>
+           Other, Specify
+
+        <div class="display-field">
+            @Html.DisplayFor(model => model.reason_others_name)
+        </div>
+
+
+           </th></tr>
+           <tr><td>
+           
+
+           <div class="display-field">
+            @if (@Model.reason_insurgency_YesNo == 1)
+            {
+                @:Ans: Yes
+             }
+            else
+            {
+                @:Ans: No
+             }
+           </div>
+
+         <div class="display-field"> 
+            @Html.DisplayFor(model => model.lkp_Period2.label)
+
+        </div>
+
+        <div class="editor-label">
+            #HH
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.reason_insurg_hh)
+        </div>
+
+        <div class="editor-label">
+            #IND
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.reason_insurg_ind)
+        </div>
+
+
+           </td><td>
+           
+           <div class="display-field">
+            @if (@Model.reason_clash_YesNo == 1)
+            {
+                @:Ans: Yes
+             }
+            else
+            {
+                @:Ans: No
+             }
+           </div>
+
+         <div class="display-field"> 
+            @Html.DisplayFor(model => model.lkp_Period2.label)
+
+        </div>
+
+
+        <div class="editor-label">
+            #HH
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.reason_clash_hh)
+        </div>
+
+        <div class="editor-label">
+            #IND
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.reason_clash_ind)
+        </div>
+
+
+           </td><td>
+           
+           <div class="display-field">
+            @if (@Model.reason_disaster_YesNo == 1)
+            {
+                @:Ans: Yes
+             }
+            else
+            {
+                @:Ans: No
+             }
+           </div>
+
+         <div class="display-field"> 
+            @Html.DisplayFor(model => model.lkp_Period2.label)
+
+        </div>
+
+
+        <div class="editor-label">
+            #HH
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.reason_disaster_hh)
+        </div>
+
+        <div class="editor-label">
+            #IND
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.reason_disaster_ind)
+        </div>
+
+
+           </td><td>
+           
+            
+            <div class="display-field">
+            @if (@Model.reason_others_YesNo == 1)
+            {
+                @:Ans: Yes
+             }
+            else
+            {
+                @:Ans: No
+             }
+           </div>
+
+
+         <div class="display-field"> 
+            @Html.DisplayFor(model => model.lkp_Period2.label)
+
+        </div>
+
+        <div class="editor-label">
+            #HH
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.reason_others_hh)
+        </div>
+
+        <div class="editor-label">
+            #IND
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.reason_others_ind)
+        </div>
+
+           </td></tr>
+        </table>
+
+
+        <br />
+
+        <table width=100%>
+        <tr><th colspan=5>E. TYPE OF LOCATION/RESIDENCE FOR IDP POPULATION IN THE LGA</th></tr>
+           <tr><th>Type of IDP's Temporary Settlements</th><th>IDPs</th><th>#HHs</th><th>
+           #IND</th></tr>
+           <tr><td>1. Camp like sites/centers</td><td>
+           
+           <div class="display-field">
+            @if (@Model.temporary_settlement_type_camp_YesNo == 1)
+            {
+                @:Ans: Yes
+             }
+            else
+            {
+                @:Ans: No
+             }
+           </div>
+
+           </td><td>
+           
+             <div class="display-field">
+            @Html.DisplayFor(model => model.temporary_settlement_hh_camp)
+        </div>
+
+           </td><td>
+           
+            <div class="display-field">
+            @Html.DisplayFor(model => model.temporary_settlement_ind_camp)
+        </div>
+           
+           </td></tr>
+
+           <tr><td>2. Host family/Community accomodation</td><td>
+           
+            <div class="display-field">
+            @if (@Model.temporary_settlement_type_hc_YesNo == 1)
+            {
+                @:Ans: Yes
+             }
+            else
+            {
+                @:Ans: No
+             }
+           </div>
+
+           </td><td>
+           
+                   <div class="display-field">
+            @Html.DisplayFor(model => model.temporary_settlement_hh_hc)
+        </div>
+
+           </td><td>
+           
+            <div class="display-field">
+            @Html.DisplayFor(model => model.temporary_settlement_ind_hc)
+        </div>
+
+           </td></tr>
+
+        </table>
+
+
+ <table class="table">
+
+        <tr><th colspan="4">F. SECONDARY DISPLACEMENT</th></tr>
+        <tr><th colspan="4">Number of times IDPs were displaced (Estimate the % of total IDP population by number of displacements 
+        and indicate for each category,<br /> Previous State & LGA of displacement and date of last displacement of the majority).</th></tr>
+           <tr><th>Displaced 1 time</th><th>Displaced 2 times</th><th>Displaced 3 times</th><th>Displaced more than 3 times</th></tr>
+             
+            <tr><td> <div class="display-field">
+            @Html.DisplayFor(model => model.disp_1T_yn)
+            </div>
+           
+
+            </td><td><div class="display-field">
+            @Html.DisplayFor(model => model.disp_2T_yn)
+            </div>
+            
+
+            </td><td><div class="display-field">
+            @Html.DisplayFor(model => model.disp_3T_yn)
+            </div>
+            
+
+            </td><td><div class="display-field">
+            @Html.DisplayFor(model => model.disp_3Tp_yn)
+            </div>
+
+           </td></tr>
+
+           <tr><td>%
+           <div class="display-field">
+            @Html.DisplayFor(model => model.disp_1T_perc)
+            </div>
+
+            </td><td>%
+            <div class="display-field">
+            @Html.DisplayFor(model => model.disp_2T_perc)
+            </div>
+
+            </td><td>%
+            <div class="display-field">
+            @Html.DisplayFor(model => model.disp_3T_perc)
+            </div>
+
+            </td><td>%
+            <div class="display-field">
+            @Html.DisplayFor(model => model.disp_3Tp_perc)
+            </div>
+
+           </td></tr>
+
+           <tr><th>State           
+            </th><td>
+            <div class="display-field">
+            @Html.DisplayFor(model => model.lkp_State2.state_name)
+            </div>
+
+            </td><td>
+            <div class="display-field">
+            @Html.DisplayFor(model => model.lkp_State3.state_name)
+            </div>
+
+            </td><td>
+            <div class="display-field">
+            @Html.DisplayFor(model => model.lkp_State4.state_name)
+            </div>
+
+           </td></tr>
+
+           <tr><th>LGA           
+            </th><td><div class="display-field">
+            @Html.DisplayFor(model => model.lkp_Lga.lga_name)
+            </div>
+
+            </td><td><div class="display-field">
+            @Html.DisplayFor(model => model.lkp_Lga1.lga_name)
+            </div>
+
+            </td><td><div class="display-field">
+            @Html.DisplayFor(model => model.lkp_Lga2.lga_name)
+            </div>
+
+           </td></tr>
+
+           <tr><th>Ward           
+            </th><td><div class="display-field">
+            @Html.DisplayFor(model => model.lkp_Ward.ward_name)
+            </div>
+
+            </td><td><div class="display-field">
+            @Html.DisplayFor(model => model.lkp_Ward1.ward_name)
+            </div>
+
+            </td><td><div class="display-field">
+            @Html.DisplayFor(model => model.lkp_Ward2.ward_name)
+            </div>
+
+           </td></tr>
+
+           <tr><th>Date of displacement           
+            </th><td><div class="display-field">
+            @Html.DisplayFor(model => model.lkp_Period25.label)
+            </div>
+
+            </td><td><div class="display-field">
+            @Html.DisplayFor(model => model.lkp_Period26.label)
+            </div>
+
+            </td><td><div class="display-field">
+            @Html.DisplayFor(model => model.lkp_Period27.label)
+            </div>
+
+           </td></tr>
+
+        </table>
+
+        <br />
+
+        <table width=100%>
+        <tr><th colspan="5">G. IDPs WHO WERE ORIGINALLY DISPLACED FROM THIS LGA</th></tr>
+
+        <tr><td colspan="3">Are there IDPs who originate from this LGA and are currently displaced in the Ward?
+            </td><td><div class="display-field">
+            @Html.DisplayFor(model => model.idps_fromLGA_dispInWard)
+            </div>
+        </td></tr>
+
+        <tr><td>Number of Households</td><td>        
+        <div class="display-field">
+        @Html.DisplayFor(model => model.NbHH_dispInWard)
+        </div>
+
+        </td><td>Number of Individuals</td><td>        
+        <div class="display-field">
+        @Html.DisplayFor(model => model.NbIND_dispInWard)
+        </div>
+        
+        </td></tr>
+
+        <tr><th colspan="5">State/LGA of previous displacement of largest group</th></tr>
+            <tr><td>State
+            <div class="display-field">
+            @Html.DisplayFor(model => model.lkp_State5.state_name)
+            </div>
+
+            </td><td>LGA
+            <div class="display-field">
+            @Html.DisplayFor(model => model.lkp_Lga3.lga_name)
+            </div>
+
+            </td><td>Number of Households        
+            <div class="display-field">
+            @Html.DisplayFor(model => model.NbHH_LargestGrp1)
+            </div>
+
+            </td><td>Number of Individuals        
+            <div class="display-field">
+            @Html.DisplayFor(model => model.NbIND_LargestGrp1)
+            </div>
+
+           </td><td>Date of arrival 
+           <div class="display-field">
+            @Html.DisplayFor(model => model.date_arriv_LGA_LargestGrp1)
+            </div>
+
+        </td></tr>
+
+        <tr><th colspan="5">State/LGA of previous displacement of 2nd largest group</th></tr>
+            <tr><td>State
+            <div class="display-field">
+            @Html.DisplayFor(model => model.lkp_State6.state_name)
+            </div>
+
+            </td><td>LGA
+            <div class="display-field">
+            @Html.DisplayFor(model => model.lkp_Lga4.lga_name)
+            </div>
+
+            </td><td>Number of Households        
+            <div class="display-field">
+            @Html.DisplayFor(model => model.NbHH_LargestGrp2)
+            </div>
+
+            </td><td>Number of Individuals        
+            <div class="display-field">
+            @Html.DisplayFor(model => model.NbIND_LargestGrp2)
+            </div>
+
+           </td><td>Date of arrival 
+           <div class="display-field">
+            @Html.DisplayFor(model => model.date_arriv_LGA_LargestGrp2)
+            </div>
+
+        </td></tr>
+
+        </table>
+
+        <br />
+
+        <table class="table">
+        <tr><th colspan=2>I. SHELTER/NFI NEEDS</th></tr>
+
+        <tr><td>I.1.a. Number of households in makeshift shelter?</td><td>
+            <div class="editor-field">
+                @Html.DisplayFor(model => model.NbHH_makeshift)
+            </div>
+        </td></tr>
+    
+        <tr><td>I.1.b. Number of households in overcrowded houses (living with host community and above 5 households per host)</td><td>
+            <div class="editor-field">
+                @Html.DisplayFor(model => model.NbHH_overcrowded_houses)
+            </div>
+        </td></tr>
+
+        <tr><td>I.1.c. Number of households in damaged houses (needing some repairs)</td><td>
+            <div class="editor-field">
+                @Html.DisplayFor(model => model.NbHH_damaged_houses)
+            </div>
+        </td></tr>
+
+        <tr><td>I.1.d. Number of households living outdoors</td><td>
+            <div class="editor-field">
+                @Html.DisplayFor(model => model.NbHH_living_outdoors)
+            </div>
+        </td></tr>
+
+        <tr><td>I.2.a. Number of households in need of basic NFI kits</td><td>
+            <div class="editor-field">
+                @Html.DisplayFor(model => model.NbHH_need_NFI)
+            </div>
+        </td></tr>
+
+        <tr><td>I.2.b. Number of households in need of kitchen sets</td><td>
+            <div class="editor-field">
+                @Html.DisplayFor(model => model.NbHH_need_KitchenSet)
+            </div>
+        </td></tr>
+
+        <tr><td>I.2.c. Number of households in need of full kits (Please do not double count)</td><td>
+            <div class="editor-field">
+                @Html.DisplayFor(model => model.NbHH_need_Full_kits)
+            </div>
+        </td></tr>
+
+        </table>
+        <br />
+
+        <table width=100%>
+            <tr>
+            <th>created_by</th>
+            <th>create_time</th>
+            <th>updated_by</th>
+            <th>update_time</th>
+            </tr>
+            <tr>
+                <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.created_by)
+                </div>
+                </td><td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.create_time)
+                </div>
+                </td><td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.updated_by)
+                </div>
+                </td><td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.update_time)
+                </div>
+                </td>
+
+            </tr>
+        </table>
+
+</fieldset>
+
+
+@using (Html.BeginForm())
+{
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back", "Index")
+    </p>
+}

@@ -1,0 +1,68 @@
+﻿@model DTM_Nigeria.Models.iom_b1f_informants
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete informant/B1F</h2>
+
+
+@if (ViewBag.Exception != null)
+{
+    <p style="color: Red">@ViewBag.Exception</p>
+}
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>informant information</legend>
+
+ <div class="display-label">names</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.iom_informants.name)
+    </div>
+
+    <div class="display-label">type</div>
+    <div class="display-field">
+        @*Html.DisplayFor(model => model.type)*@
+        @Model.iom_informants.lkp_Informant_Type.informant
+    </div>
+
+    <div class="display-label">sex</div>
+    <div class="display-field">
+        @Model.iom_informants.lkp_Sex.sex
+    </div>
+
+    <div class="display-label">contact_details</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.contact_details)
+    </div>
+
+    <div class="display-label">created_by</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.created_by)
+    </div>
+
+    <div class="display-label">create_time</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.create_time)
+    </div>
+
+    <div class="display-label">updated_by</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.updated_by)
+    </div>
+
+    <div class="display-label">update_time</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.update_time)
+    </div>   
+
+
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to informants List/B1F", "Index")
+    </p>
+}
