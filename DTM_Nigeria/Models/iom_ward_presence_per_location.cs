@@ -12,29 +12,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
-using DTM_Nigeria.Validation;
 
 namespace DTM_Nigeria.Models
 {
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(lkp_IDP_Category))]
-    [KnownType(typeof(lkp_MainUnfulfilledNeed))]
-    [KnownType(typeof(lkp_Lga))]
-    [KnownType(typeof(lkp_State))]
-    [KnownType(typeof(lkp_TypeOfResidence))]
-    [KnownType(typeof(iom_ward_profile))]
     public partial class iom_ward_presence_per_location
     {
         #region Primitive Properties
-        [DataMember]
+    
         public virtual int id
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual int ward_profile_id
         {
             get { return _ward_profile_id; }
@@ -59,15 +49,13 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _ward_profile_id;
-        [DataMember]
-        [Required(ErrorMessage = "*",AllowEmptyStrings=false)]
+    
         public virtual string location_name
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual string location_type
         {
             get { return _location_type; }
@@ -92,8 +80,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private string _location_type;
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual int idp_category
         {
             get { return _idp_category; }
@@ -118,23 +105,22 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _idp_category;
-        [DataMember]
-        [Required(ErrorMessage = "*")]
-        public virtual Nullable<int> MainUnfulfilledNeed 
+    
+        public virtual Nullable<int> MainUnfulfilledNeed
         {
-            get { return _MainUnfulfilledNeed; }
+            get { return _mainUnfulfilledNeed; }
             set
             {
                 try
                 {
                     _settingFK = true;
-                    if (_MainUnfulfilledNeed != value)
+                    if (_mainUnfulfilledNeed != value)
                     {
-                        if (lkp_IDP_Category != null && lkp_IDP_Category.id != value)
+                        if (lkp_MainUnfulfilledNeed != null && lkp_MainUnfulfilledNeed.id != value)
                         {
-                            lkp_IDP_Category = null;
+                            lkp_MainUnfulfilledNeed = null;
                         }
-                        _MainUnfulfilledNeed = value;
+                        _mainUnfulfilledNeed = value;
                     }
                 }
                 finally
@@ -143,31 +129,26 @@ namespace DTM_Nigeria.Models
                 }
             }
         }
-        private int? _MainUnfulfilledNeed;
-
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+        private Nullable<int> _mainUnfulfilledNeed;
+    
         public virtual int idp_registered_list_YesNo
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*",AllowEmptyStrings=false)]
+    
         public virtual string registered_by
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual int estimate_ind
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string majority_stateoforigin
         {
             get { return _majority_stateoforigin; }
@@ -192,7 +173,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private string _majority_stateoforigin;
-        [DataMember]
+    
         public virtual string majority_lgaoforigin
         {
             get { return _majority_lgaoforigin; }
@@ -217,43 +198,37 @@ namespace DTM_Nigeria.Models
             }
         }
         private string _majority_lgaoforigin;
-        [DataMember]
-        public virtual string created_by
-        {
-            get;
-            set;
-        }
-
-        [DataMember]
-        [RegularExpression("^[-]?[0-9]+(\\.[0-9]+)?", ErrorMessage = "decimal")]
+    
         public virtual Nullable<double> coord_lon
         {
             get;
             set;
         }
-
-
-        [DataMember]
-        [RegularExpression("^[-]?[0-9]+(\\.[0-9]+)?", ErrorMessage = "decimal")]
+    
         public virtual Nullable<double> coord_lat
         {
             get;
             set;
         }
-
-        [DataMember]
+    
+        public virtual string created_by
+        {
+            get;
+            set;
+        }
+    
         public virtual Nullable<System.DateTime> create_time
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string updated_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> update_time
         {
             get;
@@ -262,92 +237,7 @@ namespace DTM_Nigeria.Models
 
         #endregion
         #region Navigation Properties
-        
     
-        [DataMember]
-        public virtual lkp_IDP_Category lkp_IDP_Category
-        {
-            get { return _lkp_IDP_Category; }
-            set
-            {
-                if (!ReferenceEquals(_lkp_IDP_Category, value))
-                {
-                    var previousValue = _lkp_IDP_Category;
-                    _lkp_IDP_Category = value;
-                    Fixuplkp_IDP_Category(previousValue);
-                }
-            }
-        }
-        private lkp_IDP_Category _lkp_IDP_Category;
-        
-        [DataMember]
-        public virtual lkp_MainUnfulfilledNeed lkp_MainUnfulfilledNeed 
-        {
-            get { return _lkp_MainUnfulfilledNeed; }
-            set
-            {
-                if (!ReferenceEquals(_MainUnfulfilledNeed, value))
-                {
-                    var previousValue = _lkp_MainUnfulfilledNeed;
-                    _lkp_MainUnfulfilledNeed = value;
-                    Fixuplkp_MainUnfulfilledNeed(previousValue);
-                }
-            }
-        }
-        private lkp_MainUnfulfilledNeed _lkp_MainUnfulfilledNeed;
-
-        [DataMember]
-        public virtual lkp_Lga lkp_Lga
-        {
-            get { return _lkp_Lga; }
-            set
-            {
-                if (!ReferenceEquals(_lkp_Lga, value))
-                {
-                    var previousValue = _lkp_Lga;
-                    _lkp_Lga = value;
-                    Fixuplkp_Lga(previousValue);
-                }
-            }
-        }
-        private lkp_Lga _lkp_Lga;
-        
-    
-        [DataMember]
-        public virtual lkp_State lkp_State
-        {
-            get { return _lkp_State; }
-            set
-            {
-                if (!ReferenceEquals(_lkp_State, value))
-                {
-                    var previousValue = _lkp_State;
-                    _lkp_State = value;
-                    Fixuplkp_State(previousValue);
-                }
-            }
-        }
-        private lkp_State _lkp_State;
-        
-    
-        [DataMember]
-        public virtual lkp_TypeOfResidence lkp_TypeOfResidence
-        {
-            get { return _lkp_TypeOfResidence; }
-            set
-            {
-                if (!ReferenceEquals(_lkp_TypeOfResidence, value))
-                {
-                    var previousValue = _lkp_TypeOfResidence;
-                    _lkp_TypeOfResidence = value;
-                    Fixuplkp_TypeOfResidence(previousValue);
-                }
-            }
-        }
-        private lkp_TypeOfResidence _lkp_TypeOfResidence;
-        
-    
-        [DataMember]
         public virtual iom_ward_profile iom_ward_profile
         {
             get { return _iom_ward_profile; }
@@ -362,11 +252,106 @@ namespace DTM_Nigeria.Models
             }
         }
         private iom_ward_profile _iom_ward_profile;
+    
+        public virtual lkp_IDP_Category lkp_IDP_Category
+        {
+            get { return _lkp_IDP_Category; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_IDP_Category, value))
+                {
+                    var previousValue = _lkp_IDP_Category;
+                    _lkp_IDP_Category = value;
+                    Fixuplkp_IDP_Category(previousValue);
+                }
+            }
+        }
+        private lkp_IDP_Category _lkp_IDP_Category;
+    
+        public virtual lkp_Lga lkp_Lga
+        {
+            get { return _lkp_Lga; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Lga, value))
+                {
+                    var previousValue = _lkp_Lga;
+                    _lkp_Lga = value;
+                    Fixuplkp_Lga(previousValue);
+                }
+            }
+        }
+        private lkp_Lga _lkp_Lga;
+    
+        public virtual lkp_MainUnfulfilledNeed lkp_MainUnfulfilledNeed
+        {
+            get { return _lkp_MainUnfulfilledNeed; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_MainUnfulfilledNeed, value))
+                {
+                    var previousValue = _lkp_MainUnfulfilledNeed;
+                    _lkp_MainUnfulfilledNeed = value;
+                    Fixuplkp_MainUnfulfilledNeed(previousValue);
+                }
+            }
+        }
+        private lkp_MainUnfulfilledNeed _lkp_MainUnfulfilledNeed;
+    
+        public virtual lkp_State lkp_State
+        {
+            get { return _lkp_State; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_State, value))
+                {
+                    var previousValue = _lkp_State;
+                    _lkp_State = value;
+                    Fixuplkp_State(previousValue);
+                }
+            }
+        }
+        private lkp_State _lkp_State;
+    
+        public virtual lkp_TypeOfResidence lkp_TypeOfResidence
+        {
+            get { return _lkp_TypeOfResidence; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_TypeOfResidence, value))
+                {
+                    var previousValue = _lkp_TypeOfResidence;
+                    _lkp_TypeOfResidence = value;
+                    Fixuplkp_TypeOfResidence(previousValue);
+                }
+            }
+        }
+        private lkp_TypeOfResidence _lkp_TypeOfResidence;
 
         #endregion
         #region Association Fixup
     
         private bool _settingFK = false;
+    
+        private void Fixupiom_ward_profile(iom_ward_profile previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_presence_per_location.Contains(this))
+            {
+                previousValue.iom_ward_presence_per_location.Remove(this);
+            }
+    
+            if (iom_ward_profile != null)
+            {
+                if (!iom_ward_profile.iom_ward_presence_per_location.Contains(this))
+                {
+                    iom_ward_profile.iom_ward_presence_per_location.Add(this);
+                }
+                if (ward_profile_id != iom_ward_profile.id)
+                {
+                    ward_profile_id = iom_ward_profile.id;
+                }
+            }
+        }
     
         private void Fixuplkp_IDP_Category(lkp_IDP_Category previousValue)
         {
@@ -387,27 +372,7 @@ namespace DTM_Nigeria.Models
                 }
             }
         }
-
-        private void Fixuplkp_MainUnfulfilledNeed(lkp_MainUnfulfilledNeed previousValue)
-        {
-            if (previousValue != null && previousValue.iom_ward_presence_per_location.Contains(this))
-            {
-                previousValue.iom_ward_presence_per_location.Remove(this);
-            }
-
-            if (lkp_MainUnfulfilledNeed != null)
-            {
-                if (!lkp_MainUnfulfilledNeed.iom_ward_presence_per_location.Contains(this))
-                {
-                    lkp_MainUnfulfilledNeed.iom_ward_presence_per_location.Add(this);
-                }
-                if (MainUnfulfilledNeed != lkp_MainUnfulfilledNeed.id)
-                {
-                    MainUnfulfilledNeed = lkp_MainUnfulfilledNeed.id;
-                }
-            }
-        }
-
+    
         private void Fixuplkp_Lga(lkp_Lga previousValue)
         {
             if (previousValue != null && previousValue.iom_ward_presence_per_location.Contains(this))
@@ -429,6 +394,30 @@ namespace DTM_Nigeria.Models
             else if (!_settingFK)
             {
                 majority_lgaoforigin = null;
+            }
+        }
+    
+        private void Fixuplkp_MainUnfulfilledNeed(lkp_MainUnfulfilledNeed previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_presence_per_location.Contains(this))
+            {
+                previousValue.iom_ward_presence_per_location.Remove(this);
+            }
+    
+            if (lkp_MainUnfulfilledNeed != null)
+            {
+                if (!lkp_MainUnfulfilledNeed.iom_ward_presence_per_location.Contains(this))
+                {
+                    lkp_MainUnfulfilledNeed.iom_ward_presence_per_location.Add(this);
+                }
+                if (MainUnfulfilledNeed != lkp_MainUnfulfilledNeed.id)
+                {
+                    MainUnfulfilledNeed = lkp_MainUnfulfilledNeed.id;
+                }
+            }
+            else if (!_settingFK)
+            {
+                MainUnfulfilledNeed = null;
             }
         }
     
@@ -472,26 +461,6 @@ namespace DTM_Nigeria.Models
                 if (location_type != lkp_TypeOfResidence.id)
                 {
                     location_type = lkp_TypeOfResidence.id;
-                }
-            }
-        }
-    
-        private void Fixupiom_ward_profile(iom_ward_profile previousValue)
-        {
-            if (previousValue != null && previousValue.iom_ward_presence_per_location.Contains(this))
-            {
-                previousValue.iom_ward_presence_per_location.Remove(this);
-            }
-    
-            if (iom_ward_profile != null)
-            {
-                if (!iom_ward_profile.iom_ward_presence_per_location.Contains(this))
-                {
-                    iom_ward_profile.iom_ward_presence_per_location.Add(this);
-                }
-                if (ward_profile_id != iom_ward_profile.id)
-                {
-                    ward_profile_id = iom_ward_profile.id;
                 }
             }
         }

@@ -12,30 +12,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using DTM_Nigeria.Validation;
-using System.ComponentModel.DataAnnotations;
 
 namespace DTM_Nigeria.Models
 {
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(iom_group_assessment_1))]
-    [KnownType(typeof(lkp_ChildProIncident))]
-    [KnownType(typeof(lkp_GBV))]
-    [KnownType(typeof(lkp_HealthProblem))]
-    [KnownType(typeof(lkp_Incident))]
-    [KnownType(typeof(lkp_Intention))]
-    [KnownType(typeof(lkp_Lga))]
-    [KnownType(typeof(lkp_NeededNFI))]
-    [KnownType(typeof(lkp_Opportunity))]
-    [KnownType(typeof(lkp_Relationship_Type))]
-    [KnownType(typeof(lkp_TravelLocation))]
-    [KnownType(typeof(lkp_Ward))]
-    [KnownType(typeof(lkp_YesNo))]
     public partial class iom_group_assessment_2
     {
         #region Primitive Properties
-        [DataMember]
+    
         public virtual int id
         {
             get { return _id; }
@@ -60,27 +43,19 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _id;
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual Nullable<int> member_disp_p1_YesNo
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("member_disp_p1_YesNo", 1, "*")]
+    
         public virtual Nullable<int> how_many_time_disp
         {
             get;
             set;
         }
-
-
-        [RequiredIf("member_disp_p1_YesNo", 1, "*")]
-        public string state { get; set; }
-
-        [DataMember]
-        [RequiredIf("member_disp_p1_YesNo", 1, "*")]
+    
         public virtual string if_yes_lga_maj
         {
             get { return _if_yes_lga_maj; }
@@ -105,8 +80,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private string _if_yes_lga_maj;
-        [DataMember]
-        [RequiredIf("member_disp_p1_YesNo", 1, "*")]
+    
         public virtual string if_yes_ward_maj
         {
             get { return _if_yes_ward_maj; }
@@ -131,8 +105,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private string _if_yes_ward_maj;
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual Nullable<int> intention_of_majority
         {
             get { return _intention_of_majority; }
@@ -157,200 +130,175 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _intention_of_majority;
-        [DataMember]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> v_unaccompanied_children
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> v_separated_children
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> v_children_at_risk
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> v_minor_hh
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> v_female_hh
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> v_women_at_risk
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> v_older_at_risk
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> v_single_parent
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> v_physical_disability
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> v_mental_disability
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> v_serious_med_condition
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> v_missing_relatives
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> v_surviror_at_risk_of_viol
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> v_profile_based_risk
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> v_other
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string v_specify
         {
             get;
             set;
         }
-        [DataMember]
-        [Range(1, 5, ErrorMessage = "1-5")]
+    
         public virtual Nullable<int> need_water
         {
             get;
             set;
         }
-        [DataMember]
-        [Range(1, 5, ErrorMessage = "1-5")]
+    
         public virtual Nullable<int> need_food
         {
             get;
             set;
         }
-        [DataMember]
-        [Range(1, 5, ErrorMessage = "1-5")]
+    
         public virtual Nullable<int> need_health
         {
             get;
             set;
         }
-
-        public bool b_need_other { get { return need_other > 0; } set { if (value)need_other = null; } }
-        public bool b_need_other2 { get { return (!string.IsNullOrEmpty(need_specify)); } set { if (value)need_specify = null; } }
-
-        [DataMember]
-        [Range(1, 5, ErrorMessage = "1-5")]
-        [RequiredIf("b_need_other2", true, "*")]
+    
         public virtual Nullable<int> need_other
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("b_need_other", true, "*")]
+    
         public virtual string need_specify
         {
             get;
             set;
         }
-        [DataMember]
-        [Range(1, 5, ErrorMessage = "1-5")]
+    
         public virtual Nullable<int> need_sanitation
         {
             get;
             set;
         }
-        [DataMember]
-        [Range(1, 5, ErrorMessage = "1-5")]
+    
         public virtual Nullable<int> need_shelter
         {
             get;
             set;
         }
-        [DataMember]
-        [Range(1, 5, ErrorMessage = "1-5")]
+    
         public virtual Nullable<int> need_education
         {
             get;
             set;
         }
-        [DataMember]
-        [Range(1, 5, ErrorMessage = "1-5")]
+    
         public virtual Nullable<int> need_access_icome
         {
             get;
             set;
         }
-        [DataMember]
-        [Range(1, 5, ErrorMessage = "1-5")]
+    
         public virtual Nullable<int> need_lhelp
         {
             get;
             set;
         }
-        [DataMember]
-        [Range(1, 5, ErrorMessage = "1-5")]
+    
         public virtual Nullable<int> need_nfi
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> health_care_service_YesNo
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> health_most_prevalent
         {
             get { return _health_most_prevalent; }
@@ -375,19 +323,19 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _health_most_prevalent;
-        [DataMember]
+    
         public virtual string health_specify
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> sec_people_feel_safe_YesNo
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> sec_relationship_idp_comm
         {
             get { return _sec_relationship_idp_comm; }
@@ -412,53 +360,49 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _sec_relationship_idp_comm;
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> create_time
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string created_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> update_time
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string updated_by
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> v_pregnant_women
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> v_breastfeeding_mother
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> v_male_hh
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage="*")]
+    
         public virtual Nullable<int> protect_people_feel_safe_YesNo
         {
             get { return _protect_people_feel_safe_YesNo; }
@@ -483,15 +427,13 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _protect_people_feel_safe_YesNo;
-        [DataMember]
-        [RequiredIf("protect_people_feel_safe_YesNo", 4, "*")]
+    
         public virtual string protect_people_feel_safe_ifNoAns
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual Nullable<int> protect_common_incident
         {
             get { return _protect_common_incident; }
@@ -516,22 +458,19 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _protect_common_incident;
-        [DataMember]
-        [RequiredIf("protect_common_incident", 9, "*")]
+    
         public virtual string protect_common_in_ifOther
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("protect_common_incident", 10, "*")]
+    
         public virtual string protect_common_in_ifNoAns
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual Nullable<int> protect_common_GBV
         {
             get { return _protect_common_GBV; }
@@ -556,22 +495,19 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _protect_common_GBV;
-        [DataMember]
-        [RequiredIf("protect_common_GBV", 8, "*")]
+    
         public virtual string protect_common_GBV_ifOther
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("protect_common_GBV", 9, "*")]
+    
         public virtual string protect_common_GBV_ifNoAns
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual Nullable<int> protect_common_child_p_incident
         {
             get { return _protect_common_child_p_incident; }
@@ -596,15 +532,13 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _protect_common_child_p_incident;
-        [DataMember]
-        [RequiredIf("protect_common_child_p_incident", 11, "*")]
+    
         public virtual string protect_common_child_p_incident_ifOther
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual Nullable<int> protect_travel_oic_YesNo
         {
             get { return _protect_travel_oic_YesNo; }
@@ -629,8 +563,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _protect_travel_oic_YesNo;
-        [DataMember]
-        [RequiredIf("protect_travel_oic_YesNo", 1, "*")]
+    
         public virtual Nullable<int> protect_travel_oic_ifYes_where
         {
             get { return _protect_travel_oic_ifYes_where; }
@@ -655,8 +588,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _protect_travel_oic_ifYes_where;
-        [DataMember]
-        [RequiredIf("protect_travel_oic_YesNo", 1, "*")]
+    
         public virtual Nullable<int> protect_travel_oic_ifYes_what
         {
             get { return _protect_travel_oic_ifYes_what; }
@@ -681,38 +613,37 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _protect_travel_oic_ifYes_what;
-        [DataMember]
+    
         public virtual Nullable<int> shelter_num_people
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> shelter_num_hc
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> shelter_num_rh
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> shelter_num_ms
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> shelter_num_es
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual Nullable<int> shelter_mn_nfi
         {
             get { return _shelter_mn_nfi; }
@@ -737,42 +668,16 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _shelter_mn_nfi;
-        [DataMember]
-        [RequiredIf("shelter_mn_nfi", 5, "*")]
+    
         public virtual string shelter_mn_other
         {
             get;
             set;
         }
 
-        //public bool b_v_unaccompanied_children { get { return v_unaccompanied_children == 1; } set { if (value) v_unaccompanied_children = 1; else v_unaccompanied_children = 2; } }
-        //public bool b_v_separated_children { get { return v_separated_children == 1; } set { if (value) v_separated_children = 1; else v_separated_children = 2; } }
-        //public bool b_v_children_at_risk { get { return v_children_at_risk == 1; } set { if (value) v_children_at_risk = 1; else v_children_at_risk = 2; } }
-        //public bool b_v_minor_hh { get { return v_minor_hh == 1; } set { if (value) v_minor_hh = 1; else v_minor_hh = 2; } }
-        //public bool b_v_female_hh { get { return v_female_hh == 1; } set { if (value) v_female_hh = 1; else v_female_hh = 2; } }
-        //public bool b_v_women_at_risk { get { return v_women_at_risk == 1; } set { if (value) v_women_at_risk = 1; else v_women_at_risk = 2; } }
-        //public bool b_v_older_at_risk { get { return v_older_at_risk == 1; } set { if (value) v_older_at_risk = 1; else v_older_at_risk = 2; } }
-        //public bool b_v_single_parent { get { return v_single_parent == 1; } set { if (value) v_single_parent = 1; else v_single_parent = 2; } }
-        //public bool b_v_physical_disability { get { return v_physical_disability == 1; } set { if (value) v_physical_disability = 1; else v_physical_disability = 2; } }
-        //public bool b_v_mental_disability { get { return v_mental_disability == 1; } set { if (value) v_mental_disability = 1; else v_mental_disability = 2; } }
-        //public bool b_v_serious_med_condition { get { return v_serious_med_condition == 1; } set { if (value) v_serious_med_condition = 1; else v_serious_med_condition = 2; } }
-        //public bool b_v_missing_relatives { get { return v_missing_relatives == 1; } set { if (value) v_missing_relatives = 1; else v_missing_relatives = 2; } }
-        //public bool b_v_surviror_at_risk_of_viol { get { return v_surviror_at_risk_of_viol == 1; } set { if (value) v_surviror_at_risk_of_viol = 1; else v_surviror_at_risk_of_viol = 2; } }
-        //public bool b_v_profile_based_risk { get { return v_profile_based_risk == 1; } set { if (value) v_profile_based_risk = 1; else v_profile_based_risk = 2; } }
-        //public bool b_v_other { get { return v_other == 1; } set { if (value) v_other = 1; else v_other = 2; } }
-
-
-        //public bool b_v_pregnant_women { get { return v_pregnant_women == 1; } set { if (value) v_pregnant_women = 1; else v_pregnant_women = 2; } }
-        //public bool b_v_breastfeeding_mother { get { return v_breastfeeding_mother == 1; } set { if (value) v_breastfeeding_mother = 1; else v_breastfeeding_mother = 2; } }
-        //public bool b_v_male_hh { get { return v_male_hh == 1; } set { if (value) v_male_hh = 1; else v_male_hh = 2; } }
-
-
-
         #endregion
         #region Navigation Properties
-        
     
-        [DataMember]
         public virtual iom_group_assessment_1 iom_group_assessment_1
         {
             get { return _iom_group_assessment_1; }
@@ -787,9 +692,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private iom_group_assessment_1 _iom_group_assessment_1;
-        
     
-        [DataMember]
         public virtual lkp_ChildProIncident lkp_ChildProIncident
         {
             get { return _lkp_ChildProIncident; }
@@ -804,9 +707,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_ChildProIncident _lkp_ChildProIncident;
-        
     
-        [DataMember]
         public virtual lkp_GBV lkp_GBV
         {
             get { return _lkp_GBV; }
@@ -821,9 +722,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_GBV _lkp_GBV;
-        
     
-        [DataMember]
         public virtual lkp_HealthProblem lkp_HealthProblem
         {
             get { return _lkp_HealthProblem; }
@@ -838,9 +737,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_HealthProblem _lkp_HealthProblem;
-        
     
-        [DataMember]
         public virtual lkp_Incident lkp_Incident
         {
             get { return _lkp_Incident; }
@@ -855,9 +752,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_Incident _lkp_Incident;
-        
     
-        [DataMember]
         public virtual lkp_Intention lkp_Intention
         {
             get { return _lkp_Intention; }
@@ -872,9 +767,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_Intention _lkp_Intention;
-        
     
-        [DataMember]
         public virtual lkp_Lga lkp_Lga
         {
             get { return _lkp_Lga; }
@@ -889,9 +782,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_Lga _lkp_Lga;
-        
     
-        [DataMember]
         public virtual lkp_NeededNFI lkp_NeededNFI
         {
             get { return _lkp_NeededNFI; }
@@ -906,9 +797,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_NeededNFI _lkp_NeededNFI;
-        
     
-        [DataMember]
         public virtual lkp_Opportunity lkp_Opportunity
         {
             get { return _lkp_Opportunity; }
@@ -923,9 +812,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_Opportunity _lkp_Opportunity;
-        
     
-        [DataMember]
         public virtual lkp_Relationship_Type lkp_Relationship_Type
         {
             get { return _lkp_Relationship_Type; }
@@ -940,9 +827,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_Relationship_Type _lkp_Relationship_Type;
-        
     
-        [DataMember]
         public virtual lkp_TravelLocation lkp_TravelLocation
         {
             get { return _lkp_TravelLocation; }
@@ -957,9 +842,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_TravelLocation _lkp_TravelLocation;
-        
     
-        [DataMember]
         public virtual lkp_Ward lkp_Ward
         {
             get { return _lkp_Ward; }
@@ -974,9 +857,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_Ward _lkp_Ward;
-        
     
-        [DataMember]
         public virtual lkp_YesNo lkp_YesNo
         {
             get { return _lkp_YesNo; }
@@ -991,9 +872,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_YesNo _lkp_YesNo;
-        
     
-        [DataMember]
         public virtual lkp_YesNo lkp_YesNo1
         {
             get { return _lkp_YesNo1; }

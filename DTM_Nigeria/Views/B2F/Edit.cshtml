@@ -664,8 +664,12 @@
 
            </td></tr>
 
-           <tr><th>           
-            </th><td><div class="editor-field">
+           <tr><td>
+           @*<div class="editor-field">
+            @Html.DropDownListFor(model => model.profile.disp_1T_dispDate, (SelectList)ViewBag.Periods, "[Select date]")
+            @Html.ValidationMessageFor(model => model.profile.disp_1T_dispDate)
+            </div> *@          
+            </td><td><div class="editor-field">
             @Html.DropDownListFor(model => model.profile.disp_2T_dispDate, (SelectList)ViewBag.Periods, "[Select date]")
             @Html.ValidationMessageFor(model => model.profile.disp_2T_dispDate)
             </div>

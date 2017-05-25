@@ -12,35 +12,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
-using DTM_Nigeria.Validation;
 
 namespace DTM_Nigeria.Models
 {
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(iom_b1f_informants))]
-    [KnownType(typeof(iom_b1f_organizations_assisting))]
-    [KnownType(typeof(iom_dtm_phase))]
-    [KnownType(typeof(iom_idp_arrival))]
-    [KnownType(typeof(iom_presence_wards))]
-    [KnownType(typeof(iom_researchers))]
-    [KnownType(typeof(lkp_Lga))]
-    [KnownType(typeof(lkp_NotReturnLocation))]
-    [KnownType(typeof(lkp_Period2))]
-    [KnownType(typeof(lkp_Settlement))]
-    [KnownType(typeof(lkp_State))]
     public partial class iom_profile
     {
         #region Primitive Properties
-        [DataMember]
+    
         public virtual int id
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual int phase
         {
             get { return _phase; }
@@ -65,14 +49,13 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _phase;
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual string date
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual int researcher_id
         {
             get { return _researcher_id; }
@@ -97,12 +80,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _researcher_id;
-
-        [Required(ErrorMessage="*")]
-        public string state { get; set; }
-
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual string lga
         {
             get { return _lga; }
@@ -127,15 +105,13 @@ namespace DTM_Nigeria.Models
             }
         }
         private string _lga;
-        [DataMember]
-        [Required(ErrorMessage = "*", AllowEmptyStrings = false)]
+    
         public virtual string settlement
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual string settlement_type
         {
             get { return _settlement_type; }
@@ -160,37 +136,31 @@ namespace DTM_Nigeria.Models
             }
         }
         private string _settlement_type;
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual int displaced_hh_ind_YesNo
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> number_hh
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> number_ind
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual int nr_YesNo
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string nr_location
         {
             get { return _nr_location; }
@@ -215,7 +185,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private string _nr_location;
-        [DataMember]
+    
         public virtual string nr_state1
         {
             get { return _nr_state1; }
@@ -240,7 +210,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private string _nr_state1;
-        [DataMember]
+    
         public virtual string nr_state2
         {
             get { return _nr_state2; }
@@ -265,7 +235,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private string _nr_state2;
-        [DataMember]
+    
         public virtual Nullable<int> nr_period
         {
             get { return _nr_period; }
@@ -290,14 +260,13 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _nr_period;
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual int reason_insurgency_YesNo
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> reason_insurg_year
         {
             get { return _reason_insurg_year; }
@@ -322,30 +291,25 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _reason_insurg_year;
-        [DataMember]
-        [RequiredIf("reason_insurgency_YesNo", 1, "*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> reason_insurg_hh
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("reason_insurgency_YesNo", 1, "*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> reason_insurg_ind
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual int reason_clash_YesNo
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> reason_clash_year
         {
             get { return _reason_clash_year; }
@@ -370,30 +334,25 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _reason_clash_year;
-        [DataMember]
-        [RequiredIf("reason_clash_YesNo", 1, "*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> reason_clash_hh
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("reason_clash_YesNo", 1, "*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> reason_clash_ind
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual int reason_disaster_YesNo
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> reason_disaster_year
         {
             get { return _reason_disaster_year; }
@@ -418,36 +377,31 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _reason_disaster_year;
-        [DataMember]
-        [RequiredIf("reason_disaster_YesNo", 1, "*")]
+    
         public virtual Nullable<int> reason_disaster_hh
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("reason_disaster_YesNo", 1, "*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> reason_disaster_ind
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual int reason_others_YesNo
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("reason_others_YesNo", 1, "*")]
+    
         public virtual string reason_others_name
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> reason_others_year
         {
             get { return _reason_others_year; }
@@ -472,87 +426,73 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _reason_others_year;
-        [DataMember]
-        [RequiredIf("reason_others_YesNo", 1, "*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> reason_others_hh
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("reason_others_YesNo", 1, "*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> reason_others_ind
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual int temporary_settlement_type_camp_YesNo
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("temporary_settlement_type_camp_YesNo", 1, "*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> temporary_settlement_hh_camp
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("temporary_settlement_type_camp_YesNo", 1, "*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> temporary_settlement_ind_camp
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual int temporary_settlement_type_hc_YesNo
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("temporary_settlement_type_hc_YesNo",1,"*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> temporary_settlement_hh_hc
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("temporary_settlement_type_hc_YesNo", 1, "*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> temporary_settlement_ind_hc
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> create_time
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> update_time
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string created_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string updated_by
         {
             get;
@@ -561,9 +501,7 @@ namespace DTM_Nigeria.Models
 
         #endregion
         #region Navigation Properties
-        
     
-        [DataMember]
         public virtual ICollection<iom_b1f_informants> iom_b1f_informants
         {
             get
@@ -595,9 +533,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private ICollection<iom_b1f_informants> _iom_b1f_informants;
-        
     
-        [DataMember]
         public virtual ICollection<iom_b1f_organizations_assisting> iom_b1f_organizations_assisting
         {
             get
@@ -629,9 +565,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private ICollection<iom_b1f_organizations_assisting> _iom_b1f_organizations_assisting;
-        
     
-        [DataMember]
         public virtual iom_dtm_phase iom_dtm_phase
         {
             get { return _iom_dtm_phase; }
@@ -646,9 +580,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private iom_dtm_phase _iom_dtm_phase;
-        
     
-        [DataMember]
         public virtual ICollection<iom_idp_arrival> iom_idp_arrival
         {
             get
@@ -680,9 +612,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private ICollection<iom_idp_arrival> _iom_idp_arrival;
-        
     
-        [DataMember]
         public virtual ICollection<iom_presence_wards> iom_presence_wards
         {
             get
@@ -714,9 +644,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private ICollection<iom_presence_wards> _iom_presence_wards;
-        
     
-        [DataMember]
         public virtual iom_researchers iom_researchers
         {
             get { return _iom_researchers; }
@@ -731,9 +659,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private iom_researchers _iom_researchers;
-        
     
-        [DataMember]
         public virtual lkp_Lga lkp_Lga
         {
             get { return _lkp_Lga; }
@@ -748,9 +674,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_Lga _lkp_Lga;
-        
     
-        [DataMember]
         public virtual lkp_NotReturnLocation lkp_NotReturnLocation
         {
             get { return _lkp_NotReturnLocation; }
@@ -765,9 +689,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_NotReturnLocation _lkp_NotReturnLocation;
-        
     
-        [DataMember]
         public virtual lkp_Period2 lkp_Period2
         {
             get { return _lkp_Period2; }
@@ -782,9 +704,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_Period2 _lkp_Period2;
-        
     
-        [DataMember]
         public virtual lkp_Period2 lkp_Period21
         {
             get { return _lkp_Period21; }
@@ -799,9 +719,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_Period2 _lkp_Period21;
-        
     
-        [DataMember]
         public virtual lkp_Period2 lkp_Period22
         {
             get { return _lkp_Period22; }
@@ -816,9 +734,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_Period2 _lkp_Period22;
-        
     
-        [DataMember]
         public virtual lkp_Period2 lkp_Period23
         {
             get { return _lkp_Period23; }
@@ -833,9 +749,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_Period2 _lkp_Period23;
-        
     
-        [DataMember]
         public virtual lkp_Period2 lkp_Period24
         {
             get { return _lkp_Period24; }
@@ -850,9 +764,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_Period2 _lkp_Period24;
-        
     
-        [DataMember]
         public virtual lkp_Settlement lkp_Settlement
         {
             get { return _lkp_Settlement; }
@@ -867,9 +779,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_Settlement _lkp_Settlement;
-        
     
-        [DataMember]
         public virtual lkp_State lkp_State
         {
             get { return _lkp_State; }
@@ -884,9 +794,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_State _lkp_State;
-        
     
-        [DataMember]
         public virtual lkp_State lkp_State1
         {
             get { return _lkp_State1; }

@@ -12,34 +12,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
-using DTM_Nigeria.Validation;
 
 namespace DTM_Nigeria.Models
 {
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(iom_ga_gender_age_sample))]
-    [KnownType(typeof(iom_ga_idp_population))]
-    [KnownType(typeof(iom_ga_informants))]
-    [KnownType(typeof(iom_ga_site_information))]
-    [KnownType(typeof(iom_researchers))]
-    [KnownType(typeof(lkp_Lga))]
-    [KnownType(typeof(lkp_Period2))]
-    [KnownType(typeof(lkp_ReasonOfDisp))]
-    [KnownType(typeof(lkp_Shelter))]
-    [KnownType(typeof(iom_group_assessment_2))]
-    [KnownType(typeof(iom_ward_profile))]
     public partial class iom_group_assessment_1
     {
         #region Primitive Properties
-        [DataMember]
+    
         public virtual int id
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual int b2f
         {
             get { return _b2f; }
@@ -64,46 +49,37 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _b2f;
-        [DataMember]
-        [Required(ErrorMessage = "*",AllowEmptyStrings=false)]
+    
         public virtual string group_id
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*", AllowEmptyStrings = false)]
+    
         public virtual string location
         {
             get;
             set;
         }
-
-        [DataMember]
-        [RegularExpression("^[-]?[0-9]+(\\.[0-9]+)?", ErrorMessage = "decimal")]
+    
         public virtual Nullable<double> coord_lon
         {
             get;
             set;
         }
-
-
-        [DataMember]
-        [RegularExpression("^[-]?[0-9]+(\\.[0-9]+)?", ErrorMessage = "decimal")]
+    
         public virtual Nullable<double> coord_lat
         {
             get;
             set;
         }
-
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual Nullable<System.DateTime> interview_date
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> researcher_id
         {
             get { return _researcher_id; }
@@ -128,8 +104,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _researcher_id;
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual Nullable<int> shelter_type
         {
             get { return _shelter_type; }
@@ -154,19 +129,13 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _shelter_type;
-        [DataMember]
-        [RequiredIf("shelter_type", 8, "*")]
+    
         public virtual string sheter_type_other
         {
             get;
             set;
         }
-
-        [Required(ErrorMessage="*")]
-        public string  state { get; set; }
-
-        [DataMember]
-        [Required(ErrorMessage="*")]
+    
         public virtual string lga_orgin
         {
             get { return _lga_orgin; }
@@ -191,8 +160,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private string _lga_orgin;
-        [DataMember]
-        [Required(ErrorMessage="*")]
+    
         public virtual Nullable<int> reason_for_disp
         {
             get { return _reason_for_disp; }
@@ -217,31 +185,25 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _reason_for_disp;
-        [DataMember]
-        [RequiredIf("reason_for_disp", 4, "*")]
+    
         public virtual string reason_other
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage="*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> number_hh
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual Nullable<int> number_ind
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual Nullable<int> wave_of_disp
         {
             get { return _wave_of_disp; }
@@ -266,126 +228,97 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _wave_of_disp;
-        [DataMember]
-        [RequiredIf("wave_of_disp",12,"*")]
+    
         public virtual string wave_if_other
         {
             get;
             set;
         }
-
-
-        public bool b_number_hh { get {return number_hh<=20;}
-            set { if (value) { ;} }
-        }
-
-        [DataMember]
-        [RequiredIf("b_number_hh", true, "*")]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> m0_5
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("b_number_hh", true, "*")]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> m5_14
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("b_number_hh", true, "*")]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> m15_24
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("b_number_hh", true, "*")]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> m25_59
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("b_number_hh", true, "*")]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> m60p
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("b_number_hh", true, "*")]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> f0_5
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("b_number_hh", true, "*")]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> f5_14
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("b_number_hh", true, "*")]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> f15_24
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("b_number_hh", true, "*")]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> f25_59
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("b_number_hh", true, "*")]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> f60p
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
-        [Range(4,16,ErrorMessage="4-16")]
+    
         public virtual Nullable<int> credibility_rating
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> create_time
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string created_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> update_time
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string updated_by
         {
             get;
@@ -394,9 +327,7 @@ namespace DTM_Nigeria.Models
 
         #endregion
         #region Navigation Properties
-        
     
-        [DataMember]
         public virtual ICollection<iom_ga_gender_age_sample> iom_ga_gender_age_sample
         {
             get
@@ -428,9 +359,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private ICollection<iom_ga_gender_age_sample> _iom_ga_gender_age_sample;
-        
     
-        [DataMember]
         public virtual ICollection<iom_ga_idp_population> iom_ga_idp_population
         {
             get
@@ -462,9 +391,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private ICollection<iom_ga_idp_population> _iom_ga_idp_population;
-        
     
-        [DataMember]
         public virtual ICollection<iom_ga_informants> iom_ga_informants
         {
             get
@@ -496,9 +423,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private ICollection<iom_ga_informants> _iom_ga_informants;
-        
     
-        [DataMember]
         public virtual ICollection<iom_ga_site_information> iom_ga_site_information
         {
             get
@@ -530,9 +455,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private ICollection<iom_ga_site_information> _iom_ga_site_information;
-        
     
-        [DataMember]
         public virtual iom_researchers iom_researchers
         {
             get { return _iom_researchers; }
@@ -547,94 +470,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private iom_researchers _iom_researchers;
-        
     
-        [DataMember]
-        public virtual lkp_Lga lkp_Lga
-        {
-            get { return _lkp_Lga; }
-            set
-            {
-                if (!ReferenceEquals(_lkp_Lga, value))
-                {
-                    var previousValue = _lkp_Lga;
-                    _lkp_Lga = value;
-                    Fixuplkp_Lga(previousValue);
-                }
-            }
-        }
-        private lkp_Lga _lkp_Lga;
-        
-    
-        [DataMember]
-        public virtual lkp_Period2 lkp_Period2
-        {
-            get { return _lkp_Period2; }
-            set
-            {
-                if (!ReferenceEquals(_lkp_Period2, value))
-                {
-                    var previousValue = _lkp_Period2;
-                    _lkp_Period2 = value;
-                    Fixuplkp_Period2(previousValue);
-                }
-            }
-        }
-        private lkp_Period2 _lkp_Period2;
-        
-    
-        [DataMember]
-        public virtual lkp_ReasonOfDisp lkp_ReasonOfDisp
-        {
-            get { return _lkp_ReasonOfDisp; }
-            set
-            {
-                if (!ReferenceEquals(_lkp_ReasonOfDisp, value))
-                {
-                    var previousValue = _lkp_ReasonOfDisp;
-                    _lkp_ReasonOfDisp = value;
-                    Fixuplkp_ReasonOfDisp(previousValue);
-                }
-            }
-        }
-        private lkp_ReasonOfDisp _lkp_ReasonOfDisp;
-        
-    
-        [DataMember]
-        public virtual lkp_Shelter lkp_Shelter
-        {
-            get { return _lkp_Shelter; }
-            set
-            {
-                if (!ReferenceEquals(_lkp_Shelter, value))
-                {
-                    var previousValue = _lkp_Shelter;
-                    _lkp_Shelter = value;
-                    Fixuplkp_Shelter(previousValue);
-                }
-            }
-        }
-        private lkp_Shelter _lkp_Shelter;
-        
-    
-        [DataMember]
-        public virtual iom_group_assessment_2 iom_group_assessment_2
-        {
-            get { return _iom_group_assessment_2; }
-            set
-            {
-                if (!ReferenceEquals(_iom_group_assessment_2, value))
-                {
-                    var previousValue = _iom_group_assessment_2;
-                    _iom_group_assessment_2 = value;
-                    Fixupiom_group_assessment_2(previousValue);
-                }
-            }
-        }
-        private iom_group_assessment_2 _iom_group_assessment_2;
-        
-    
-        [DataMember]
         public virtual iom_ward_profile iom_ward_profile
         {
             get { return _iom_ward_profile; }
@@ -649,6 +485,81 @@ namespace DTM_Nigeria.Models
             }
         }
         private iom_ward_profile _iom_ward_profile;
+    
+        public virtual lkp_Lga lkp_Lga
+        {
+            get { return _lkp_Lga; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Lga, value))
+                {
+                    var previousValue = _lkp_Lga;
+                    _lkp_Lga = value;
+                    Fixuplkp_Lga(previousValue);
+                }
+            }
+        }
+        private lkp_Lga _lkp_Lga;
+    
+        public virtual lkp_Period2 lkp_Period2
+        {
+            get { return _lkp_Period2; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Period2, value))
+                {
+                    var previousValue = _lkp_Period2;
+                    _lkp_Period2 = value;
+                    Fixuplkp_Period2(previousValue);
+                }
+            }
+        }
+        private lkp_Period2 _lkp_Period2;
+    
+        public virtual lkp_ReasonOfDisp lkp_ReasonOfDisp
+        {
+            get { return _lkp_ReasonOfDisp; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_ReasonOfDisp, value))
+                {
+                    var previousValue = _lkp_ReasonOfDisp;
+                    _lkp_ReasonOfDisp = value;
+                    Fixuplkp_ReasonOfDisp(previousValue);
+                }
+            }
+        }
+        private lkp_ReasonOfDisp _lkp_ReasonOfDisp;
+    
+        public virtual lkp_Shelter lkp_Shelter
+        {
+            get { return _lkp_Shelter; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Shelter, value))
+                {
+                    var previousValue = _lkp_Shelter;
+                    _lkp_Shelter = value;
+                    Fixuplkp_Shelter(previousValue);
+                }
+            }
+        }
+        private lkp_Shelter _lkp_Shelter;
+    
+        public virtual iom_group_assessment_2 iom_group_assessment_2
+        {
+            get { return _iom_group_assessment_2; }
+            set
+            {
+                if (!ReferenceEquals(_iom_group_assessment_2, value))
+                {
+                    var previousValue = _iom_group_assessment_2;
+                    _iom_group_assessment_2 = value;
+                    Fixupiom_group_assessment_2(previousValue);
+                }
+            }
+        }
+        private iom_group_assessment_2 _iom_group_assessment_2;
 
         #endregion
         #region Association Fixup
@@ -676,6 +587,26 @@ namespace DTM_Nigeria.Models
             else if (!_settingFK)
             {
                 researcher_id = null;
+            }
+        }
+    
+        private void Fixupiom_ward_profile(iom_ward_profile previousValue)
+        {
+            if (previousValue != null && previousValue.iom_group_assessment_1.Contains(this))
+            {
+                previousValue.iom_group_assessment_1.Remove(this);
+            }
+    
+            if (iom_ward_profile != null)
+            {
+                if (!iom_ward_profile.iom_group_assessment_1.Contains(this))
+                {
+                    iom_ward_profile.iom_group_assessment_1.Add(this);
+                }
+                if (b2f != iom_ward_profile.id)
+                {
+                    b2f = iom_ward_profile.id;
+                }
             }
         }
     
@@ -785,26 +716,6 @@ namespace DTM_Nigeria.Models
             if (iom_group_assessment_2 != null)
             {
                 iom_group_assessment_2.iom_group_assessment_1 = this;
-            }
-        }
-    
-        private void Fixupiom_ward_profile(iom_ward_profile previousValue)
-        {
-            if (previousValue != null && previousValue.iom_group_assessment_1.Contains(this))
-            {
-                previousValue.iom_group_assessment_1.Remove(this);
-            }
-    
-            if (iom_ward_profile != null)
-            {
-                if (!iom_ward_profile.iom_group_assessment_1.Contains(this))
-                {
-                    iom_ward_profile.iom_group_assessment_1.Add(this);
-                }
-                if (b2f != iom_ward_profile.id)
-                {
-                    b2f = iom_ward_profile.id;
-                }
             }
         }
     

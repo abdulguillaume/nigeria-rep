@@ -12,31 +12,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
-using DTM_Nigeria.Validation;
 
 namespace DTM_Nigeria.Models
 {
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(lkp_Ethnicity))]
-    [KnownType(typeof(lkp_Religion))]
-    [KnownType(typeof(lkp_Ward))]
-    [KnownType(typeof(iom_group_assessment_1))]
     public partial class iom_ga_idp_population
     {
         #region Primitive Properties
-        [DataMember]
+    
         public virtual int id
         {
             get;
             set;
         }
-
-        [Required]
-        public bool notEmpty { get; set; }
-
-        [DataMember]
+    
         public virtual int ga_id
         {
             get { return _ga_id; }
@@ -61,8 +49,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _ga_id;
-        [DataMember]
-        [RequiredIf("notEmpty", true, "*")]
+    
         public virtual string ward_orig
         {
             get { return _ward_orig; }
@@ -87,24 +74,19 @@ namespace DTM_Nigeria.Models
             }
         }
         private string _ward_orig;
-        [DataMember]
-        [RequiredIf("notEmpty", true, "*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = ">0")]
+    
         public virtual Nullable<int> hh
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("notEmpty", true, "*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = ">0")]
+    
         public virtual Nullable<int> ind
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("notEmpty", true, "*")]
+    
         public virtual Nullable<int> ethnicity
         {
             get { return _ethnicity; }
@@ -129,8 +111,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _ethnicity;
-        [DataMember]
-        [RequiredIf("notEmpty", true, "*")]
+    
         public virtual Nullable<int> religion
         {
             get { return _religion; }
@@ -155,32 +136,31 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _religion;
-        [DataMember]
-        [RequiredIf("ethnicity", 15, "*")]
+    
         public virtual string religion_other
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> create_time
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string created_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> update_time
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string updated_by
         {
             get;
@@ -189,60 +169,7 @@ namespace DTM_Nigeria.Models
 
         #endregion
         #region Navigation Properties
-        
     
-        [DataMember]
-        public virtual lkp_Ethnicity lkp_Ethnicity
-        {
-            get { return _lkp_Ethnicity; }
-            set
-            {
-                if (!ReferenceEquals(_lkp_Ethnicity, value))
-                {
-                    var previousValue = _lkp_Ethnicity;
-                    _lkp_Ethnicity = value;
-                    Fixuplkp_Ethnicity(previousValue);
-                }
-            }
-        }
-        private lkp_Ethnicity _lkp_Ethnicity;
-        
-    
-        [DataMember]
-        public virtual lkp_Religion lkp_Religion
-        {
-            get { return _lkp_Religion; }
-            set
-            {
-                if (!ReferenceEquals(_lkp_Religion, value))
-                {
-                    var previousValue = _lkp_Religion;
-                    _lkp_Religion = value;
-                    Fixuplkp_Religion(previousValue);
-                }
-            }
-        }
-        private lkp_Religion _lkp_Religion;
-        
-    
-        [DataMember]
-        public virtual lkp_Ward lkp_Ward
-        {
-            get { return _lkp_Ward; }
-            set
-            {
-                if (!ReferenceEquals(_lkp_Ward, value))
-                {
-                    var previousValue = _lkp_Ward;
-                    _lkp_Ward = value;
-                    Fixuplkp_Ward(previousValue);
-                }
-            }
-        }
-        private lkp_Ward _lkp_Ward;
-        
-    
-        [DataMember]
         public virtual iom_group_assessment_1 iom_group_assessment_1
         {
             get { return _iom_group_assessment_1; }
@@ -257,11 +184,76 @@ namespace DTM_Nigeria.Models
             }
         }
         private iom_group_assessment_1 _iom_group_assessment_1;
+    
+        public virtual lkp_Ethnicity lkp_Ethnicity
+        {
+            get { return _lkp_Ethnicity; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Ethnicity, value))
+                {
+                    var previousValue = _lkp_Ethnicity;
+                    _lkp_Ethnicity = value;
+                    Fixuplkp_Ethnicity(previousValue);
+                }
+            }
+        }
+        private lkp_Ethnicity _lkp_Ethnicity;
+    
+        public virtual lkp_Religion lkp_Religion
+        {
+            get { return _lkp_Religion; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Religion, value))
+                {
+                    var previousValue = _lkp_Religion;
+                    _lkp_Religion = value;
+                    Fixuplkp_Religion(previousValue);
+                }
+            }
+        }
+        private lkp_Religion _lkp_Religion;
+    
+        public virtual lkp_Ward lkp_Ward
+        {
+            get { return _lkp_Ward; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Ward, value))
+                {
+                    var previousValue = _lkp_Ward;
+                    _lkp_Ward = value;
+                    Fixuplkp_Ward(previousValue);
+                }
+            }
+        }
+        private lkp_Ward _lkp_Ward;
 
         #endregion
         #region Association Fixup
     
         private bool _settingFK = false;
+    
+        private void Fixupiom_group_assessment_1(iom_group_assessment_1 previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ga_idp_population.Contains(this))
+            {
+                previousValue.iom_ga_idp_population.Remove(this);
+            }
+    
+            if (iom_group_assessment_1 != null)
+            {
+                if (!iom_group_assessment_1.iom_ga_idp_population.Contains(this))
+                {
+                    iom_group_assessment_1.iom_ga_idp_population.Add(this);
+                }
+                if (ga_id != iom_group_assessment_1.id)
+                {
+                    ga_id = iom_group_assessment_1.id;
+                }
+            }
+        }
     
         private void Fixuplkp_Ethnicity(lkp_Ethnicity previousValue)
         {
@@ -332,26 +324,6 @@ namespace DTM_Nigeria.Models
             else if (!_settingFK)
             {
                 ward_orig = null;
-            }
-        }
-    
-        private void Fixupiom_group_assessment_1(iom_group_assessment_1 previousValue)
-        {
-            if (previousValue != null && previousValue.iom_ga_idp_population.Contains(this))
-            {
-                previousValue.iom_ga_idp_population.Remove(this);
-            }
-    
-            if (iom_group_assessment_1 != null)
-            {
-                if (!iom_group_assessment_1.iom_ga_idp_population.Contains(this))
-                {
-                    iom_group_assessment_1.iom_ga_idp_population.Add(this);
-                }
-                if (ga_id != iom_group_assessment_1.id)
-                {
-                    ga_id = iom_group_assessment_1.id;
-                }
             }
         }
 

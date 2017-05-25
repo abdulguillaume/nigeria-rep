@@ -12,24 +12,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
-using DTM_Nigeria.Validation;
 
 namespace DTM_Nigeria.Models
 {
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(iom_group_assessment_1))]
     public partial class iom_ga_site_information
     {
         #region Primitive Properties
-        [DataMember]
+    
         public virtual int id
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<int> ga_id
         {
             get { return _ga_id; }
@@ -54,60 +49,43 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _ga_id;
-
-        [Required]
-        public bool notEmpty { get; set; }
-
-        [DataMember]
-        [RequiredIf("notEmpty", true, "*")]
+    
         public virtual string name_site
         {
             get;
             set;
         }
-
-        //[RegularExpression("^([+-]?[0-8]?[0-9]|90)d([0-5]?[0-9]m)?([0-5]?[0-9](\\.[0-9])?s)?$", ErrorMessage = "*")]
-        //[RequiredIf("notEmpty", true, "*")]
-        //public string str_coord_lon { get; set; }
-
-        [DataMember]
-        [RegularExpression("^[-]?[0-9]+(\\.[0-9]+)?", ErrorMessage = "decimal")]
+    
         public virtual Nullable<double> coord_lon
         {
             get;
             set;
         }
-
-        //[RegularExpression("^([+-]?[0-8]?[0-9]|90)d([0-5]?[0-9]m)?([0-5]?[0-9](\\.[0-9])?s)?$", ErrorMessage = "*")]
-        //[RequiredIf("notEmpty", true, "*")]
-        //public string str_coord_lat { get; set; }
-
-        [DataMember]
-        [RegularExpression("^[-]?[0-9]+(\\.[0-9]+)?", ErrorMessage = "decimal")]
+    
         public virtual Nullable<double> coord_lat
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> create_time
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string created_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> update_time
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string updated_by
         {
             get;
@@ -116,9 +94,7 @@ namespace DTM_Nigeria.Models
 
         #endregion
         #region Navigation Properties
-        
     
-        [DataMember]
         public virtual iom_group_assessment_1 iom_group_assessment_1
         {
             get { return _iom_group_assessment_1; }

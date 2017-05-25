@@ -12,28 +12,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
 
 namespace DTM_Nigeria.Models
 {
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(iom_informants))]
-    [KnownType(typeof(iom_group_assessment_1))]
     public partial class iom_ga_informants
     {
         #region Primitive Properties
-        [DataMember]
+    
         public virtual int id
         {
             get;
             set;
         }
-
-        [Required]
-        public bool notEmpty { get; set; }
-
-        [DataMember]
+    
         public virtual int ga_id
         {
             get { return _ga_id; }
@@ -50,7 +41,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _ga_id;
-        [DataMember]
+    
         public virtual int informant
         {
             get { return _informant; }
@@ -67,25 +58,25 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _informant;
-        [DataMember]
+    
         public virtual string created_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> create_time
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string updated_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> update_time
         {
             get;
@@ -94,26 +85,7 @@ namespace DTM_Nigeria.Models
 
         #endregion
         #region Navigation Properties
-        
     
-        [DataMember]
-        public virtual iom_informants iom_informants
-        {
-            get { return _iom_informants; }
-            set
-            {
-                if (!ReferenceEquals(_iom_informants, value))
-                {
-                    var previousValue = _iom_informants;
-                    _iom_informants = value;
-                    Fixupiom_informants(previousValue);
-                }
-            }
-        }
-        private iom_informants _iom_informants;
-        
-    
-        [DataMember]
         public virtual iom_group_assessment_1 iom_group_assessment_1
         {
             get { return _iom_group_assessment_1; }
@@ -128,29 +100,24 @@ namespace DTM_Nigeria.Models
             }
         }
         private iom_group_assessment_1 _iom_group_assessment_1;
-
-        #endregion
-        #region Association Fixup
     
-        private void Fixupiom_informants(iom_informants previousValue)
+        public virtual iom_informants iom_informants
         {
-            if (previousValue != null && previousValue.iom_ga_informants.Contains(this))
+            get { return _iom_informants; }
+            set
             {
-                previousValue.iom_ga_informants.Remove(this);
-            }
-    
-            if (iom_informants != null)
-            {
-                if (!iom_informants.iom_ga_informants.Contains(this))
+                if (!ReferenceEquals(_iom_informants, value))
                 {
-                    iom_informants.iom_ga_informants.Add(this);
-                }
-                if (informant != iom_informants.id)
-                {
-                    informant = iom_informants.id;
+                    var previousValue = _iom_informants;
+                    _iom_informants = value;
+                    Fixupiom_informants(previousValue);
                 }
             }
         }
+        private iom_informants _iom_informants;
+
+        #endregion
+        #region Association Fixup
     
         private void Fixupiom_group_assessment_1(iom_group_assessment_1 previousValue)
         {
@@ -168,6 +135,26 @@ namespace DTM_Nigeria.Models
                 if (ga_id != iom_group_assessment_1.id)
                 {
                     ga_id = iom_group_assessment_1.id;
+                }
+            }
+        }
+    
+        private void Fixupiom_informants(iom_informants previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ga_informants.Contains(this))
+            {
+                previousValue.iom_ga_informants.Remove(this);
+            }
+    
+            if (iom_informants != null)
+            {
+                if (!iom_informants.iom_ga_informants.Contains(this))
+                {
+                    iom_informants.iom_ga_informants.Add(this);
+                }
+                if (informant != iom_informants.id)
+                {
+                    informant = iom_informants.id;
                 }
             }
         }

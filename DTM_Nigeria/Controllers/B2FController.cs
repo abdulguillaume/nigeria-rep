@@ -52,7 +52,7 @@ namespace DTM_Nigeria.Controllers
             setViewBags(b2f.iom_presence_wards.iom_profile.phase.ToString());
             //getSession();
             //ViewBag.ProfileID=w
-            
+
             return View(b2f);
         }
 
@@ -302,7 +302,7 @@ namespace DTM_Nigeria.Controllers
 
                     new VerifForm(new B2F(profile));
 
-                    _entity.iom_ward_profile.Add(profile);
+                    _entity.iom_ward_profile.AddObject(profile);// Add(profile);
                     _entity.SaveChanges();
 
 
@@ -508,6 +508,9 @@ namespace DTM_Nigeria.Controllers
                         b2f.disp_3T_ward = prof.profile.disp_3T_ward;
                         b2f.disp_3Tp_ward = prof.profile.disp_3Tp_ward;
 
+                        //Added by Abdul on May 25, 2017 (disp_1T_dispDate)
+                        //b2f.disp_1T_dispDate = prof.profile.disp_1T_dispDate;
+
                         b2f.disp_2T_dispDate = prof.profile.disp_2T_dispDate;
                         b2f.disp_3T_dispDate = prof.profile.disp_3T_dispDate;
                         b2f.disp_3Tp_dispDate = prof.profile.disp_3Tp_dispDate;
@@ -604,7 +607,7 @@ namespace DTM_Nigeria.Controllers
                 {
                     // TODO: Add delete logic here
 
-                    _entity.iom_ward_profile.Remove(b2f);
+                    _entity.iom_ward_profile.DeleteObject(b2f);// Remove(b2f);
 
                     _entity.SaveChanges();
 

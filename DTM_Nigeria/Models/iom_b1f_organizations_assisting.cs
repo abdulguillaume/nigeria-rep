@@ -12,25 +12,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
 
 namespace DTM_Nigeria.Models
 {
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(iom_organizations))]
-    [KnownType(typeof(lkp_assistance_type))]
-    [KnownType(typeof(iom_profile))]
     public partial class iom_b1f_organizations_assisting
     {
         #region Primitive Properties
-        [DataMember]
+    
         public virtual int id
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual int organization
         {
             get { return _organization; }
@@ -47,7 +41,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _organization;
-        [DataMember]
+    
         public virtual int profile_id
         {
             get { return _profile_id; }
@@ -64,8 +58,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _profile_id;
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual int assistance_type
         {
             get { return _assistance_type; }
@@ -82,32 +75,31 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _assistance_type;
-        [DataMember]
-        [Required(ErrorMessage = "*", AllowEmptyStrings = false)]
+    
         public virtual string contact_person
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string created_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> create_time
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string updated_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> update_time
         {
             get;
@@ -116,9 +108,7 @@ namespace DTM_Nigeria.Models
 
         #endregion
         #region Navigation Properties
-        
     
-        [DataMember]
         public virtual iom_organizations iom_organizations
         {
             get { return _iom_organizations; }
@@ -133,26 +123,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private iom_organizations _iom_organizations;
-        
     
-        [DataMember]
-        public virtual lkp_assistance_type lkp_assistance_type
-        {
-            get { return _lkp_assistance_type; }
-            set
-            {
-                if (!ReferenceEquals(_lkp_assistance_type, value))
-                {
-                    var previousValue = _lkp_assistance_type;
-                    _lkp_assistance_type = value;
-                    Fixuplkp_assistance_type(previousValue);
-                }
-            }
-        }
-        private lkp_assistance_type _lkp_assistance_type;
-        
-    
-        [DataMember]
         public virtual iom_profile iom_profile
         {
             get { return _iom_profile; }
@@ -167,6 +138,21 @@ namespace DTM_Nigeria.Models
             }
         }
         private iom_profile _iom_profile;
+    
+        public virtual lkp_assistance_type lkp_assistance_type
+        {
+            get { return _lkp_assistance_type; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_assistance_type, value))
+                {
+                    var previousValue = _lkp_assistance_type;
+                    _lkp_assistance_type = value;
+                    Fixuplkp_assistance_type(previousValue);
+                }
+            }
+        }
+        private lkp_assistance_type _lkp_assistance_type;
 
         #endregion
         #region Association Fixup
@@ -191,26 +177,6 @@ namespace DTM_Nigeria.Models
             }
         }
     
-        private void Fixuplkp_assistance_type(lkp_assistance_type previousValue)
-        {
-            if (previousValue != null && previousValue.iom_b1f_organizations_assisting.Contains(this))
-            {
-                previousValue.iom_b1f_organizations_assisting.Remove(this);
-            }
-    
-            if (lkp_assistance_type != null)
-            {
-                if (!lkp_assistance_type.iom_b1f_organizations_assisting.Contains(this))
-                {
-                    lkp_assistance_type.iom_b1f_organizations_assisting.Add(this);
-                }
-                if (assistance_type != lkp_assistance_type.id)
-                {
-                    assistance_type = lkp_assistance_type.id;
-                }
-            }
-        }
-    
         private void Fixupiom_profile(iom_profile previousValue)
         {
             if (previousValue != null && previousValue.iom_b1f_organizations_assisting.Contains(this))
@@ -227,6 +193,26 @@ namespace DTM_Nigeria.Models
                 if (profile_id != iom_profile.id)
                 {
                     profile_id = iom_profile.id;
+                }
+            }
+        }
+    
+        private void Fixuplkp_assistance_type(lkp_assistance_type previousValue)
+        {
+            if (previousValue != null && previousValue.iom_b1f_organizations_assisting.Contains(this))
+            {
+                previousValue.iom_b1f_organizations_assisting.Remove(this);
+            }
+    
+            if (lkp_assistance_type != null)
+            {
+                if (!lkp_assistance_type.iom_b1f_organizations_assisting.Contains(this))
+                {
+                    lkp_assistance_type.iom_b1f_organizations_assisting.Add(this);
+                }
+                if (assistance_type != lkp_assistance_type.id)
+                {
+                    assistance_type = lkp_assistance_type.id;
                 }
             }
         }

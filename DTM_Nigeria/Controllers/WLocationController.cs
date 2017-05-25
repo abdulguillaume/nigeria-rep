@@ -177,7 +177,7 @@ namespace DTM_Nigeria.Controllers
                     location_.create_time = tmp;
                     location_.update_time = tmp;
 
-                    _entity.iom_ward_presence_per_location.Add(location_);
+                    _entity.iom_ward_presence_per_location.AddObject(location_);// Add(location_);
                     _entity.SaveChanges();
 
                     return RedirectToAction("Index");
@@ -306,7 +306,7 @@ namespace DTM_Nigeria.Controllers
                 try
                 {
                     // TODO: Add delete logic here
-                    _entity.iom_ward_presence_per_location.Remove(loc);
+                    _entity.iom_ward_presence_per_location.DeleteObject(loc);// Remove(loc);
 
                     _entity.SaveChanges();
 

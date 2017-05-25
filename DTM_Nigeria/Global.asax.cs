@@ -31,7 +31,32 @@ namespace DTM_Nigeria
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
 
+            //routes.Add("SOAP",
+            //    new Route("soap", new WebServiceRouteHandler("Api/ExportLocationsToSiteAssessment.asmx")));
+
+
+
+
+
         }
+
+        //public class WebServiceRouteHandler : IRouteHandler
+        //{
+        //    private string _VirtualPath;
+
+        //    public WebServiceRouteHandler(string virtualPath)
+        //    {
+        //        _VirtualPath = virtualPath;
+        //    }
+
+        //    public IHttpHandler GetHttpHandler(RequestContext requestContext)
+        //    {
+        //        return new System.Web.Services.Protocols.WebServiceHandlerFactory().GetHandler(HttpContext.Current,
+        //            "*",
+        //            _VirtualPath,
+        //            HttpContext.Current.Server.MapPath(_VirtualPath));
+        //    }
+        //}
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {

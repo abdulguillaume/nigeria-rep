@@ -12,33 +12,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
 
 namespace DTM_Nigeria.Models
 {
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(iom_group_assessment_1))]
-    [KnownType(typeof(iom_profile))]
-    [KnownType(typeof(iom_ward_profile))]
     public partial class iom_researchers
     {
         #region Primitive Properties
-        [DataMember]
+    
         public virtual int id
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*", AllowEmptyStrings = false)]
+    
         public virtual string researcher_name
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*", AllowEmptyStrings = false)]
+    
         public virtual string researcher_tel
         {
             get;
@@ -47,9 +39,7 @@ namespace DTM_Nigeria.Models
 
         #endregion
         #region Navigation Properties
-        
     
-        [DataMember]
         public virtual ICollection<iom_group_assessment_1> iom_group_assessment_1
         {
             get
@@ -81,9 +71,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private ICollection<iom_group_assessment_1> _iom_group_assessment_1;
-        
     
-        [DataMember]
         public virtual ICollection<iom_profile> iom_profile
         {
             get
@@ -115,9 +103,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private ICollection<iom_profile> _iom_profile;
-        
     
-        [DataMember]
         public virtual ICollection<iom_ward_profile> iom_ward_profile
         {
             get

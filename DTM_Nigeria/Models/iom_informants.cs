@@ -12,40 +12,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
-using DTM_Nigeria.Validation;
 
 namespace DTM_Nigeria.Models
 {
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(iom_b1f_informants))]
-    [KnownType(typeof(iom_b2f_informants))]
-    [KnownType(typeof(lkp_Informant_Type))]
-    [KnownType(typeof(lkp_Sex))]
-    [KnownType(typeof(iom_ga_informants))]
     public partial class iom_informants
     {
         #region Primitive Properties
-        [DataMember]
+    
         public virtual int id
         {
             get;
             set;
         }
-
-        [Required]
-        public bool notEmpty { get; set; }
-
-        [DataMember]
-        [RequiredIf("notEmpty",true,"*")]
+    
         public virtual string name
         {
             get;
             set;
         }
-        [DataMember]
-        [RequiredIf("notEmpty", true, "*")]
+    
         public virtual Nullable<int> type
         {
             get { return _type; }
@@ -70,8 +55,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _type;
-        [DataMember]
-        [RequiredIf("notEmpty", true, "*")]
+    
         public virtual string sex
         {
             get { return _sex; }
@@ -96,7 +80,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private string _sex;
-        [DataMember]
+    
         public virtual string details
         {
             get;
@@ -105,9 +89,7 @@ namespace DTM_Nigeria.Models
 
         #endregion
         #region Navigation Properties
-        
     
-        [DataMember]
         public virtual ICollection<iom_b1f_informants> iom_b1f_informants
         {
             get
@@ -139,9 +121,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private ICollection<iom_b1f_informants> _iom_b1f_informants;
-        
     
-        [DataMember]
         public virtual ICollection<iom_b2f_informants> iom_b2f_informants
         {
             get
@@ -173,43 +153,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private ICollection<iom_b2f_informants> _iom_b2f_informants;
-        
     
-        [DataMember]
-        public virtual lkp_Informant_Type lkp_Informant_Type
-        {
-            get { return _lkp_Informant_Type; }
-            set
-            {
-                if (!ReferenceEquals(_lkp_Informant_Type, value))
-                {
-                    var previousValue = _lkp_Informant_Type;
-                    _lkp_Informant_Type = value;
-                    Fixuplkp_Informant_Type(previousValue);
-                }
-            }
-        }
-        private lkp_Informant_Type _lkp_Informant_Type;
-        
-    
-        [DataMember]
-        public virtual lkp_Sex lkp_Sex
-        {
-            get { return _lkp_Sex; }
-            set
-            {
-                if (!ReferenceEquals(_lkp_Sex, value))
-                {
-                    var previousValue = _lkp_Sex;
-                    _lkp_Sex = value;
-                    Fixuplkp_Sex(previousValue);
-                }
-            }
-        }
-        private lkp_Sex _lkp_Sex;
-        
-    
-        [DataMember]
         public virtual ICollection<iom_ga_informants> iom_ga_informants
         {
             get
@@ -241,6 +185,36 @@ namespace DTM_Nigeria.Models
             }
         }
         private ICollection<iom_ga_informants> _iom_ga_informants;
+    
+        public virtual lkp_Informant_Type lkp_Informant_Type
+        {
+            get { return _lkp_Informant_Type; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Informant_Type, value))
+                {
+                    var previousValue = _lkp_Informant_Type;
+                    _lkp_Informant_Type = value;
+                    Fixuplkp_Informant_Type(previousValue);
+                }
+            }
+        }
+        private lkp_Informant_Type _lkp_Informant_Type;
+    
+        public virtual lkp_Sex lkp_Sex
+        {
+            get { return _lkp_Sex; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Sex, value))
+                {
+                    var previousValue = _lkp_Sex;
+                    _lkp_Sex = value;
+                    Fixuplkp_Sex(previousValue);
+                }
+            }
+        }
+        private lkp_Sex _lkp_Sex;
 
         #endregion
         #region Association Fixup

@@ -12,33 +12,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
 
 namespace DTM_Nigeria.Models
 {
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(iom_b1f_organizations_assisting))]
-    [KnownType(typeof(iom_b2f_organizations_assisting))]
-    [KnownType(typeof(lkp_Organization))]
     public partial class iom_organizations
     {
         #region Primitive Properties
-        [DataMember]
+    
         public virtual int id
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*", AllowEmptyStrings = false)]
+    
         public virtual string name
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage = "*")]
+    
         public virtual Nullable<int> type
         {
             get { return _type; }
@@ -63,7 +55,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private Nullable<int> _type;
-        [DataMember]
+    
         public virtual string description
         {
             get;
@@ -72,9 +64,7 @@ namespace DTM_Nigeria.Models
 
         #endregion
         #region Navigation Properties
-        
     
-        [DataMember]
         public virtual ICollection<iom_b1f_organizations_assisting> iom_b1f_organizations_assisting
         {
             get
@@ -106,9 +96,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private ICollection<iom_b1f_organizations_assisting> _iom_b1f_organizations_assisting;
-        
     
-        [DataMember]
         public virtual ICollection<iom_b2f_organizations_assisting> iom_b2f_organizations_assisting
         {
             get
@@ -140,9 +128,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private ICollection<iom_b2f_organizations_assisting> _iom_b2f_organizations_assisting;
-        
     
-        [DataMember]
         public virtual lkp_Organization lkp_Organization
         {
             get { return _lkp_Organization; }

@@ -12,69 +12,61 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
 
 namespace DTM_Nigeria.Models
 {
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(iom_profile))]
     public partial class iom_dtm_phase
     {
         #region Primitive Properties
-        [DataMember]
-        [Required(ErrorMessage="*")]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+    
         public virtual int phase
         {
             get;
             set;
         }
-        [DataMember]
-        [Required(ErrorMessage="*",AllowEmptyStrings=false)]
+    
         public virtual string description
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> field_start_date
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> field_end_date
         {
             get;
             set;
         }
-        [DataMember]
-        [Required]
+    
         public virtual int closed_YesNo
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> create_date
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string created_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> update_date
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string updated_by
         {
             get;
@@ -83,9 +75,7 @@ namespace DTM_Nigeria.Models
 
         #endregion
         #region Navigation Properties
-        
     
-        [DataMember]
         public virtual ICollection<iom_profile> iom_profile
         {
             get

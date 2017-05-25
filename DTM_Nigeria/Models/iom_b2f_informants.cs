@@ -12,24 +12,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
 
 namespace DTM_Nigeria.Models
 {
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(iom_informants))]
-    [KnownType(typeof(iom_ward_profile))]
     public partial class iom_b2f_informants
     {
         #region Primitive Properties
-        [DataMember]
+    
         public virtual int id
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual int informant
         {
             get { return _informant; }
@@ -46,7 +41,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _informant;
-        [DataMember]
+    
         public virtual int ward_profile_id
         {
             get { return _ward_profile_id; }
@@ -63,32 +58,31 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _ward_profile_id;
-        [DataMember]
-        [Required(ErrorMessage = "*", AllowEmptyStrings = false)]
+    
         public virtual string contact_details
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string created_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> create_time
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string updated_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> update_time
         {
             get;
@@ -97,9 +91,7 @@ namespace DTM_Nigeria.Models
 
         #endregion
         #region Navigation Properties
-        
     
-        [DataMember]
         public virtual iom_informants iom_informants
         {
             get { return _iom_informants; }
@@ -114,9 +106,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private iom_informants _iom_informants;
-        
     
-        [DataMember]
         public virtual iom_ward_profile iom_ward_profile
         {
             get { return _iom_ward_profile; }

@@ -469,7 +469,7 @@ namespace DTM_Nigeria.Controllers
 
                     new VerifForm(b3f, phase);
 
-                    _entity.iom_group_assessment_1.Add(ga_p1);
+                    _entity.iom_group_assessment_1.AddObject(ga_p1);//Add(ga_p1);
                     _entity.SaveChanges();
 
                     return RedirectToAction("Index");
@@ -612,7 +612,7 @@ namespace DTM_Nigeria.Controllers
 
                     new VerifForm(p2, phase);
 
-                    _entity.iom_group_assessment_2.Add(ga_p2);
+                    _entity.iom_group_assessment_2.AddObject(ga_p2);//Add(ga_p2);
                     _entity.SaveChanges();
 
                     return RedirectToAction("IndexP2", new { id = ga_p2.id });
@@ -700,7 +700,7 @@ namespace DTM_Nigeria.Controllers
                             site.created_by = User.Identity.Name;
                             site.updated_by = User.Identity.Name;
 
-                            _entity.iom_ga_site_information.Add(site);
+                            _entity.iom_ga_site_information.AddObject(site);// Add(site);
                             //_entity.SaveChanges();
                         }
                     }
@@ -784,7 +784,7 @@ namespace DTM_Nigeria.Controllers
                         bd.updated_by = User.Identity.Name;
 
 
-                        _entity.iom_ga_gender_age_sample.Add(bd);
+                        _entity.iom_ga_gender_age_sample.AddObject(bd);// Add(bd);
                         i++;
                         
                     }
@@ -911,7 +911,7 @@ namespace DTM_Nigeria.Controllers
                             iom_ga_idp_population u = _entity.iom_ga_idp_population.Where(
                                 y =>y.id==a.id
                                 ).FirstOrDefault();
-                            _entity.iom_ga_idp_population.Remove(u);
+                            _entity.iom_ga_idp_population.DeleteObject(u);// Remove(u);
                         }
                     }
 
@@ -959,7 +959,7 @@ namespace DTM_Nigeria.Controllers
                     foreach (var a in toRemInf)
                     {
                         iom_ga_informants u = _entity.iom_ga_informants.Where(y => y.informant == a.informant).FirstOrDefault();
-                        _entity.iom_ga_informants.Remove(u);
+                        _entity.iom_ga_informants.DeleteObject(u);// Remove(u);
                         
                     }
 
@@ -1246,7 +1246,7 @@ namespace DTM_Nigeria.Controllers
                         {
                             //delete blank ones
                             iom_ga_site_information x = ga_p1.iom_ga_site_information.Where(y => y.id == a.id).FirstOrDefault();
-                            _entity.iom_ga_site_information.Remove(x);
+                            _entity.iom_ga_site_information.DeleteObject(x);// Remove(x);
                         }
                     }
 
@@ -1458,7 +1458,7 @@ namespace DTM_Nigeria.Controllers
                 try
                 {
                     // TODO: Add delete logic here
-                    _entity.iom_group_assessment_1.Remove(ga_p1);
+                    _entity.iom_group_assessment_1.DeleteObject(ga_p1);// Remove(ga_p1);
 
                     _entity.SaveChanges();
                     
@@ -1513,7 +1513,7 @@ namespace DTM_Nigeria.Controllers
                 try
                 {
                     // TODO: Add delete logic here
-                    _entity.iom_group_assessment_2.Remove(ga_p2);
+                    _entity.iom_group_assessment_2.DeleteObject(ga_p2);// Remove(ga_p2);
 
                     _entity.SaveChanges();
 
@@ -1584,7 +1584,7 @@ namespace DTM_Nigeria.Controllers
 
                     foreach (var a in sites)
                     {
-                        _entity.iom_ga_site_information.Remove(a);
+                        _entity.iom_ga_site_information.DeleteObject(a);// Remove(a);
                         _entity.SaveChanges();
                     }
 
@@ -1649,7 +1649,7 @@ namespace DTM_Nigeria.Controllers
 
                     foreach (var a in ages)
                     {
-                        _entity.iom_ga_gender_age_sample.Remove(a);
+                        _entity.iom_ga_gender_age_sample.DeleteObject(a);// Remove(a);
                         _entity.SaveChanges();
                     }
 

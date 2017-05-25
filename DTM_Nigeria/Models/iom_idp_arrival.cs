@@ -12,26 +12,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
 
 namespace DTM_Nigeria.Models
 {
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(iom_profile))]
-    [KnownType(typeof(lkp_Location))]
-    [KnownType(typeof(lkp_Period2))]
-    [KnownType(typeof(lkp_State))]
     public partial class iom_idp_arrival
     {
         #region Primitive Properties
-        [DataMember]
+    
         public virtual int id
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual int profile_id
         {
             get { return _profile_id; }
@@ -56,7 +49,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _profile_id;
-        [DataMember]
+    
         public virtual int year
         {
             get { return _year; }
@@ -81,21 +74,19 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _year;
-        [DataMember]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = ">0")]
+    
         public virtual Nullable<int> hh
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = ">0")]
+    
         public virtual Nullable<int> ind
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string state_type
         {
             get { return _state_type; }
@@ -120,7 +111,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private string _state_type;
-        [DataMember]
+    
         public virtual string location
         {
             get { return _location; }
@@ -145,25 +136,25 @@ namespace DTM_Nigeria.Models
             }
         }
         private string _location;
-        [DataMember]
+    
         public virtual string created_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> create_time
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string updated_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> update_time
         {
             get;
@@ -172,9 +163,7 @@ namespace DTM_Nigeria.Models
 
         #endregion
         #region Navigation Properties
-        
     
-        [DataMember]
         public virtual iom_profile iom_profile
         {
             get { return _iom_profile; }
@@ -189,9 +178,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private iom_profile _iom_profile;
-        
     
-        [DataMember]
         public virtual lkp_Location lkp_Location
         {
             get { return _lkp_Location; }
@@ -206,9 +193,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_Location _lkp_Location;
-        
     
-        [DataMember]
         public virtual lkp_Period2 lkp_Period2
         {
             get { return _lkp_Period2; }
@@ -223,9 +208,7 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_Period2 _lkp_Period2;
-        
     
-        [DataMember]
         public virtual lkp_State lkp_State
         {
             get { return _lkp_State; }

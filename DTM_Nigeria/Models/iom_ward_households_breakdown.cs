@@ -12,23 +12,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using System.ComponentModel.DataAnnotations;
 
 namespace DTM_Nigeria.Models
 {
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(iom_ward_profile))]
     public partial class iom_ward_households_breakdown
     {
         #region Primitive Properties
-        [DataMember]
+    
         public virtual int hhs
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual int ward_profile_id
         {
             get { return _ward_profile_id; }
@@ -45,95 +41,85 @@ namespace DTM_Nigeria.Models
             }
         }
         private int _ward_profile_id;
-        [DataMember]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> m_lt1
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> f_lt1
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> m_1_5
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> f_1_5
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> m_6_17
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> f_6_17
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> m_18_59
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> f_18_59
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> m_60p
         {
             get;
             set;
         }
-        [DataMember]
-        [RegularExpression("^[0-9]*", ErrorMessage = "*")]
+    
         public virtual Nullable<int> f_60p
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string created_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> create_time
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual string updated_by
         {
             get;
             set;
         }
-        [DataMember]
+    
         public virtual Nullable<System.DateTime> update_time
         {
             get;
@@ -142,9 +128,7 @@ namespace DTM_Nigeria.Models
 
         #endregion
         #region Navigation Properties
-        
     
-        [DataMember]
         public virtual iom_ward_profile iom_ward_profile
         {
             get { return _iom_ward_profile; }

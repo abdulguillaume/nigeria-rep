@@ -305,7 +305,7 @@ namespace DTM_Nigeria.Controllers
 
                     new VerifForm(new B1F(profile));
 
-                    _entity.iom_profile.Add(profile);
+                    _entity.iom_profile.AddObject(profile);// Add(profile);
                     _entity.SaveChanges();
 
                     return RedirectToAction("Index");
@@ -530,7 +530,7 @@ namespace DTM_Nigeria.Controllers
                    
                    }
 
-                   _entity.iom_profile.Remove(b1f);
+                   _entity.iom_profile.DeleteObject(b1f);// Remove(b1f);
 
                    _entity.SaveChanges();
 
