@@ -67,7 +67,7 @@
         
         
         <table width=100%>
-        <tr><th colspan=5>B. DEMOGRAPHICS</th></tr>
+        <tr><th colspan=4>B. DEMOGRAPHICS</th></tr>
            <tr><td colspan=2>Are there displaced IDP hh/individuals in the LGA?</td><td colspan=2>
            
            <div class="display-field">
@@ -81,7 +81,7 @@
            </td></tr>
            
            <tr><td colspan=4>If yes, what is the estimated number of current IDP population?</td></tr>
-           <tr><td>Number of households</td><td>
+           <tr><td >Number of households</td><td>
            
              <div class="display-field">
             @Html.DisplayFor(model => model.number_hh)
@@ -525,7 +525,7 @@
             </td>
         </tr>
 
-        <tr>
+        @*<tr>
             <th>
                 Ward
             </th>
@@ -547,28 +547,31 @@
                 </div>
 
             </td>
-        </tr>
+        </tr>*@
 
         <tr>
-            <th>
-                Date of displacement
-                @*<div class="display-field">
-                    @Html.DisplayFor(model => model.lkp_Period28.label)
-                </div>*@
-            </th>
             <td>
+                Date of displacement: 
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.lkp_Period28.label)
+                </div>
+            </td>
+            <td>
+                Date of displacement: 
                 <div class="display-field">
                     @Html.DisplayFor(model => model.lkp_Period25.label)
                 </div>
 
             </td>
             <td>
+                Date of displacement: 
                 <div class="display-field">
                     @Html.DisplayFor(model => model.lkp_Period26.label)
                 </div>
 
             </td>
             <td>
+                Date of displacement:
                 <div class="display-field">
                     @Html.DisplayFor(model => model.lkp_Period27.label)
                 </div>

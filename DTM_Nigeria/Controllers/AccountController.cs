@@ -14,10 +14,20 @@ namespace DTM_Nigeria.Controllers
 
         //
         // GET: /Account/LogOn
+        public ActionResult Login()
+        {
+            return LogOn();
+        }
+
+        [HttpPost]
+        public ActionResult Login(LogOnModel model, string returnUrl)
+        {
+            return LogOn( model,  returnUrl);
+        }
 
         public ActionResult LogOn()
         {
-            return View();
+            return View("LogOn");
         }
 
         //

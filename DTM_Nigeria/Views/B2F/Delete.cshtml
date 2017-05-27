@@ -76,7 +76,7 @@
         
         <table width=100%>
         <tr><th colspan=5>B. DEMOGRAPHICS</th></tr>
-           <tr><td colspan=2>Are there displaced IDP hh/individuals in the LGA?</td><td colspan=2>
+           <tr><td colspan=2>Are there displaced IDP hh/individuals in the LGA?</td><td colspan=3>
            
            <div class="display-field">
             @if (@Model.displaced_hh_ind_YesNo == 1)
@@ -91,8 +91,8 @@
 
            </td></tr>
            
-           <tr><td colspan=4>If yes, what is the estimated number of current IDP population?</td></tr>
-           <tr><td>Number of households</td><td>
+           <tr><td colspan=5>If yes, what is the estimated number of current IDP population?</td></tr>
+           <tr><td>Number of households</td><td colspan=2>
            
              <div class="display-field">
             @Html.DisplayFor(model => model.number_hh)
@@ -106,7 +106,7 @@
         </div>
 
            </td></tr>
-           <tr><td colspan=4>Arrival of IDPs in the LGA</td></tr>
+           <tr><td colspan=5>Arrival of IDPs in the LGA</td></tr>
 
             <tr>
             
@@ -373,7 +373,7 @@
 
         <br />
 
-        <table width=100%>
+        <table width="100%">
         <tr><th colspan=5>E. TYPE OF LOCATION/RESIDENCE FOR IDP POPULATION IN THE LGA</th></tr>
            <tr><th>Type of IDP's Temporary Settlements</th><th>IDPs</th><th>#HHs</th><th>
            #IND</th></tr>
@@ -517,7 +517,7 @@
 
            </td></tr>
 
-           <tr><th>Ward           
+           @*<tr><th>Ward           
             </th><td><div class="display-field">
             @Html.DisplayFor(model => model.lkp_Ward.ward_name)
             </div>
@@ -530,18 +530,27 @@
             @Html.DisplayFor(model => model.lkp_Ward2.ward_name)
             </div>
 
-           </td></tr>
+           </td></tr>*@
 
-           <tr><th>Date of displacement           
-            </th><td><div class="display-field">
+           <tr><td>
+           Date of displacement:   
+           <div class="display-field">
+            @Html.DisplayFor(model => model.lkp_Period28.label)
+            </div>        
+            </td><td>
+            Date of displacement:   
+            <div class="display-field">
             @Html.DisplayFor(model => model.lkp_Period25.label)
             </div>
-
-            </td><td><div class="display-field">
+            </td><td>
+            Date of displacement:   
+            <div class="display-field">
             @Html.DisplayFor(model => model.lkp_Period26.label)
             </div>
 
-            </td><td><div class="display-field">
+            </td><td>
+            Date of displacement:   
+            <div class="display-field">
             @Html.DisplayFor(model => model.lkp_Period27.label)
             </div>
 

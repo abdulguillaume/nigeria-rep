@@ -920,27 +920,103 @@ namespace DTM_Nigeria.Models
     
         public virtual string disp_2T_state
         {
-            get;
-            set;
+            get { return _disp_2T_state; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_disp_2T_state != value)
+                    {
+                        if (lkp_State2 != null && lkp_State2.state_code != value)
+                        {
+                            lkp_State2 = null;
+                        }
+                        _disp_2T_state = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private string _disp_2T_state;
     
         public virtual string disp_2T_lga
         {
-            get;
-            set;
+            get { return _disp_2T_lga; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_disp_2T_lga != value)
+                    {
+                        if (lkp_Lga != null && lkp_Lga.lga_code != value)
+                        {
+                            lkp_Lga = null;
+                        }
+                        _disp_2T_lga = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private string _disp_2T_lga;
     
         public virtual string disp_2T_ward
         {
-            get;
-            set;
+            get { return _disp_2T_ward; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_disp_2T_ward != value)
+                    {
+                        if (lkp_Ward != null && lkp_Ward.ward_code != value)
+                        {
+                            lkp_Ward = null;
+                        }
+                        _disp_2T_ward = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private string _disp_2T_ward;
     
         public virtual Nullable<int> disp_2T_dispDate
         {
-            get;
-            set;
+            get { return _disp_2T_dispDate; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_disp_2T_dispDate != value)
+                    {
+                        if (lkp_Period25 != null && lkp_Period25.id != value)
+                        {
+                            lkp_Period25 = null;
+                        }
+                        _disp_2T_dispDate = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private Nullable<int> _disp_2T_dispDate;
     
         public virtual Nullable<int> disp_3T_yn
         {
@@ -956,27 +1032,103 @@ namespace DTM_Nigeria.Models
     
         public virtual string disp_3T_state
         {
-            get;
-            set;
+            get { return _disp_3T_state; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_disp_3T_state != value)
+                    {
+                        if (lkp_State3 != null && lkp_State3.state_code != value)
+                        {
+                            lkp_State3 = null;
+                        }
+                        _disp_3T_state = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private string _disp_3T_state;
     
         public virtual string disp_3T_lga
         {
-            get;
-            set;
+            get { return _disp_3T_lga; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_disp_3T_lga != value)
+                    {
+                        if (lkp_Lga1 != null && lkp_Lga1.lga_code != value)
+                        {
+                            lkp_Lga1 = null;
+                        }
+                        _disp_3T_lga = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private string _disp_3T_lga;
     
         public virtual string disp_3T_ward
         {
-            get;
-            set;
+            get { return _disp_3T_ward; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_disp_3T_ward != value)
+                    {
+                        if (lkp_Ward1 != null && lkp_Ward1.ward_code != value)
+                        {
+                            lkp_Ward1 = null;
+                        }
+                        _disp_3T_ward = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private string _disp_3T_ward;
     
         public virtual Nullable<int> disp_3T_dispDate
         {
-            get;
-            set;
+            get { return _disp_3T_dispDate; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_disp_3T_dispDate != value)
+                    {
+                        if (lkp_Period26 != null && lkp_Period26.id != value)
+                        {
+                            lkp_Period26 = null;
+                        }
+                        _disp_3T_dispDate = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private Nullable<int> _disp_3T_dispDate;
     
         public virtual Nullable<int> disp_3Tp_yn
         {
@@ -992,27 +1144,103 @@ namespace DTM_Nigeria.Models
     
         public virtual string disp_3Tp_state
         {
-            get;
-            set;
+            get { return _disp_3Tp_state; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_disp_3Tp_state != value)
+                    {
+                        if (lkp_State4 != null && lkp_State4.state_code != value)
+                        {
+                            lkp_State4 = null;
+                        }
+                        _disp_3Tp_state = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private string _disp_3Tp_state;
     
         public virtual string disp_3Tp_lga
         {
-            get;
-            set;
+            get { return _disp_3Tp_lga; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_disp_3Tp_lga != value)
+                    {
+                        if (lkp_Lga2 != null && lkp_Lga2.lga_code != value)
+                        {
+                            lkp_Lga2 = null;
+                        }
+                        _disp_3Tp_lga = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private string _disp_3Tp_lga;
     
         public virtual string disp_3Tp_ward
         {
-            get;
-            set;
+            get { return _disp_3Tp_ward; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_disp_3Tp_ward != value)
+                    {
+                        if (lkp_Ward2 != null && lkp_Ward2.ward_code != value)
+                        {
+                            lkp_Ward2 = null;
+                        }
+                        _disp_3Tp_ward = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private string _disp_3Tp_ward;
     
         public virtual Nullable<int> disp_3Tp_dispDate
         {
-            get;
-            set;
+            get { return _disp_3Tp_dispDate; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_disp_3Tp_dispDate != value)
+                    {
+                        if (lkp_Period27 != null && lkp_Period27.id != value)
+                        {
+                            lkp_Period27 = null;
+                        }
+                        _disp_3Tp_dispDate = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private Nullable<int> _disp_3Tp_dispDate;
     
         public virtual Nullable<int> idps_fromLGA_dispInWard
         {
@@ -1034,15 +1262,53 @@ namespace DTM_Nigeria.Models
     
         public virtual string state_prev_disp_LargestGrp1
         {
-            get;
-            set;
+            get { return _state_prev_disp_LargestGrp1; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_state_prev_disp_LargestGrp1 != value)
+                    {
+                        if (lkp_State5 != null && lkp_State5.state_code != value)
+                        {
+                            lkp_State5 = null;
+                        }
+                        _state_prev_disp_LargestGrp1 = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private string _state_prev_disp_LargestGrp1;
     
         public virtual string lga_prev_disp_LargestGrp1
         {
-            get;
-            set;
+            get { return _lga_prev_disp_LargestGrp1; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_lga_prev_disp_LargestGrp1 != value)
+                    {
+                        if (lkp_Lga3 != null && lkp_Lga3.lga_code != value)
+                        {
+                            lkp_Lga3 = null;
+                        }
+                        _lga_prev_disp_LargestGrp1 = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private string _lga_prev_disp_LargestGrp1;
     
         public virtual string date_arriv_LGA_LargestGrp1
         {
@@ -1064,15 +1330,53 @@ namespace DTM_Nigeria.Models
     
         public virtual string state_prev_disp_LargestGrp2
         {
-            get;
-            set;
+            get { return _state_prev_disp_LargestGrp2; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_state_prev_disp_LargestGrp2 != value)
+                    {
+                        if (lkp_State6 != null && lkp_State6.state_code != value)
+                        {
+                            lkp_State6 = null;
+                        }
+                        _state_prev_disp_LargestGrp2 = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private string _state_prev_disp_LargestGrp2;
     
         public virtual string lga_prev_disp_LargestGrp2
         {
-            get;
-            set;
+            get { return _lga_prev_disp_LargestGrp2; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_lga_prev_disp_LargestGrp2 != value)
+                    {
+                        if (lkp_Lga4 != null && lkp_Lga4.lga_code != value)
+                        {
+                            lkp_Lga4 = null;
+                        }
+                        _lga_prev_disp_LargestGrp2 = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private string _lga_prev_disp_LargestGrp2;
     
         public virtual string date_arriv_LGA_LargestGrp2
         {
@@ -1160,9 +1464,28 @@ namespace DTM_Nigeria.Models
     
         public virtual Nullable<int> disp_1T_dispDate
         {
-            get;
-            set;
+            get { return _disp_1T_dispDate; }
+            set
+            {
+                try
+                {
+                    _settingFK = true;
+                    if (_disp_1T_dispDate != value)
+                    {
+                        if (lkp_Period28 != null && lkp_Period28.id != value)
+                        {
+                            lkp_Period28 = null;
+                        }
+                        _disp_1T_dispDate = value;
+                    }
+                }
+                finally
+                {
+                    _settingFK = false;
+                }
+            }
         }
+        private Nullable<int> _disp_1T_dispDate;
 
         #endregion
         #region Navigation Properties
@@ -1793,6 +2116,261 @@ namespace DTM_Nigeria.Models
             }
         }
         private lkp_YesNo _lkp_YesNo;
+    
+        public virtual lkp_Period2 lkp_Period25
+        {
+            get { return _lkp_Period25; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Period25, value))
+                {
+                    var previousValue = _lkp_Period25;
+                    _lkp_Period25 = value;
+                    Fixuplkp_Period25(previousValue);
+                }
+            }
+        }
+        private lkp_Period2 _lkp_Period25;
+    
+        public virtual lkp_Period2 lkp_Period26
+        {
+            get { return _lkp_Period26; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Period26, value))
+                {
+                    var previousValue = _lkp_Period26;
+                    _lkp_Period26 = value;
+                    Fixuplkp_Period26(previousValue);
+                }
+            }
+        }
+        private lkp_Period2 _lkp_Period26;
+    
+        public virtual lkp_Period2 lkp_Period27
+        {
+            get { return _lkp_Period27; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Period27, value))
+                {
+                    var previousValue = _lkp_Period27;
+                    _lkp_Period27 = value;
+                    Fixuplkp_Period27(previousValue);
+                }
+            }
+        }
+        private lkp_Period2 _lkp_Period27;
+    
+        public virtual lkp_Period2 lkp_Period28
+        {
+            get { return _lkp_Period28; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Period28, value))
+                {
+                    var previousValue = _lkp_Period28;
+                    _lkp_Period28 = value;
+                    Fixuplkp_Period28(previousValue);
+                }
+            }
+        }
+        private lkp_Period2 _lkp_Period28;
+    
+        public virtual lkp_Lga lkp_Lga
+        {
+            get { return _lkp_Lga; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Lga, value))
+                {
+                    var previousValue = _lkp_Lga;
+                    _lkp_Lga = value;
+                    Fixuplkp_Lga(previousValue);
+                }
+            }
+        }
+        private lkp_Lga _lkp_Lga;
+    
+        public virtual lkp_Lga lkp_Lga1
+        {
+            get { return _lkp_Lga1; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Lga1, value))
+                {
+                    var previousValue = _lkp_Lga1;
+                    _lkp_Lga1 = value;
+                    Fixuplkp_Lga1(previousValue);
+                }
+            }
+        }
+        private lkp_Lga _lkp_Lga1;
+    
+        public virtual lkp_Lga lkp_Lga2
+        {
+            get { return _lkp_Lga2; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Lga2, value))
+                {
+                    var previousValue = _lkp_Lga2;
+                    _lkp_Lga2 = value;
+                    Fixuplkp_Lga2(previousValue);
+                }
+            }
+        }
+        private lkp_Lga _lkp_Lga2;
+    
+        public virtual lkp_State lkp_State2
+        {
+            get { return _lkp_State2; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_State2, value))
+                {
+                    var previousValue = _lkp_State2;
+                    _lkp_State2 = value;
+                    Fixuplkp_State2(previousValue);
+                }
+            }
+        }
+        private lkp_State _lkp_State2;
+    
+        public virtual lkp_State lkp_State3
+        {
+            get { return _lkp_State3; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_State3, value))
+                {
+                    var previousValue = _lkp_State3;
+                    _lkp_State3 = value;
+                    Fixuplkp_State3(previousValue);
+                }
+            }
+        }
+        private lkp_State _lkp_State3;
+    
+        public virtual lkp_State lkp_State4
+        {
+            get { return _lkp_State4; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_State4, value))
+                {
+                    var previousValue = _lkp_State4;
+                    _lkp_State4 = value;
+                    Fixuplkp_State4(previousValue);
+                }
+            }
+        }
+        private lkp_State _lkp_State4;
+    
+        public virtual lkp_Ward lkp_Ward
+        {
+            get { return _lkp_Ward; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Ward, value))
+                {
+                    var previousValue = _lkp_Ward;
+                    _lkp_Ward = value;
+                    Fixuplkp_Ward(previousValue);
+                }
+            }
+        }
+        private lkp_Ward _lkp_Ward;
+    
+        public virtual lkp_Ward lkp_Ward1
+        {
+            get { return _lkp_Ward1; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Ward1, value))
+                {
+                    var previousValue = _lkp_Ward1;
+                    _lkp_Ward1 = value;
+                    Fixuplkp_Ward1(previousValue);
+                }
+            }
+        }
+        private lkp_Ward _lkp_Ward1;
+    
+        public virtual lkp_Ward lkp_Ward2
+        {
+            get { return _lkp_Ward2; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Ward2, value))
+                {
+                    var previousValue = _lkp_Ward2;
+                    _lkp_Ward2 = value;
+                    Fixuplkp_Ward2(previousValue);
+                }
+            }
+        }
+        private lkp_Ward _lkp_Ward2;
+    
+        public virtual lkp_Lga lkp_Lga3
+        {
+            get { return _lkp_Lga3; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Lga3, value))
+                {
+                    var previousValue = _lkp_Lga3;
+                    _lkp_Lga3 = value;
+                    Fixuplkp_Lga3(previousValue);
+                }
+            }
+        }
+        private lkp_Lga _lkp_Lga3;
+    
+        public virtual lkp_Lga lkp_Lga4
+        {
+            get { return _lkp_Lga4; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_Lga4, value))
+                {
+                    var previousValue = _lkp_Lga4;
+                    _lkp_Lga4 = value;
+                    Fixuplkp_Lga4(previousValue);
+                }
+            }
+        }
+        private lkp_Lga _lkp_Lga4;
+    
+        public virtual lkp_State lkp_State5
+        {
+            get { return _lkp_State5; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_State5, value))
+                {
+                    var previousValue = _lkp_State5;
+                    _lkp_State5 = value;
+                    Fixuplkp_State5(previousValue);
+                }
+            }
+        }
+        private lkp_State _lkp_State5;
+    
+        public virtual lkp_State lkp_State6
+        {
+            get { return _lkp_State6; }
+            set
+            {
+                if (!ReferenceEquals(_lkp_State6, value))
+                {
+                    var previousValue = _lkp_State6;
+                    _lkp_State6 = value;
+                    Fixuplkp_State6(previousValue);
+                }
+            }
+        }
+        private lkp_State _lkp_State6;
 
         #endregion
         #region Association Fixup
@@ -2477,6 +3055,414 @@ namespace DTM_Nigeria.Models
             else if (!_settingFK)
             {
                 diff_cause_issues = null;
+            }
+        }
+    
+        private void Fixuplkp_Period25(lkp_Period2 previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile5.Contains(this))
+            {
+                previousValue.iom_ward_profile5.Remove(this);
+            }
+    
+            if (lkp_Period25 != null)
+            {
+                if (!lkp_Period25.iom_ward_profile5.Contains(this))
+                {
+                    lkp_Period25.iom_ward_profile5.Add(this);
+                }
+                if (disp_2T_dispDate != lkp_Period25.id)
+                {
+                    disp_2T_dispDate = lkp_Period25.id;
+                }
+            }
+            else if (!_settingFK)
+            {
+                disp_2T_dispDate = null;
+            }
+        }
+    
+        private void Fixuplkp_Period26(lkp_Period2 previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile6.Contains(this))
+            {
+                previousValue.iom_ward_profile6.Remove(this);
+            }
+    
+            if (lkp_Period26 != null)
+            {
+                if (!lkp_Period26.iom_ward_profile6.Contains(this))
+                {
+                    lkp_Period26.iom_ward_profile6.Add(this);
+                }
+                if (disp_3T_dispDate != lkp_Period26.id)
+                {
+                    disp_3T_dispDate = lkp_Period26.id;
+                }
+            }
+            else if (!_settingFK)
+            {
+                disp_3T_dispDate = null;
+            }
+        }
+    
+        private void Fixuplkp_Period27(lkp_Period2 previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile7.Contains(this))
+            {
+                previousValue.iom_ward_profile7.Remove(this);
+            }
+    
+            if (lkp_Period27 != null)
+            {
+                if (!lkp_Period27.iom_ward_profile7.Contains(this))
+                {
+                    lkp_Period27.iom_ward_profile7.Add(this);
+                }
+                if (disp_3Tp_dispDate != lkp_Period27.id)
+                {
+                    disp_3Tp_dispDate = lkp_Period27.id;
+                }
+            }
+            else if (!_settingFK)
+            {
+                disp_3Tp_dispDate = null;
+            }
+        }
+    
+        private void Fixuplkp_Period28(lkp_Period2 previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile8.Contains(this))
+            {
+                previousValue.iom_ward_profile8.Remove(this);
+            }
+    
+            if (lkp_Period28 != null)
+            {
+                if (!lkp_Period28.iom_ward_profile8.Contains(this))
+                {
+                    lkp_Period28.iom_ward_profile8.Add(this);
+                }
+                if (disp_1T_dispDate != lkp_Period28.id)
+                {
+                    disp_1T_dispDate = lkp_Period28.id;
+                }
+            }
+            else if (!_settingFK)
+            {
+                disp_1T_dispDate = null;
+            }
+        }
+    
+        private void Fixuplkp_Lga(lkp_Lga previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile.Contains(this))
+            {
+                previousValue.iom_ward_profile.Remove(this);
+            }
+    
+            if (lkp_Lga != null)
+            {
+                if (!lkp_Lga.iom_ward_profile.Contains(this))
+                {
+                    lkp_Lga.iom_ward_profile.Add(this);
+                }
+                if (disp_2T_lga != lkp_Lga.lga_code)
+                {
+                    disp_2T_lga = lkp_Lga.lga_code;
+                }
+            }
+            else if (!_settingFK)
+            {
+                disp_2T_lga = null;
+            }
+        }
+    
+        private void Fixuplkp_Lga1(lkp_Lga previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile1.Contains(this))
+            {
+                previousValue.iom_ward_profile1.Remove(this);
+            }
+    
+            if (lkp_Lga1 != null)
+            {
+                if (!lkp_Lga1.iom_ward_profile1.Contains(this))
+                {
+                    lkp_Lga1.iom_ward_profile1.Add(this);
+                }
+                if (disp_3T_lga != lkp_Lga1.lga_code)
+                {
+                    disp_3T_lga = lkp_Lga1.lga_code;
+                }
+            }
+            else if (!_settingFK)
+            {
+                disp_3T_lga = null;
+            }
+        }
+    
+        private void Fixuplkp_Lga2(lkp_Lga previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile2.Contains(this))
+            {
+                previousValue.iom_ward_profile2.Remove(this);
+            }
+    
+            if (lkp_Lga2 != null)
+            {
+                if (!lkp_Lga2.iom_ward_profile2.Contains(this))
+                {
+                    lkp_Lga2.iom_ward_profile2.Add(this);
+                }
+                if (disp_3Tp_lga != lkp_Lga2.lga_code)
+                {
+                    disp_3Tp_lga = lkp_Lga2.lga_code;
+                }
+            }
+            else if (!_settingFK)
+            {
+                disp_3Tp_lga = null;
+            }
+        }
+    
+        private void Fixuplkp_State2(lkp_State previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile2.Contains(this))
+            {
+                previousValue.iom_ward_profile2.Remove(this);
+            }
+    
+            if (lkp_State2 != null)
+            {
+                if (!lkp_State2.iom_ward_profile2.Contains(this))
+                {
+                    lkp_State2.iom_ward_profile2.Add(this);
+                }
+                if (disp_2T_state != lkp_State2.state_code)
+                {
+                    disp_2T_state = lkp_State2.state_code;
+                }
+            }
+            else if (!_settingFK)
+            {
+                disp_2T_state = null;
+            }
+        }
+    
+        private void Fixuplkp_State3(lkp_State previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile3.Contains(this))
+            {
+                previousValue.iom_ward_profile3.Remove(this);
+            }
+    
+            if (lkp_State3 != null)
+            {
+                if (!lkp_State3.iom_ward_profile3.Contains(this))
+                {
+                    lkp_State3.iom_ward_profile3.Add(this);
+                }
+                if (disp_3T_state != lkp_State3.state_code)
+                {
+                    disp_3T_state = lkp_State3.state_code;
+                }
+            }
+            else if (!_settingFK)
+            {
+                disp_3T_state = null;
+            }
+        }
+    
+        private void Fixuplkp_State4(lkp_State previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile4.Contains(this))
+            {
+                previousValue.iom_ward_profile4.Remove(this);
+            }
+    
+            if (lkp_State4 != null)
+            {
+                if (!lkp_State4.iom_ward_profile4.Contains(this))
+                {
+                    lkp_State4.iom_ward_profile4.Add(this);
+                }
+                if (disp_3Tp_state != lkp_State4.state_code)
+                {
+                    disp_3Tp_state = lkp_State4.state_code;
+                }
+            }
+            else if (!_settingFK)
+            {
+                disp_3Tp_state = null;
+            }
+        }
+    
+        private void Fixuplkp_Ward(lkp_Ward previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile.Contains(this))
+            {
+                previousValue.iom_ward_profile.Remove(this);
+            }
+    
+            if (lkp_Ward != null)
+            {
+                if (!lkp_Ward.iom_ward_profile.Contains(this))
+                {
+                    lkp_Ward.iom_ward_profile.Add(this);
+                }
+                if (disp_2T_ward != lkp_Ward.ward_code)
+                {
+                    disp_2T_ward = lkp_Ward.ward_code;
+                }
+            }
+            else if (!_settingFK)
+            {
+                disp_2T_ward = null;
+            }
+        }
+    
+        private void Fixuplkp_Ward1(lkp_Ward previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile1.Contains(this))
+            {
+                previousValue.iom_ward_profile1.Remove(this);
+            }
+    
+            if (lkp_Ward1 != null)
+            {
+                if (!lkp_Ward1.iom_ward_profile1.Contains(this))
+                {
+                    lkp_Ward1.iom_ward_profile1.Add(this);
+                }
+                if (disp_3T_ward != lkp_Ward1.ward_code)
+                {
+                    disp_3T_ward = lkp_Ward1.ward_code;
+                }
+            }
+            else if (!_settingFK)
+            {
+                disp_3T_ward = null;
+            }
+        }
+    
+        private void Fixuplkp_Ward2(lkp_Ward previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile2.Contains(this))
+            {
+                previousValue.iom_ward_profile2.Remove(this);
+            }
+    
+            if (lkp_Ward2 != null)
+            {
+                if (!lkp_Ward2.iom_ward_profile2.Contains(this))
+                {
+                    lkp_Ward2.iom_ward_profile2.Add(this);
+                }
+                if (disp_3Tp_ward != lkp_Ward2.ward_code)
+                {
+                    disp_3Tp_ward = lkp_Ward2.ward_code;
+                }
+            }
+            else if (!_settingFK)
+            {
+                disp_3Tp_ward = null;
+            }
+        }
+    
+        private void Fixuplkp_Lga3(lkp_Lga previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile3.Contains(this))
+            {
+                previousValue.iom_ward_profile3.Remove(this);
+            }
+    
+            if (lkp_Lga3 != null)
+            {
+                if (!lkp_Lga3.iom_ward_profile3.Contains(this))
+                {
+                    lkp_Lga3.iom_ward_profile3.Add(this);
+                }
+                if (lga_prev_disp_LargestGrp1 != lkp_Lga3.lga_code)
+                {
+                    lga_prev_disp_LargestGrp1 = lkp_Lga3.lga_code;
+                }
+            }
+            else if (!_settingFK)
+            {
+                lga_prev_disp_LargestGrp1 = null;
+            }
+        }
+    
+        private void Fixuplkp_Lga4(lkp_Lga previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile4.Contains(this))
+            {
+                previousValue.iom_ward_profile4.Remove(this);
+            }
+    
+            if (lkp_Lga4 != null)
+            {
+                if (!lkp_Lga4.iom_ward_profile4.Contains(this))
+                {
+                    lkp_Lga4.iom_ward_profile4.Add(this);
+                }
+                if (lga_prev_disp_LargestGrp2 != lkp_Lga4.lga_code)
+                {
+                    lga_prev_disp_LargestGrp2 = lkp_Lga4.lga_code;
+                }
+            }
+            else if (!_settingFK)
+            {
+                lga_prev_disp_LargestGrp2 = null;
+            }
+        }
+    
+        private void Fixuplkp_State5(lkp_State previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile5.Contains(this))
+            {
+                previousValue.iom_ward_profile5.Remove(this);
+            }
+    
+            if (lkp_State5 != null)
+            {
+                if (!lkp_State5.iom_ward_profile5.Contains(this))
+                {
+                    lkp_State5.iom_ward_profile5.Add(this);
+                }
+                if (state_prev_disp_LargestGrp1 != lkp_State5.state_code)
+                {
+                    state_prev_disp_LargestGrp1 = lkp_State5.state_code;
+                }
+            }
+            else if (!_settingFK)
+            {
+                state_prev_disp_LargestGrp1 = null;
+            }
+        }
+    
+        private void Fixuplkp_State6(lkp_State previousValue)
+        {
+            if (previousValue != null && previousValue.iom_ward_profile6.Contains(this))
+            {
+                previousValue.iom_ward_profile6.Remove(this);
+            }
+    
+            if (lkp_State6 != null)
+            {
+                if (!lkp_State6.iom_ward_profile6.Contains(this))
+                {
+                    lkp_State6.iom_ward_profile6.Add(this);
+                }
+                if (state_prev_disp_LargestGrp2 != lkp_State6.state_code)
+                {
+                    state_prev_disp_LargestGrp2 = lkp_State6.state_code;
+                }
+            }
+            else if (!_settingFK)
+            {
+                state_prev_disp_LargestGrp2 = null;
             }
         }
     

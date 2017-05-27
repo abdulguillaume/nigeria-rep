@@ -263,6 +263,166 @@ namespace DTM_Nigeria.Models
             }
         }
         private ICollection<lkp_Ward> _lkp_Ward;
+    
+        public virtual ICollection<iom_ward_profile> iom_ward_profile
+        {
+            get
+            {
+                if (_iom_ward_profile == null)
+                {
+                    var newCollection = new FixupCollection<iom_ward_profile>();
+                    newCollection.CollectionChanged += Fixupiom_ward_profile;
+                    _iom_ward_profile = newCollection;
+                }
+                return _iom_ward_profile;
+            }
+            set
+            {
+                if (!ReferenceEquals(_iom_ward_profile, value))
+                {
+                    var previousValue = _iom_ward_profile as FixupCollection<iom_ward_profile>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= Fixupiom_ward_profile;
+                    }
+                    _iom_ward_profile = value;
+                    var newValue = value as FixupCollection<iom_ward_profile>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += Fixupiom_ward_profile;
+                    }
+                }
+            }
+        }
+        private ICollection<iom_ward_profile> _iom_ward_profile;
+    
+        public virtual ICollection<iom_ward_profile> iom_ward_profile1
+        {
+            get
+            {
+                if (_iom_ward_profile1 == null)
+                {
+                    var newCollection = new FixupCollection<iom_ward_profile>();
+                    newCollection.CollectionChanged += Fixupiom_ward_profile1;
+                    _iom_ward_profile1 = newCollection;
+                }
+                return _iom_ward_profile1;
+            }
+            set
+            {
+                if (!ReferenceEquals(_iom_ward_profile1, value))
+                {
+                    var previousValue = _iom_ward_profile1 as FixupCollection<iom_ward_profile>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= Fixupiom_ward_profile1;
+                    }
+                    _iom_ward_profile1 = value;
+                    var newValue = value as FixupCollection<iom_ward_profile>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += Fixupiom_ward_profile1;
+                    }
+                }
+            }
+        }
+        private ICollection<iom_ward_profile> _iom_ward_profile1;
+    
+        public virtual ICollection<iom_ward_profile> iom_ward_profile2
+        {
+            get
+            {
+                if (_iom_ward_profile2 == null)
+                {
+                    var newCollection = new FixupCollection<iom_ward_profile>();
+                    newCollection.CollectionChanged += Fixupiom_ward_profile2;
+                    _iom_ward_profile2 = newCollection;
+                }
+                return _iom_ward_profile2;
+            }
+            set
+            {
+                if (!ReferenceEquals(_iom_ward_profile2, value))
+                {
+                    var previousValue = _iom_ward_profile2 as FixupCollection<iom_ward_profile>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= Fixupiom_ward_profile2;
+                    }
+                    _iom_ward_profile2 = value;
+                    var newValue = value as FixupCollection<iom_ward_profile>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += Fixupiom_ward_profile2;
+                    }
+                }
+            }
+        }
+        private ICollection<iom_ward_profile> _iom_ward_profile2;
+    
+        public virtual ICollection<iom_ward_profile> iom_ward_profile3
+        {
+            get
+            {
+                if (_iom_ward_profile3 == null)
+                {
+                    var newCollection = new FixupCollection<iom_ward_profile>();
+                    newCollection.CollectionChanged += Fixupiom_ward_profile3;
+                    _iom_ward_profile3 = newCollection;
+                }
+                return _iom_ward_profile3;
+            }
+            set
+            {
+                if (!ReferenceEquals(_iom_ward_profile3, value))
+                {
+                    var previousValue = _iom_ward_profile3 as FixupCollection<iom_ward_profile>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= Fixupiom_ward_profile3;
+                    }
+                    _iom_ward_profile3 = value;
+                    var newValue = value as FixupCollection<iom_ward_profile>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += Fixupiom_ward_profile3;
+                    }
+                }
+            }
+        }
+        private ICollection<iom_ward_profile> _iom_ward_profile3;
+    
+        public virtual ICollection<iom_ward_profile> iom_ward_profile4
+        {
+            get
+            {
+                if (_iom_ward_profile4 == null)
+                {
+                    var newCollection = new FixupCollection<iom_ward_profile>();
+                    newCollection.CollectionChanged += Fixupiom_ward_profile4;
+                    _iom_ward_profile4 = newCollection;
+                }
+                return _iom_ward_profile4;
+            }
+            set
+            {
+                if (!ReferenceEquals(_iom_ward_profile4, value))
+                {
+                    var previousValue = _iom_ward_profile4 as FixupCollection<iom_ward_profile>;
+                    if (previousValue != null)
+                    {
+                        previousValue.CollectionChanged -= Fixupiom_ward_profile4;
+                    }
+                    _iom_ward_profile4 = value;
+                    var newValue = value as FixupCollection<iom_ward_profile>;
+                    if (newValue != null)
+                    {
+                        newValue.CollectionChanged += Fixupiom_ward_profile4;
+                    }
+                }
+            }
+        }
+        private ICollection<iom_ward_profile> _iom_ward_profile4;
 
         #endregion
         #region Association Fixup
@@ -414,6 +574,116 @@ namespace DTM_Nigeria.Models
                     if (ReferenceEquals(item.lkp_Lga, this))
                     {
                         item.lkp_Lga = null;
+                    }
+                }
+            }
+        }
+    
+        private void Fixupiom_ward_profile(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (iom_ward_profile item in e.NewItems)
+                {
+                    item.lkp_Lga = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (iom_ward_profile item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.lkp_Lga, this))
+                    {
+                        item.lkp_Lga = null;
+                    }
+                }
+            }
+        }
+    
+        private void Fixupiom_ward_profile1(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (iom_ward_profile item in e.NewItems)
+                {
+                    item.lkp_Lga1 = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (iom_ward_profile item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.lkp_Lga1, this))
+                    {
+                        item.lkp_Lga1 = null;
+                    }
+                }
+            }
+        }
+    
+        private void Fixupiom_ward_profile2(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (iom_ward_profile item in e.NewItems)
+                {
+                    item.lkp_Lga2 = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (iom_ward_profile item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.lkp_Lga2, this))
+                    {
+                        item.lkp_Lga2 = null;
+                    }
+                }
+            }
+        }
+    
+        private void Fixupiom_ward_profile3(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (iom_ward_profile item in e.NewItems)
+                {
+                    item.lkp_Lga3 = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (iom_ward_profile item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.lkp_Lga3, this))
+                    {
+                        item.lkp_Lga3 = null;
+                    }
+                }
+            }
+        }
+    
+        private void Fixupiom_ward_profile4(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (iom_ward_profile item in e.NewItems)
+                {
+                    item.lkp_Lga4 = this;
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (iom_ward_profile item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.lkp_Lga4, this))
+                    {
+                        item.lkp_Lga4 = null;
                     }
                 }
             }

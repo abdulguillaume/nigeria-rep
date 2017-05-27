@@ -617,23 +617,23 @@
 
            <tr><th>           
             </th><td><div class="editor-field">
-            @Html.DropDownListFor(model => model.profile.disp_2T_lga, (SelectList)ViewBag.LgasList, "[Select LGA]", new { @id = "lg_2T" })
+            @Html.DropDownListFor(model => model.profile.disp_2T_lga, (SelectList)ViewBag.LgasList1, "[Select LGA]", new { @id = "lg_2T" })
             @Html.ValidationMessageFor(model => model.profile.disp_2T_lga)
             </div>
 
             </td><td><div class="editor-field">
-            @Html.DropDownListFor(model => model.profile.disp_3T_lga, (SelectList)ViewBag.LgasList, "[Select LGA]", new { @id = "lg_3T" })
+            @Html.DropDownListFor(model => model.profile.disp_3T_lga, (SelectList)ViewBag.LgasList2, "[Select LGA]", new { @id = "lg_3T" })
             @Html.ValidationMessageFor(model => model.profile.disp_3T_lga)
             </div>
 
             </td><td><div class="editor-field">
-            @Html.DropDownListFor(model => model.profile.disp_3Tp_lga, (SelectList)ViewBag.LgasList, "[Select LGA]", new { @id = "lg_3Tp" })
+            @Html.DropDownListFor(model => model.profile.disp_3Tp_lga, (SelectList)ViewBag.LgasList3, "[Select LGA]", new { @id = "lg_3Tp" })
             @Html.ValidationMessageFor(model => model.profile.disp_3Tp_lga)
             </div>
 
            </td></tr>
 
-           <tr><th>           
+           @*<tr><th>           
             </th><td><div class="editor-field">
             @Html.DropDownListFor(model => model.profile.disp_2T_ward, (SelectList)ViewBag.WardsList, "[Select WARD]", new { @id = "wd_2T" })
             @Html.ValidationMessageFor(model => model.profile.disp_2T_ward)
@@ -649,13 +649,13 @@
             @Html.ValidationMessageFor(model => model.profile.disp_3Tp_ward)
             </div>
 
-           </td></tr>
+           </td></tr>*@
 
            <tr><td>
-           @*<div class="editor-field">
+           <div class="editor-field">
             @Html.DropDownListFor(model => model.profile.disp_1T_dispDate, (SelectList)ViewBag.Periods, "[Select date]")
             @Html.ValidationMessageFor(model => model.profile.disp_1T_dispDate)
-            </div> *@            
+            </div>             
             </td><td><div class="editor-field">
             @Html.DropDownListFor(model => model.profile.disp_2T_dispDate, (SelectList)ViewBag.Periods, "[Select date]")
             @Html.ValidationMessageFor(model => model.profile.disp_2T_dispDate)
@@ -708,7 +708,7 @@
             </div>
 
             </td><td><div class="editor-field">
-            @Html.DropDownListFor(model => model.profile.lga_prev_disp_LargestGrp1, (SelectList)ViewBag.LgasList, "[Select LGA]", new { @id = "lg_prv1" })
+            @Html.DropDownListFor(model => model.profile.lga_prev_disp_LargestGrp1, (SelectList)ViewBag.LgasList4, "[Select LGA]", new { @id = "lg_prv1" })
             @Html.ValidationMessageFor(model => model.profile.lga_prev_disp_LargestGrp1)
             </div>
 
@@ -739,7 +739,7 @@
             </div>
 
             </td><td><div class="editor-field">
-            @Html.DropDownListFor(model => model.profile.lga_prev_disp_LargestGrp2, (SelectList)ViewBag.LgasList, "[Select LGA]", new { @id = "lg_prv2" })
+            @Html.DropDownListFor(model => model.profile.lga_prev_disp_LargestGrp2, (SelectList)ViewBag.LgasList5, "[Select LGA]", new { @id = "lg_prv2" })
             @Html.ValidationMessageFor(model => model.profile.lga_prev_disp_LargestGrp2)
             </div>
 
@@ -845,7 +845,7 @@
             if ($(this).val() != "NULL") {
 
                 $.ajax({
-                    url: "/B2F/getLgaList",
+                    url: "/B1F/getLgaList",
                     type: 'POST',
                     data: { id: $(this).val() },
                     success: function (lgas) {
@@ -859,49 +859,10 @@
                     },
                     error: function (xhr) { alert("error!!"); }
                 });
-                //***--set ward to null--***
-                $.ajax({
-                    url: "/B2F/getWardList",
-                    type: 'POST',
-                    data: { id: $(this).val() },
-                    success: function (wards) {
 
-                        var $select = $('#wd_2T');
-                        $select.empty();
-                        //
-                        $select.append("<option value=''>[Select Ward]</option>");
-                        // $.each(wards, function (i, ward) {
-                        //     $select.append("<option value='" + ward.Value + "'>" + ward.Text + "</option>");
-                        // });
-                    },
-                    error: function (xhr) { alert("error!!"); }
-                });
-                //***--set ward to null--***
             }
         });
 
-
-        $("#lg_2T").change(function () {
-
-            if ($(this).val() != "NULL") {
-
-                $.ajax({
-                    url: "/B2F/getWardList",
-                    type: 'POST',
-                    data: { id: $(this).val() },
-                    success: function (wards) {
-
-                        var $select = $('#wd_2T');
-                        $select.empty();
-                        $select.append("<option value=''>[Select ward]</option>");
-                        $.each(wards, function (i, ward) {
-                            $select.append("<option value='" + ward.Value + "'>" + ward.Text + "</option>");
-                        });
-                    },
-                    error: function (xhr) { alert("error!!"); }
-                });
-            }
-        });
 
         //3T displaced
         $("#st_3T").change(function () {
@@ -909,7 +870,7 @@
             if ($(this).val() != "NULL") {
 
                 $.ajax({
-                    url: "/B2F/getLgaList",
+                    url: "/B1F/getLgaList",
                     type: 'POST',
                     data: { id: $(this).val() },
                     success: function (lgas) {
@@ -923,49 +884,10 @@
                     },
                     error: function (xhr) { alert("error!!"); }
                 });
-                //***--set ward to null--***
-                $.ajax({
-                    url: "/B2F/getWardList",
-                    type: 'POST',
-                    data: { id: $(this).val() },
-                    success: function (wards) {
 
-                        var $select = $('#wd_3T');
-                        $select.empty();
-                        //
-                        $select.append("<option value=''>[Select Ward]</option>");
-                        // $.each(wards, function (i, ward) {
-                        //     $select.append("<option value='" + ward.Value + "'>" + ward.Text + "</option>");
-                        // });
-                    },
-                    error: function (xhr) { alert("error!!"); }
-                });
-                //***--set ward to null--***
             }
         });
-
-
-        $("#lg_3T").change(function () {
-
-            if ($(this).val() != "NULL") {
-
-                $.ajax({
-                    url: "/B2F/getWardList",
-                    type: 'POST',
-                    data: { id: $(this).val() },
-                    success: function (wards) {
-
-                        var $select = $('#wd_3T');
-                        $select.empty();
-                        $select.append("<option value=''>[Select ward]</option>");
-                        $.each(wards, function (i, ward) {
-                            $select.append("<option value='" + ward.Value + "'>" + ward.Text + "</option>");
-                        });
-                    },
-                    error: function (xhr) { alert("error!!"); }
-                });
-            }
-        });
+               
 
         //3Tp displaced
         $("#st_3Tp").change(function () {
@@ -973,7 +895,7 @@
             if ($(this).val() != "NULL") {
 
                 $.ajax({
-                    url: "/B2F/getLgaList",
+                    url: "/B1F/getLgaList",
                     type: 'POST',
                     data: { id: $(this).val() },
                     success: function (lgas) {
@@ -987,49 +909,9 @@
                     },
                     error: function (xhr) { alert("error!!"); }
                 });
-                //***--set ward to null--***
-                $.ajax({
-                    url: "/B2F/getWardList",
-                    type: 'POST',
-                    data: { id: $(this).val() },
-                    success: function (wards) {
-
-                        var $select = $('#wd_3Tp');
-                        $select.empty();
-                        //
-                        $select.append("<option value=''>[Select Ward]</option>");
-                        // $.each(wards, function (i, ward) {
-                        //     $select.append("<option value='" + ward.Value + "'>" + ward.Text + "</option>");
-                        // });
-                    },
-                    error: function (xhr) { alert("error!!"); }
-                });
-                //***--set ward to null--***
-            }
-        });
-
-
-        $("#lg_3Tp").change(function () {
-
-            if ($(this).val() != "NULL") {
-
-                $.ajax({
-                    url: "/B2F/getWardList",
-                    type: 'POST',
-                    data: { id: $(this).val() },
-                    success: function (wards) {
-
-                        var $select = $('#wd_3Tp');
-                        $select.empty();
-                        $select.append("<option value=''>[Select ward]</option>");
-                        $.each(wards, function (i, ward) {
-                            $select.append("<option value='" + ward.Value + "'>" + ward.Text + "</option>");
-                        });
-                    },
-                    error: function (xhr) { alert("error!!"); }
-                });
-            }
-        });
+               
+              }
+            });//ok
 
         //State/LGA prev disp (1)
         $("#st_prv1").change(function () {
@@ -1037,7 +919,7 @@
             if ($(this).val() != "NULL") {
 
                 $.ajax({
-                    url: "/B2F/getLgaList",
+                    url: "/B1F/getLgaList",
                     type: 'POST',
                     data: { id: $(this).val() },
                     success: function (lgas) {
@@ -1052,7 +934,7 @@
                     error: function (xhr) { alert("error!!"); }
                 });
             }
-        });
+        });//ok
 
 
         //State/LGA prev disp (2)
@@ -1061,7 +943,7 @@
             if ($(this).val() != "NULL") {
 
                 $.ajax({
-                    url: "/B2F/getLgaList",
+                    url: "/B1F/getLgaList",
                     type: 'POST',
                     data: { id: $(this).val() },
                     success: function (lgas) {
@@ -1076,7 +958,7 @@
                     error: function (xhr) { alert("error!!"); }
                 });
             }
-        });
+        });//ok
 
     });
 </script>
