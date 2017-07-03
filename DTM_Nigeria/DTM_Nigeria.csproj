@@ -344,6 +344,9 @@
     <Compile Include="Models\OrgB1F.cs" />
     <Compile Include="Models\OrgB2F.cs" />
     <Compile Include="Models\SessionPath.cs" />
+    <Compile Include="Models\spGetLocationsList_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\VerifForm.cs" />
     <Compile Include="Models\view_error_check_B2F_toFix.cs">
       <DependentUpon>Model1.tt</DependentUpon>

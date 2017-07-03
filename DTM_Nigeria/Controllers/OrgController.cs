@@ -177,7 +177,7 @@ namespace DTM_Nigeria.Controllers
                     org_.create_time = tmp;
                     org_.update_time = tmp;
 
-                    _entity.iom_b1f_organizations_assisting.AddObject(org_);// Add(org_);
+                    _entity.iom_b1f_organizations_assisting.Add(org_);// Add(org_);
                     _entity.SaveChanges();
 
                     return RedirectToAction("Index");
@@ -214,7 +214,7 @@ namespace DTM_Nigeria.Controllers
         //            org_.create_time = tmp;
         //            org_.update_time = tmp;
 
-        //            _entity.AddObject("iom_organizations_assisting", org_);
+        //            _entity.Add("iom_organizations_assisting", org_);
         //            _entity.SaveChanges();
 
         //            return RedirectToAction("Index");
@@ -329,7 +329,7 @@ namespace DTM_Nigeria.Controllers
                 try
                 {
                     // TODO: Add delete logic here
-                    _entity.iom_b1f_organizations_assisting.DeleteObject(org);// Remove(org);
+                    _entity.iom_b1f_organizations_assisting.Remove(org);// Remove(org);
 
                     _entity.SaveChanges();
 

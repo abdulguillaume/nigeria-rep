@@ -82,6 +82,16 @@ yesNo.Add(new SelectListItem { Text = "No", Value = "2" });
             @Html.ValidationMessageFor(model => model.registered_by)
         </div>
 
+        @*added by abdul on july 3, 2017*@
+        <div class="editor-label">
+            @Html.LabelFor(model => model.estimate_hh)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.estimate_hh)
+            @Html.ValidationMessageFor(model => model.estimate_hh)
+        </div>
+
+
         <div class="editor-label">
             @Html.LabelFor(model => model.estimate_ind)
         </div>

@@ -358,7 +358,7 @@ namespace DTM_Nigeria.Controllers
 
                     new VerifForm(new B2F(profile));
 
-                    _entity.iom_ward_profile.AddObject(profile);// Add(profile);
+                    _entity.iom_ward_profile.Add(profile);// Add(profile);
                     _entity.SaveChanges();
 
 
@@ -684,7 +684,7 @@ namespace DTM_Nigeria.Controllers
                 {
                     // TODO: Add delete logic here
 
-                    _entity.iom_ward_profile.DeleteObject(b2f);// Remove(b2f);
+                    _entity.iom_ward_profile.Remove(b2f);// Remove(b2f);
 
                     _entity.SaveChanges();
 

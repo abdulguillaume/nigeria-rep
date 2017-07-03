@@ -180,7 +180,7 @@ namespace DTM_Nigeria.Controllers
                     inf.create_time = tmp;
                     inf.update_time = tmp;
 
-                    _entity.iom_b2f_informants.AddObject(inf);// Add(inf);
+                    _entity.iom_b2f_informants.Add(inf);// Add(inf);
                     _entity.SaveChanges();
 
                     return RedirectToAction("Index");
@@ -292,7 +292,7 @@ namespace DTM_Nigeria.Controllers
                 try
                 {
                     // TODO: Add delete logic here
-                    _entity.iom_b2f_informants.DeleteObject(inf);// Remove(inf);
+                    _entity.iom_b2f_informants.Remove(inf);// Remove(inf);
 
                     _entity.SaveChanges();
 
