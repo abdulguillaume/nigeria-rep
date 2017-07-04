@@ -164,7 +164,7 @@ namespace DTM_Nigeria.Controllers
 
 
 
-                        _entity.iom_ward_households_breakdown.AddObject(bd);// Add(bd);
+                        _entity.iom_ward_households_breakdown.Add(bd);// Add(bd);
                         _entity.SaveChanges();
                     }
                     
@@ -323,7 +323,7 @@ namespace DTM_Nigeria.Controllers
                     foreach (var hhage in ages)
                     {
                         //iom_ward_households_breakdown bd=hhage
-                        _entity.iom_ward_households_breakdown.DeleteObject(hhage);// Remove(hhage);
+                        _entity.iom_ward_households_breakdown.Remove(hhage);// Remove(hhage);
                         _entity.SaveChanges();
                     }
 

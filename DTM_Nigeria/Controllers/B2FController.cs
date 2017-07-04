@@ -49,7 +49,7 @@ namespace DTM_Nigeria.Controllers
             var b2f = (from c in _entity.iom_ward_profile
                        where c.id == id
                        select c).FirstOrDefault();
-            setViewBags(b2f.iom_presence_wards.iom_profile.phase.ToString());
+            setViewBags(null, b2f.iom_presence_wards.iom_profile.phase.ToString());
             //getSession();
             //ViewBag.ProfileID=w
 
@@ -128,7 +128,7 @@ namespace DTM_Nigeria.Controllers
             ViewBag.Wpcode = w;
         }
 
-        public void setViewBags(string phase)
+        public void setViewBags(string[] def, string phase)
         {
             if(ward!=null)
                 getWardInfo(ward);
@@ -137,9 +137,29 @@ namespace DTM_Nigeria.Controllers
 
             ViewBag.StatesList = new SelectList(_entity.lkp_State, "state_code", "state_name");
 
-            ViewBag.LgasList = new SelectList(_entity.lkp_Lga, "lga_code", "lga_name");
+            string st_1, st_2, st_3; //for section F.
+            string st_4, st_5;//for section G.
+            st_1 = st_2 = st_3 = "-1";
+            st_4 = st_5 = "-1";
 
-            ViewBag.WardsList = new SelectList(_entity.lkp_Ward, "ward_code", "ward_name");
+            if (def != null)
+            {
+                st_1 = def[0];
+                st_2 = def[1];
+                st_3 = def[2];
+                st_4 = def[3];
+                st_5 = def[4];
+            }
+
+            //edit on May 27, 2017 to allow dropdown only when select state
+            ViewBag.LgasList1 = new SelectList(_entity.lkp_Lga.Where(x => x.state_code == st_1), "lga_code", "lga_name");
+            ViewBag.LgasList2 = new SelectList(_entity.lkp_Lga.Where(x => x.state_code == st_2), "lga_code", "lga_name");
+            ViewBag.LgasList3 = new SelectList(_entity.lkp_Lga.Where(x => x.state_code == st_3), "lga_code", "lga_name");
+
+            ViewBag.LgasList4 = new SelectList(_entity.lkp_Lga.Where(x => x.state_code == st_4), "lga_code", "lga_name");
+            ViewBag.LgasList5 = new SelectList(_entity.lkp_Lga.Where(x => x.state_code == st_5), "lga_code", "lga_name");
+
+            //ViewBag.WardsList = new SelectList(_entity.lkp_Ward, "ward_code", "ward_name");
 
             ViewBag.LocationsList = new SelectList(_entity.lkp_Location, "id", "location");
             ViewBag.NotRetLocation = new SelectList(_entity.lkp_NotReturnLocation, "id", "location");
@@ -153,6 +173,33 @@ namespace DTM_Nigeria.Controllers
             ViewBag.Period2 = new SelectList(_entity.lkp_Period2.Where(x => x.phase.Equals(str_phase)), "id", "label");
             ViewBag.YesNo_ = new SelectList(_entity.lkp_YesNo.Where(x => x.id<=2), "id", "value");
            // ViewBag.Period2 = new SelectList(_entity.lkp_Period2.Where(x => x.phase.Equals(phase)), "id", "label");
+        }
+
+        public void setViewBags2(string phase)
+        {
+            if (ward != null)
+                getWardInfo(ward);
+
+            ViewBag.Settlement = new SelectList(_entity.lkp_Settlement, "id", "settlement");
+
+            ViewBag.StatesList = new SelectList(_entity.lkp_State, "state_code", "state_name");
+
+            ViewBag.LgasList = new SelectList(_entity.lkp_Lga, "lga_code", "lga_name");
+
+            ViewBag.WardsList = new SelectList(_entity.lkp_Ward, "ward_code", "ward_name");
+
+            ViewBag.LocationsList = new SelectList(_entity.lkp_Location, "id", "location");
+            ViewBag.NotRetLocation = new SelectList(_entity.lkp_NotReturnLocation, "id", "location");
+
+            ViewBag.Periods = new SelectList(_entity.lkp_Period2.Where(x => x.phase.Equals(phase)), "id", "label");
+
+            // ViewBag.Period1 = new SelectList(_entity.lkp_Period2.Where(x => x.phase.Equals(phase)), "id", "label");
+
+            string str_phase = phase.Equals("1") ? "1_1" : phase;
+
+            ViewBag.Period2 = new SelectList(_entity.lkp_Period2.Where(x => x.phase.Equals(str_phase)), "id", "label");
+            ViewBag.YesNo_ = new SelectList(_entity.lkp_YesNo.Where(x => x.id <= 2), "id", "value");
+            // ViewBag.Period2 = new SelectList(_entity.lkp_Period2.Where(x => x.phase.Equals(phase)), "id", "label");
         }
 
         [HttpPost]
@@ -214,7 +261,7 @@ namespace DTM_Nigeria.Controllers
 
             var ward_=_entity.iom_presence_wards.Where(x => x.id == wid).FirstOrDefault();
             
-            setViewBags(period_txt);
+            setViewBags(null, period_txt);
 
            /* getSession();
             */
@@ -241,8 +288,17 @@ namespace DTM_Nigeria.Controllers
             string period_txt = (_entity.iom_dtm_phase.Where(y=>y.closed_YesNo==2).Max(x => x.phase)).ToString();
 
             getSession();
-            setViewBags(period_txt);
 
+            var states_def = new string[5]{
+                b2f.profile.disp_2T_state,
+                b2f.profile.disp_3T_state,
+                b2f.profile.disp_3Tp_state,
+                b2f.profile.state_prev_disp_LargestGrp1,
+                b2f.profile.state_prev_disp_LargestGrp2
+            };
+
+            setViewBags(states_def, period_txt);
+            //findStateCode(b1f.profile.lga)
 
             iom_ward_profile profile = new iom_ward_profile();
 
@@ -302,7 +358,7 @@ namespace DTM_Nigeria.Controllers
 
                     new VerifForm(new B2F(profile));
 
-                    _entity.iom_ward_profile.AddObject(profile);// Add(profile);
+                    _entity.iom_ward_profile.Add(profile);// Add(profile);
                     _entity.SaveChanges();
 
 
@@ -351,7 +407,17 @@ namespace DTM_Nigeria.Controllers
           //  b2f.displaced_hh_ind_YesNo = 1;
 
             getSession();
-            setViewBags(b2f.iom_presence_wards.iom_profile.phase.ToString());
+
+            var states_def = new string[5]{
+                b2f.disp_2T_state,
+                b2f.disp_3T_state,
+                b2f.disp_3Tp_state,
+                b2f.state_prev_disp_LargestGrp1,
+                b2f.state_prev_disp_LargestGrp2
+            };
+
+            setViewBags(states_def, b2f.iom_presence_wards.iom_profile.phase.ToString());
+            //setViewBags(b2f.iom_presence_wards.iom_profile.phase.ToString());
 
             return View(new B2F(b2f));
         }
@@ -369,7 +435,15 @@ namespace DTM_Nigeria.Controllers
                        select c).FirstOrDefault();
 
             getSession();
-            setViewBags(b2f.iom_presence_wards.iom_profile.phase.ToString());
+            var states_def = new string[5]{
+                prof.profile.disp_2T_state,
+                prof.profile.disp_3T_state,
+                prof.profile.disp_3Tp_state,
+                prof.profile.state_prev_disp_LargestGrp1,
+                prof.profile.state_prev_disp_LargestGrp2
+            };
+
+            setViewBags(states_def, b2f.iom_presence_wards.iom_profile.phase.ToString());
 
             if (b2f != null)
             {
@@ -504,13 +578,15 @@ namespace DTM_Nigeria.Controllers
                         b2f.disp_3T_lga = prof.profile.disp_3T_lga;
                         b2f.disp_3Tp_lga = prof.profile.disp_3Tp_lga;
 
-                        b2f.disp_2T_ward = prof.profile.disp_2T_ward;
-                        b2f.disp_3T_ward = prof.profile.disp_3T_ward;
-                        b2f.disp_3Tp_ward = prof.profile.disp_3Tp_ward;
+                        //--not used - not in the B2F form
+                        //b2f.disp_2T_ward = prof.profile.disp_2T_ward;
+                        //b2f.disp_3T_ward = prof.profile.disp_3T_ward;
+                        //b2f.disp_3Tp_ward = prof.profile.disp_3Tp_ward;
 
                         //Added by Abdul on May 25, 2017 (disp_1T_dispDate)
                         //b2f.disp_1T_dispDate = prof.profile.disp_1T_dispDate;
 
+                        b2f.disp_1T_dispDate = prof.profile.disp_1T_dispDate;
                         b2f.disp_2T_dispDate = prof.profile.disp_2T_dispDate;
                         b2f.disp_3T_dispDate = prof.profile.disp_3T_dispDate;
                         b2f.disp_3Tp_dispDate = prof.profile.disp_3Tp_dispDate;
@@ -538,7 +614,8 @@ namespace DTM_Nigeria.Controllers
 
                         new VerifForm(new B2F(b2f));
 
-                        UpdateModel(b2f);
+                        //UpdateModel(b2f);
+                        //_entity
                         _entity.SaveChanges();
 
 
@@ -575,7 +652,7 @@ namespace DTM_Nigeria.Controllers
                        where c.id == id
                        select c).FirstOrDefault();
 
-            setViewBags(b2f.iom_presence_wards.iom_profile.phase.ToString());
+            setViewBags(null, b2f.iom_presence_wards.iom_profile.phase.ToString());
 
             if (b2f != null)
             {
@@ -598,7 +675,7 @@ namespace DTM_Nigeria.Controllers
                        where c.id == id
                        select c).FirstOrDefault();
 
-            setViewBags(b2f.iom_presence_wards.iom_profile.phase.ToString());
+            setViewBags(null, b2f.iom_presence_wards.iom_profile.phase.ToString());
 
             if (b2f != null)
             {
@@ -607,7 +684,7 @@ namespace DTM_Nigeria.Controllers
                 {
                     // TODO: Add delete logic here
 
-                    _entity.iom_ward_profile.DeleteObject(b2f);// Remove(b2f);
+                    _entity.iom_ward_profile.Remove(b2f);// Remove(b2f);
 
                     _entity.SaveChanges();
 

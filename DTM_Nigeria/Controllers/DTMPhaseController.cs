@@ -84,7 +84,7 @@ namespace DTM_Nigeria.Controllers
                     dtm_.create_date = tmp;
                     dtm_.update_date = tmp;
 
-                    _entity.iom_dtm_phase.AddObject(dtm_);// Add(dtm_);
+                    _entity.iom_dtm_phase.Add(dtm_);// Add(dtm_);
                     _entity.SaveChanges();
 
                     mutex.ReleaseMutex();
@@ -234,7 +234,7 @@ namespace DTM_Nigeria.Controllers
                 try
                 {
                     // TODO: Add delete logic here
-                    _entity.iom_dtm_phase.DeleteObject(dtm_);// Remove(dtm_);
+                    _entity.iom_dtm_phase.Remove(dtm_);// Remove(dtm_);
                     _entity.SaveChanges();
 
                     return RedirectToAction("Index");
