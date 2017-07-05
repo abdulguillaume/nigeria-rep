@@ -3604,6 +3604,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spGetLocationsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="phase" Type="varchar" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -4214,6 +4217,9 @@
             <End Role="lkp_State" EntitySet="lkp_State" />
             <End Role="iom_ward_profile" EntitySet="iom_ward_profile" />
           </AssociationSet>
+          <FunctionImport Name="spGetLocationsList" ReturnType="Collection(iomdtmModel.spGetLocationsList_Result)">
+            <Parameter Name="phase" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="aspnet_Applications">
           <Key>
@@ -7229,6 +7235,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="spGetLocationsList_Result">
+          <Property Type="Int32" Name="phase" Nullable="false" />
+          <Property Type="String" Name="state_code" Nullable="false" MaxLength="11" />
+          <Property Type="String" Name="state_name" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="lga_code" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="lga_name" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="ward_code" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="ward_name" Nullable="false" MaxLength="32" />
+          <Property Type="Int32" Name="ward_profile_id" Nullable="false" />
+          <Property Type="Int32" Name="location_id" Nullable="false" />
+          <Property Type="String" Name="location_type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="location_name" Nullable="false" MaxLength="32" />
+          <Property Type="Double" Name="coord_lon" Nullable="true" />
+          <Property Type="Double" Name="coord_lat" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8411,6 +8432,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGetLocationsList" FunctionName="iomdtmModel.Store.spGetLocationsList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="iomdtmModel.spGetLocationsList_Result">
+                <ScalarProperty Name="phase" ColumnName="phase" />
+                <ScalarProperty Name="state_code" ColumnName="state_code" />
+                <ScalarProperty Name="state_name" ColumnName="state_name" />
+                <ScalarProperty Name="lga_code" ColumnName="lga_code" />
+                <ScalarProperty Name="lga_name" ColumnName="lga_name" />
+                <ScalarProperty Name="ward_code" ColumnName="ward_code" />
+                <ScalarProperty Name="ward_name" ColumnName="ward_name" />
+                <ScalarProperty Name="ward_profile_id" ColumnName="ward_profile_id" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="location_type" ColumnName="location_type" />
+                <ScalarProperty Name="location_name" ColumnName="location_name" />
+                <ScalarProperty Name="coord_lon" ColumnName="coord_lon" />
+                <ScalarProperty Name="coord_lat" ColumnName="coord_lat" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

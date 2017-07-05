@@ -158,6 +158,6 @@ $RECYCLE.BIN/
 #Added by Abdul on July 30, 2017
 DTM_Nigeria/_bin_deployableAssemblies/*.*
 DTM_Nigeria/bin/*.*
-DTM_Nigeria/Models
+DTM_Nigeria/Models/*.*
 DTM_Nigeria/obj/*.*
 

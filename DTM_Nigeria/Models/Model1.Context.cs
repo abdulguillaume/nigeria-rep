@@ -10,6 +10,7 @@
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Objects;
 
 namespace DTM_Nigeria.Models
 {
@@ -102,5 +103,16 @@ namespace DTM_Nigeria.Models
         public DbSet<vw_error_ck_B2F_vs_LocA> vw_error_ck_B2F_vs_LocA { get; set; }
         public DbSet<vw_error_ck_B2F_vs_LocA_pop_no_match> vw_error_ck_B2F_vs_LocA_pop_no_match { get; set; }
         public DbSet<view_estimate_hhs_Inds_per_Wards_per_Year_of_Arrival> view_estimate_hhs_Inds_per_Wards_per_Year_of_Arrival { get; set; }
+    
+        public virtual ObjectResult<spGetLocationsList_Result> spGetLocationsList(string phase)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(spGetLocationsList_Result).Assembly);
+    
+            var phaseParameter = phase != null ?
+                new ObjectParameter("phase", phase) :
+                new ObjectParameter("phase", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetLocationsList_Result>("spGetLocationsList", phaseParameter);
+        }
     }
 }
