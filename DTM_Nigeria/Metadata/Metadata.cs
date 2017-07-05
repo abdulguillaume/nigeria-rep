@@ -750,11 +750,17 @@ namespace DTM_Nigeria.Metadata
         [Required(ErrorMessage = "*", AllowEmptyStrings = false)]
         public string registered_by;
 
+<<<<<<< HEAD
         [Required(ErrorMessage = "*")]
         [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
         public int estimate_hh;
 
         [Required(ErrorMessage = "*")]
+=======
+        [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
+        public int estimate_hh;
+
+>>>>>>> 9de47dccb0ec0cd87af79455cd1ea2d065724dcf
         [RegularExpression("^[1-9]+[0-9]*", ErrorMessage = "number>0")]
         public int estimate_ind;
 
@@ -818,7 +824,11 @@ namespace DTM_Nigeria.Metadata
         public Nullable<int> type;
     }
 
+<<<<<<< HEAD
     public partial class iom_presence_wards_MD
+=======
+    public class iom_presence_wards_MD
+>>>>>>> 9de47dccb0ec0cd87af79455cd1ea2d065724dcf
     {
         [Required(ErrorMessage = "*")]
         public  string ward_code;
