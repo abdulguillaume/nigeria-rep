@@ -241,9 +241,6 @@ namespace DTM_Nigeria.Metadata
         public string disp_2T_lga;
 
         [RequiredIf("disp_2T_yn", 1, "*")]
-        public string disp_2T_ward;
-
-        [RequiredIf("disp_2T_yn", 1, "*")]
         public Nullable<int> disp_2T_dispDate;
 
         //Displaced 3T
@@ -261,8 +258,6 @@ namespace DTM_Nigeria.Metadata
         [RequiredIf("disp_3T_yn", 1, "*")]
         public string disp_3T_lga;
 
-        [RequiredIf("disp_3T_yn", 1, "*")]
-        public string disp_3T_ward;
 
         [RequiredIf("disp_3T_yn", 1, "*")]
         public Nullable<int> disp_3T_dispDate;
